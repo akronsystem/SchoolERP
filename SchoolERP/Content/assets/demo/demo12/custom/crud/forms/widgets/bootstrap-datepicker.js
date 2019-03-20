@@ -36,6 +36,7 @@ var BootstrapDatepicker = {
                 }
             }
             ),
+
             $("#m_datepicker_4_1").datepicker({
                 orientation: "top left", todayHighlight: !0, templates: {
                     leftArrow: '<i class="la la-angle-left"></i>', rightArrow: '<i class="la la-angle-right"></i>'
@@ -72,6 +73,7 @@ var BootstrapDatepicker = {
                 }
             }
             )
+
     }
 }
 
