@@ -3,784 +3,1116 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/SchoolAdmin/Views/Shared/LayoutPage.cshtml";
 }
+<html>
+<body>
+    <div class="m-content" ng-app="ERP">
+        @using System.Configuration;
 
-<div class="m-content">
+        <!--Begin::Main Portlet-->
+        <div class="m-portlet m-portlet--full-height" ng-controller="EmployeeController">
 
-    <!--Begin::Main Portlet-->
-    <div class="m-portlet m-portlet--full-height">
+            <!--begin: Portlet Head-->
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Employee Master
+                        </h3>
+                    </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <ul class="m-portlet__nav">
+                        <li class="m-portlet__nav-item">
+                            <select ng-model="btnactive" ng-change="Initialize()" class="form-control">
 
-        <!--begin: Portlet Head-->
-        <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text">
-                       Employee Master
-                    </h3>
+                                <option class="form-control" value="Active" ng-selected="true">Active</option>
+                                <option class="form-control" value="Deactive">Deactive</option>
+                            </select>
+                        </li>
+                        <li class="m-portlet__nav-item">
+                            <a ng-click="ShowHide()" class="btn btn-outline-info m-btn m-btn--icon">
+                                <span>
+                                    <i class="la la-plus fa-strong-bold"></i>
+                                    <span>New Employee</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
-            <div class="m-portlet__head-tools">
-                <ul class="m-portlet__nav">
-                   
-                    <li class="m-portlet__nav-item">
-                        <a  class="btn btn-outline-info m-btn m-btn--icon">
-                            <span>
-                                <i class="la la-plus"></i>
-                                <span>Add Employee</span>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
 
-        <!--end: Portlet Head-->
-        <!--begin: Portlet Body-->
-        <div class="m-portlet__body m-portlet__body--no-padding">
-            <!--begin: Form Wizard-->
-            <div class="m-wizard m-wizard--3 m-wizard--success" id="m_wizard">
-                <!--begin: Message container -->
-                <div class="m-portlet__padding-x">
 
-                    <!-- Here you can put a message or alert -->
-                </div>
+            <div ng-init="Initialize()" class="m-content">
 
-                <!--end: Message container -->
-                <div class="row m-row--no-padding">
-                    <div class="col-xl-2 col-lg-12">
+                <div class="m-portlet m-portlet--mobile" ng-show="Visible">
 
-                        <!--begin: Form Wizard Head -->
-                        <div class="m-wizard__head">
-                            <!--begin: Form Wizard Progress -->
-                            <div class="m-wizard__progress">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                    <div class="m-portlet__body">                      
+                        <div class="row d-block m-0 mt-1">
+                            <div class="table-responsive">
+                                <!--begin: Datatable -->
+                                <table class="table table-striped- table-bordered table-hover table-checkable table-fixed" id="student-admission-view">
+                                    <thead>
+                                        <tr>
+                                            <th>Name Of The Employee</th>
+                                            <th>Mobile Number</th>
+                                            <th>Department</th>
+                                            <th>Email Id</th>                                           
+                                            <th>Action</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="data in EmployeeInfoData">
+                                            <td>
+                                                {{data.EmployeeName}}
+                                            </td>
+                                            <td>
+                                                {{data.MobileNo }}
+                                            </td>
+                                            <td>
+                                                {{data.Department}}
+                                            </td>
+                                            <td>
+                                                {{data.EmailID}}
+                                            </td>
+                                           
+
+                                            <td>
+                                                <div class="action-link">
+                                                    @*<a class="print-icon" href="javascript:void(0);" data-toggle="m-tooltip" title="Print" data-html="true"><i class="la la-print"></i></a>
+                                                <a class="view-icon" href="javascript:void(0);" data-toggle="m-tooltip" title="View"><i class="la la-eye"></i></a>*@
+                                                    <a class="edit-icon" ng-click="Verify(data.EmployeeID,data.EmployeeCode)" data-toggle="m-tooltip" title="Edit" data-wizard-action="first"><i class="la la-edit"></i></a>
+                                                    @*<a class="delete-icon" ng-click="Delete(data.SchoolId)" data-toggle="m-tooltip" title="Deactive"><i class="la la-trash-o"></i></a>*@
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="m-switch m-switch--icon m-switch--danger">
+                                                    <label>
+
+                                                        <input type="checkbox" ng-checked="{{data.Status}}" ng-click="Delete(data.EmployeeID)">
+                                                        <span style="height: 33px;width: 45px;"></span>
+                                                    </label>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!--end: Form Wizard Progress -->
-                            <!--begin: Form Wizard Nav -->
-                            <div class="m-wizard__nav">
-                                <div class="m-wizard__steps">
-                                    <div class="m-wizard__step m-wizard__step--current" m-wizard-target="m_wizard_form_step_1">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">                                               
+            </div>
+
+
+            <!--end: Portlet Head-->
+            <!--begin: Portlet Body-->
+            <div class="m-portlet__body m-portlet__body--no-padding">
+                <!--begin: Form Wizard-->
+                <div class="m-wizard m-wizard--3 m-wizard--success" id="m_wizard" ng-show="IsVisible">
+                    <!--begin: Message container -->
+                    <div class="m-portlet__padding-x">
+
+                        <!-- Here you can put a message or alert -->
+                    </div>
+
+                    <!--end: Message container -->
+                    <div class="row m-row--no-padding">
+                        <div class="col-xl-2 col-lg-12">
+
+                            <!--begin: Form Wizard Head -->
+                            <div class="m-wizard__head">
+                                <!--begin: Form Wizard Progress -->
+                                <div class="m-wizard__progress">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <!--end: Form Wizard Progress -->
+                                <!--begin: Form Wizard Nav -->
+                                <div class="m-wizard__nav">
+                                    <div class="m-wizard__steps">
+                                        <div class="m-wizard__step m-wizard__step--current" m-wizard-target="m_wizard_form_step_1">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
                                                     <span>1</span>
                                                 </a><div class="m-wizard__step-line">
-    <span></span>
-</div>
-                                            <div class="m-wizard__step-label">
-                                               Personal Details
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Personal Details
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                                <span>2</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
-                                            </div>
-                                            <div class="m-wizard__step-label">
-                                               Educational Details
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                                <span>3</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
-                                            </div>
-                                            <div class="m-wizard__step-label">
-                                               Current Appointment
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_2">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>2</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Educational Details
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_4">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                           <span>4</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
-                                            </div>
-                                            <div class="m-wizard__step-label">
-                                                Experience Details
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_5">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                                <span>5</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
-                                            </div>
-                                            <div class="m-wizard__step-label">
-                                               Bank Details
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_3">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>3</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Current Appointment
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_6">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                                <span>6</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
-                                            </div>
-                                            <div class="m-wizard__step-label">
-                                                Document Upload
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_4">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>4</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Bank Details
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_7">
-                                        <div class="m-wizard__step-info">
-                                            <a href="#" class="m-wizard__step-number">
-                                                <span>7</span>
-                                            </a>
-                                            <div class="m-wizard__step-line">
-                                                <span></span>
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_5">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>5</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Experience Details
+                                                </div>
                                             </div>
-                                            <div class="m-wizard__step-label">
-                                               Upload Profile Picture
+                                        </div>
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_6">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>6</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Document Upload
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="m-wizard__step" m-wizard-target="m_wizard_form_step_7">
+                                            <div class="m-wizard__step-info">
+                                                <a href="#" class="m-wizard__step-number">
+                                                    <span>7</span>
+                                                </a>
+                                                <div class="m-wizard__step-line">
+                                                    <span></span>
+                                                </div>
+                                                <div class="m-wizard__step-label">
+                                                    Upload Profile Picture
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--end: Form Wizard Nav -->
                             </div>
 
-                            <!--end: Form Wizard Nav -->
+                            <!--end: Form Wizard Head -->
                         </div>
+                        <div class="col-xl-10 col-lg-12">
 
-                        <!--end: Form Wizard Head -->
-                    </div>
-                    <div class="col-xl-10 col-lg-12">
+                            <!--begin: Form Wizard Form-->
+                            <div class="m-wizard__form">
 
-                        <!--begin: Form Wizard Form-->
-                        <div class="m-wizard__form">
+                                <!--
+                                    1) Use m-form--label-align-left class to alight the form input lables to the right
+                                    2) Use m-form--state class to highlight input control borders on form validation
+                                -->
+                                <form class="m-form m-form--label-align-left- m-form--state-" name="form" id="m_form">
 
-                            <!--
-                                1) Use m-form--label-align-left class to alight the form input lables to the right
-                                2) Use m-form--state class to highlight input control borders on form validation
-                            -->
-                            <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
+                                    <!--begin: Form Body -->
+                                    <div class="m-portlet__body m-portlet__body--no-padding">
 
-                                <!--begin: Form Body -->
-                                <div class="m-portlet__body m-portlet__body--no-padding">
+                                        <!--begin: Form Wizard Step 1-->
+                                        <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
 
-                                    <!--begin: Form Wizard Step 1-->
-                                    <div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
-                                        <div class="m-form__section m-form__section--first">
                                             <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Personal Details</h3>
-                                            </div>
-                                         
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label"> Name<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" placeholder="">
-                                                </div>
+                                                <h3 class="m-form__heading-title m--font-success">Personal Details</h3>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-6">
                                                     <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Department<span class="required-star">*</span></label>
+                                                        <label class="col-xl-4 col-lg-4 col-form-label">Employee Code<span class="required-star">*</span></label>
                                                         <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
+                                                            <input type="text" name="code" id="code" class="form-control m-input" placeholder="" autocomplete="off" ng-model="EmployeeCode" value="{{EmployeeCode}}" />
+                                                            <input type="hidden" ng-model="EmployeeID" value="{{EmployeeID}}" />
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">Designation<span class="required-star">*</span></label>
+                                                    <div class="form-group m-form__group row" ng-init="GetEmployeeType()">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Employee Type<span class="required-star">*</span></label>
                                                         <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="id" class="form-control m-input" ng-model="SchoolId" value="{{SchoolId}}">
-
-                                            </div>
-                                           
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Gender<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder="" autocomplete="off" ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">Blood Group<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder="" autocomplete="off" ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="id" class="form-control m-input" ng-model="SchoolId" value="{{SchoolId}}">
-
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Email<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" autocomplete="off" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Alternate Email<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" placeholder="" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Mobile Number<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" placeholder="" autocomplete="off">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__section">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">
-                                                    Permanent Address Details
-                                                    <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
-                                                </h3>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Address<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" placeholder="" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">State<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">District<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Taluka<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">City/Village<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">PinCode<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">
-                                                    Correspondance Address Details
-                                                    <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
-                                                </h3>                                                
-                                                    <label class="m-checkbox">
-                                                        Copy Permanent Address
-                                                        <input type="checkbox" id="" value="">
-                                                        <span></span>
-                                                    </label>
-                                                
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Address<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="name" class="form-control m-input" placeholder="" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">State<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">District<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Taluka<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">City/Village<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">PinCode<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                            </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__heading">
-                                            <h3 class="m-form__heading-title">
-                                                Parent Details
-                                                <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
-                                            </h3>
-                                        </div>
-                                        <div class="form-group  row">
-                                            <label class="col-xl-2 col-lg-3 col-form-label">Name Of The Parent<span class="required-star">*</span></label>
-                                            <div class="col-xl-8 col-lg-8">
-                                                <input type="text" name="name" class="form-control m-input" placeholder="Full Name" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__heading">
-                                            <h3 class="m-form__heading-title">
-                                                Religion Details
-                                                <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
-                                            </h3>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="form-group row">
-                                                    <label class="col-xl-4  col-form-label">Caste<span class="required-star">*</span></label>
-                                                    <div class="col-xl-8 col-lg-8">
-                                                        <input type="text" name="cast" id="cast" class="form-control m-input" placeholder="" ng-model="" value="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="form-group row">
-                                                    <label class="col-xl-4 col-lg-4 col-form-label">Sub-Caste<span class="required-star">*</span></label>
-                                                    <div class="col-xl-8 col-lg-8">
-                                                        <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="form-group row">
-                                                    <label class="col-xl-4  col-form-label">Religion<span class="required-star">*</span></label>
-                                                    <div class="col-xl-8 col-lg-8">
-                                                        <input type="text" name="cast" id="cast" class="form-control m-input" placeholder="" ng-model="" value="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="form-group row">
-                                                    <label class="col-xl-4 col-lg-4 col-form-label">Category<span class="required-star">*</span></label>
-                                                    <div class="col-xl-8 col-lg-8">
-                                                        <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder=" " ng-model="SchoolName" value="" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--end: Form Wizard Step 1-->
-                                    <!--begin: Form Wizard Step 2-->
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_2">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Educational Details</h3>
-                                            </div>
-                                            <div id="m_repeater_1">
-                                                <div class="form-group  m-form__group row" id="m_repeater_1">
-                                                  
-                                                    <div  class="col-xl-12">
-                                                        <div>
-                                                            <table class="table table-striped- table-bordered table-hover  table-responsive" id="m_table_2">
-                                                                <tr>
-                                                                    <th>NAME</th>
-                                                                    <th>PASSING MONTH & YEAR</th>
-                                                                    <th>SCHOOL/ COLLEGE</th>
-                                                                    <th>UNIVERSITY/ BOARD</th>
-                                                                    <th>BOARD DIVISION/ STATE</th>
-                                                                    <th>CREDIT/ PERCENTAGE/ SGPA</th>
-                                                                    <th colspan="2">Actions</th>
-                                                                </tr>
-                                                                <tbody data-repeater-list="">
-                                                                    <tr data-repeater-item class="align-items-center">
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 200px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 200px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"/></td>
-                                                                        @*<th ><input type="button" class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill" value="Delete"/></th>*@
-                                                                        <td data-repeater-delete="">
-                                                                                                                                                        <a href="#" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
-                                                                                <i class="fa fa-minus"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                        @*<td data-repeater-create="">
-                                                                            <a href="#" class="btn btn-primary m-btn m-btn--icon m-btn--icon-only">
-                                                                                <i class="fa fa-plus"></i>
-                                                                            </a>
-                                                                        </td>*@
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                                                            <span>
-                                                                <i class="la la-plus"></i>
-                                                                <span>Add</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-
-                                    <!--end: Form Wizard Step 2-->
-                                    <!--begin: Form Wizard Step 3-->
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_3">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Current Appointment</h3>
-                                            </div>
-                                         
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Appointment Type<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">JobType<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Joining Date<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>                                          
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">UAN<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>  
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">Sr.GradeScale Applicable<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">Sr.GradeScale ApplicableDate<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">SelectionGrade ScaleApplicable<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">SelectionGrade ScaleApplicable Date<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-
-                                    <!--end: Form Wizard Step 3-->
-                                    <!--begin: Form Wizard Step 4-->
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_4">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title"> Experience Details</h3>
-                                            </div>
-                                            <div id="m_repeater_2">
-                                                <div class="form-group  m-form__group row" id="m_repeater_2">
-
-                                                    <div class="col-xl-12" >
-                                                        <div>
-                                                            <table  class="table table-striped- table-bordered table-hover  table-responsive" id="m_table_2">
-                                                                <tr>
-                                                                    <th>EXPERIENCE TYPE</th>
-                                                                    <th>ORGANISATION</th>
-                                                                    <th>ORGANISATION ADDRESS</th>
-                                                                    <th>DESIGNATION</th>
-                                                                    <th>PERIOD FROM</th>
-                                                                    <th>PERIOD TO</th>
-                                                                    <th>TOTAL EXPERIENCE</th>
-                                                                    <th>DOCUMENT UPLOAD</th>
-                                                                    <th colspan="2">Actions</th>
-                                                                </tr>
-                                                                <tbody data-repeater-list="">
-                                                                    <tr data-repeater-item class="align-items-center">
-                                                                        <td><input type="text" class="form-control" placeholder=""  style="width: 130px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder=""  style="width: 130px"/></td>
-                                                                        <td> <textarea class="form-control m-input" placeholder=""  style="width: 130px"></textarea></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder=""  style="width: 130px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder=""  style="width: 130px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder=""  style="width: 130px"/></td>
-                                                                        <td><input type="text" class="form-control m-input" placeholder=""  style="width: 130px"/></td>
-                                                                        <td><input type="file" class="form-control m-input" placeholder=""  style="width: 237px"/></td>
-                                                                        @*<th ><input type="button" class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill" value="Delete"/></th>*@
-                                                                        <td data-repeater-delete="">
-                                                                            <a href="#" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
-                                                                                <i class="fa fa-minus"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                      
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div data-repeater-create="" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
-                                                            <span>
-                                                                <i class="la la-plus"></i>
-                                                                <span>Add</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_5">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Bank Details</h3>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Bank Name<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="bankname" class="form-control m-input" placeholder="Bank Name" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Account Holder Name<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="bankname" class="form-control m-input" placeholder="Account Holder Name" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="form-group  row">
-                                                <label class="col-xl-2 col-lg-3 col-form-label">Branch Name<span class="required-star">*</span></label>
-                                                <div class="col-xl-8 col-lg-8">
-                                                    <input type="text" name="bankname" class="form-control m-input" placeholder="Branch Name" autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4  col-form-label">IFSC Code<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder="IFSC Code" ng-model="" value="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-4 col-lg-4 col-form-label">MICR Code<span class="required-star">*</span></label>
-                                                        <div class="col-xl-8 col-lg-8">
-                                                            <input type="text" name="" id="" class="form-control m-input" placeholder="MICR Code" ng-model="" value="" />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                           
-                                        </div>
-
-                                    </div>
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_6">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Document Upload</h3>
-                                            </div>
-                                            <table class="table table-striped- table-bordered table-hover table-checkable" id="section_table_view">
-                                                <tr>
-                                                    <th>Certificates</th>
-                                                    <th>Browse Certificates</th>
-                                                    <th>Upload Certificates</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                          <select class="form-control" value="" ng-model="">
+                                                            <select class="form-control" value="{{DepartmentID}}" ng-model="DepartmentID">
                                                                 <option value="0">--Select--</option>
-                                                                <option>SSC Certificate</option>
-                                                                <option>HSC-DIPLOMA Certificate</option>
-                                                                <option>UG Certificate</option>
-                                                                <option>PG Certificate</option>
-                                                                <option>Phd Certificate</option>
-                                                                <option>Aadhar Card</option>
-                                                                <option>Pan Card</option>
-                                                                <option>University Approval Letter</option>
-                                                                <option>Passport Details</option>
-                                                                <option>Birth Certificate</option>
-                                                                <option>Caste Certificate</option>
-                                                                <option>Caste Validity</option>
-                                                                <option>SET NET Score Card</option>
-                                                                <option>Any Other</option>                                                            
-
+                                                                <option ng-repeat="d in EmployeeData" value="{{d.DepartmentID}}" ng-selected="d.DepartmentID == DepartmentID">{{d.Department}}</option>
 
                                                             </select>
-                                                       
-                                                    </td>
-                                                    <td>
-                                                        <input type="file" class="form-control" />
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-info" ng-show="" ng-model="" ng-click="">
-                                                            <i class="fa fa-upload"> </i>  Upload
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                </table>
-</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                    </div>
-                                    <div class="m-wizard__form-step" id="m_wizard_form_step_7">
-                                        <div class="m-form__section m-form__section--first">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Profile Upload</h3>
                                             </div>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <div class="m-card-user__pic">
-                                                        <img src="~/Content/assets/app/media/img/users/1.png" class="m--img-rounded m--marginless" style="height:91px" alt="" />
+                                                <div class="col-xl-6">
+                                                    <div class="form-group m-form__group row" ng-init="GetSection()">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Section<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <select class="form-control" value="{{SectionID}}" ng-model="SectionID">
+                                                                <option value="0">--Select--</option>
+                                                                <option ng-repeat="d in SectionData" value="{{d.SectionId}}" ng-selected="d.SectionId == SectionID">{{d.SectionName}}</option>
 
-                                                        <!--
-                    <span class="m-type m-type--lg m--bg-danger"><span class="m--font-light">S<span><span>
-                    -->
-                                                    </div><br>
-                                                    <input type="file" />
-                                                    <label><b>Upload Profile Picture</b></label>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                <div class="col-6">
-                                                    <div class="m-card-user__pic">
-                                                        <img src="~/Content/assets/app/media/img/users/blankimage.jpg" class="m--img-rounded m--marginless" style="height:91px" alt="" />
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group m-form__group row" ng-init="GetShift()">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Shift Type<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <select class="form-control" value="{{ShiftID}}" ng-model="ShiftID">
+                                                                <option value="0">--Select--</option>
+                                                                <option ng-repeat="d in ShiftDetails" value="{{d.ShiftID}}" ng-selected="d.ShiftID == ShiftID">{{d.ShiftName}}</option>
 
-                                                        <!--
-            <span class="m-type m-type--lg m--bg-danger"><span class="m--font-light">S<span><span>
-            -->
-                                                    </div><br>
-                                                    <input type="file" />
-                                                    <label><b>Upload Profile Sign </b></label>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4  col-form-label">Name<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="name" id="name" class="form-control m-input" placeholder="Full Name" autocomplete="off" ng-model="EmployeeName" value="{{EmployeeName}}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group m-form__group row" ng-init="GetDesignation()">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Designation<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <select class="form-control" value="{{DesignationID}}" ng-model="DesignationID">
+                                                                <option value="0">--Select--</option>
+                                                                <option ng-repeat="d in DesignationData" value="{{d.DesignationID}}" ng-selected="d.DesignationID == DesignationID">{{d.Designation}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Gender<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <select class="form-control" value="{{Gender}}" ng-model="Gender">
+                                                                <option value="0">--Select--</option>
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group m-form__group row">
+                                                        <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Blood Group<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <select class="form-control" value="{{BloodGroup}}" ng-model="BloodGroup">
+                                                                <option value="0">--Select--</option>
+                                                                <option>A+</option>
+                                                                <option>B+</option>
+                                                                <option>A-</option>
+                                                                <option>B-</option>
+                                                                <option>AB+</option>
+                                                                <option>AB-</option>
+                                                                <option>O+</option>
+                                                                <option>O-</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4  col-form-label">Email<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="email" id="email" class="form-control m-input" placeholder="EmailID" autocomplete="off" ng-model="EmailID" value="{{EmailID}}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4 col-lg-4 col-form-label">Alternate Email<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="alernateemail" id="alternateemail" class="form-control m-input" placeholder="Alternate EmailID" autocomplete="off" ng-model="AlternateEmailID" value="{{AlternateEmailID}}" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4  col-form-label">Mobile No<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="MobileNo" id="MobileNo" class="form-control m-input" placeholder="Mobile Number" autocomplete="off" ng-model="MobileNo" value="{{MobileNo}}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4 col-lg-4 col-form-label">Alternate Mobile NO<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="alermobileno" id="alermobileno" class="form-control m-input" placeholder="Alternate Mobile NO" autocomplete="off" ng-model="AlternateMobileNo" value="{{AlternateMobileNo}}" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-4 col-lg-4 col-form-label">Date of Birth<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <div class="input-group date">
+                                                                <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_1" ng-model="DateofBirth" value="{{DateofBirth}}" />
+                                                               </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 </div>
+                                                <hr />
+                                                @*<div class="m-form__section">*@
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title m--font-success">
+                                                        Permanent Address Details
+                                                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group  row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">Address<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <textarea type="text" name="PermanentAddress" class="form-control m-input" ng-model="PermanentAddress" value="{{PermanentAddress}}" autocomplete="off"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row" ng-init="GetState()">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">State<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{PermanantStateID}}" ng-model="PermanantStateID" ng-change="GetDistrict(PermanantStateID)">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="s in StateList" value="{{s.StateID}}" ng-selected="s.StateID == PermanantStateID">{{s.State}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row" ng-init="GetDistrict()">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">District<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{PermanantDistrictID}}" ng-model="PermanantDistrictID" ng-change="GetTaluka(PermanantStateID,PermanantDistrictID)">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in ParentDistrict" value="{{d.DistrictID}}" ng-selected="d.DistrictID == PermanantDistrictID">{{d.District}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Taluka<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{PermanantTalukaID}}" ng-model="PermanantTalukaID">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in TalukaList" value="{{d.TalukaID}}" ng-selected="d.TalukaID == PermanantTalukaID">{{d.Taluka}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">City/Village<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <input type="text" name="City" id="City" class="form-control m-input" placeholder="City/Village" ng-model="PermanentCountry" value="{{PermanentCountry}}" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">Pincode<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder="Permanant Pincode " ng-model="PermanantPincode" value="{{PermanantPincode}}" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <hr />
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title m--font-success" ng-click="ShowDiv()">
+                                                        Correspondance Address Details
+                                                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
+                                                    </h3>
+                                                    <label class="m-checkbox">
+                                                        Copy Permanent Address
+                                                        <input type="checkbox" ng-change="ShowDiv()" ng-model="Selected">
+                                                        <span></span>
+                                                    </label>
+
+                                                </div>
+                                            <div ng-show="IsAddress">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group  row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">Address<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <textarea type="text" name="CorrespondanceAddress" class="form-control m-input"  autocomplete="off" ng-model="CorrespondanceAddress" value="{{CorrespondanceAddress}}"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row" ng-init="GetCorrState()">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">State<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{CorrespondanceStateID}}" ng-model="CorrespondanceStateID" ng-change="GetCorrDistrict(CorrespondanceStateID)">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="s in StateCorrList" value="{{s.StateID}}" ng-selected="s.StateID == CorrespondanceStateID">{{s.State}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row" ng-init="GetDistrict()">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">District<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{CorrespondanceDistrictID}}" ng-model="CorrespondanceDistrictID" ng-change="GetCorrTaluka(CorrespondanceStateID,CorrespondanceDistrictID)">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in ParentCorrDistrict" value="{{d.DistrictID}}" ng-selected="d.DistrictID == CorrespondanceDistrictID">{{d.District}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Taluka<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{CorrespondanceTalukaID}}" ng-model="CorrespondanceTalukaID">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in TalukaCorrList" value="{{d.TalukaID}}" ng-selected="d.TalukaID == CorrespondanceTalukaId">{{d.Taluka}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">City/Village<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <input type="text" name="City" id="City" class="form-control m-input" placeholder="City/Village" ng-model="CorrespondanceCountry" value="{{CorrespondanceCountry}}" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-4 col-lg-4 col-form-label">Pincode<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <input type="text" name="pincode" id="pincode" class="form-control m-input" placeholder="PinCode" ng-model="CorrespondancePincode" value="{{CorrespondancePincode}}" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                                @* </div> *@
+
+                                                <hr />
+                                                <div class="m-form__heading">
+                                                    <h3 class="m-form__heading-title m--font-success">
+                                                        Religion Details
+                                                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon " title="Some help text goes here"></i>
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row" ng-init="GetCaste()">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Caste<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="" ng-model="CasteID" ng-change="GetReligion(CasteID)">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in CasteData" value="{{d.CasteID}}" ng-selected="d.CasteID == CasteID">{{d.CasteName}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Sub-Caste<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="" ng-model="SubCasteID">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in ReligionData" value="{{d.SubCasteID}}" ng-selected="d.SubCasteID == SubCasteID">{{d.SubCasteName}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Religion<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="{{ReligionID}}" ng-model="ReligionID">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in ReligionData" value="{{d.ReligionID}}" ng-selected="d.ReligionID == ReligionID">{{d.ReligionName}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="form-group m-form__group row">
+                                                            <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Category<span class="required-star">*</span></label>
+                                                            <div class="col-xl-8 col-lg-8">
+                                                                <select class="form-control" value="" ng-model="CategoryID">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option ng-repeat="d in ReligionData" value="{{d.CategoryID}}" ng-selected="d.CategoryID == CategoryID">{{d.CategoryName}}</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--end: Form Wizard Step 1-->
+                                            <!--begin: Form Wizard Step 2-->
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success">Educational Details</h3>
+                                                    </div>
+                                                    <div id="m_repeater_1">
+                                                        <div class="form-group  m-form__group row" id="m_repeater_1">
+
+                                                            <div class="col-xl-12">
+                                                                <div>
+                                                                    <table class="table table-striped- table-bordered table-hover  table-responsive" id="m_table_2">
+                                                                        <tr>
+                                                                            <th>Sr.No</th>
+                                                                            <th>QUALIFICATION</th>
+                                                                            <th>PASSING YEAR</th>
+                                                                            <th>SCHOOL/COLLEGE</th>
+                                                                            <th>UNIVERSITY/BOARD</th>
+                                                                            <th>BOARD/STATE</th>
+                                                                            <th>CREDIT/PERCENTAGE/SGPA</th>
+                                                                            <th colspan="2">Actions</th>
+                                                                        </tr>
+                                                                        <tbody ng-repeat="m in Customers" >
+                                                                            <tr  class="align-items-center">
+                                                                                <td>{{$index + 1}}</td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 200px"  value="{{m.CourseName}}" id="CourseName"/></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"  value="{{m.PassingMothYear}}" id="PassingMothYear"/></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 200px"  value="{{m.SchoolCollege}}" id="SchoolCollege"/></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"  value="{{m.UniversityBoard}}" id="UniversityBoard"/></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"  value="{{m.BoardDivisionState}}" id="BoardDivisionState"/></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 150px"  value="{{m.CreditPercentageSGPA}}" id="CreditPercentageSGPA"/></td>
+                                                                                @*<th ><input type="button" class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill" value="Delete"/></th>*@
+                                                                                <td>
+                                                                                    <button ng-show="RemoveSave" ng-click="Remove($index)" value="Remove" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
+                                                                                        <i class="fa fa-minus"></i>
+                                                                                    </button>
+                                                                                    <button ng-show="RemoveED" ng-click="RemoveEDUCATION($index)" value="Remove" class="btn btn-info m-btn m-btn--icon m-btn--icon-only">
+                                                                                        <i class="fa fa-minus"></i>
+                                                                                    </button>
+                                                                                </td>
+                                                                                @*<td data-repeater-create="">
+                                                    <a href="#" class="btn btn-primary m-btn m-btn--icon m-btn--icon-only">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </td>*@
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-10">
+                                                                <button type="button" ng-click="AddRow($index)" value="Add"  class="btn btn-info m-btn m-btn--icon m-btn--icon-only">
+                                                                              <i class="la la-plus"></i>                                                                 
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <button type="button" ng-show="SaveDetails" ng-click="AddRowSave($index)" value="Save Details" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                                    <span>
+                                                                       Save Details
+                                                                    </span>
+                                                                </button>
+                                                           
+                                                                <button type="button" ng-show="UpdateDetails" ng-click="AddRowUpdate($index)" value="Save Details" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                                    <span>
+                                                                        Update Details
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!--end: Form Wizard Step 2-->
+                                            <!--begin: Form Wizard Step 3-->
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_3">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success">Current Appointment Details</h3>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group m-form__group row">
+                                                                <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Appointment Type<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <select class="form-control" value="{{AppointmentType}}" ng-model="AppointmentType">
+                                                                        <option value="0">--Select--</option>
+                                                                        <option>Probation</option>
+                                                                        <option>Confirmed</option>
+                                                                        <option>Temporary</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label">JobType<span class="required-star">*</span></label>
+                                                                <div class="m-radio-inline">
+                                                                    <label class="m-radio">
+                                                                        <input type="radio" name="example_3" ng-model="JobType" ng-value='"FullTime"'>Full-Time
+                                                                        <span></span>
+                                                                    </label>
+                                                                    <label class="m-radio">
+                                                                        <input type="radio" name="example_3" ng-model="JobType" ng-value='"PartTime"'>Part-Time
+                                                                        <span></span>
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4  col-form-label">Joining Date<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <div class="input-group date">
+                                                                        <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2" ng-model="JoiningDate" value="{{JoiningDate}}" />
+                                                                    </div>                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @*<div class="col-xl-6">
+                            <div class="form-group row">
+                                <label class="col-xl-4  col-form-label">UAN<span class="required-star">*</span></label>
+                                <div class="col-xl-8 col-lg-8">
+                                    <input type="text" name="" id="" class="form-control m-input" placeholder=" " ng-model="" value="" />
+                                </div>
+                            </div>
+                        </div>*@
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group m-form__group row">
+                                                                <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">Sr.GradeScale Applicable<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <select class="form-control" value="{{SrGradeScaleApplicable}}" ng-model="SrGradeScaleApplicable" ng-change="GradeScale(SrGradeScaleApplicable)">
+                                                                        <option value="0">--Select--</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                        <option value="No">No</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row" ng-hide="GradeScaleDate">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label">Sr.GradeScale ApplicableDate<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <div class="input-group date">
+                                                                        <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_3" ng-model="SrGradeScaleApplicableDate" value="{{SrGradeScaleApplicableDate}}" />
+                                                                    </div>      
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group m-form__group row">
+                                                                <label for="example-text-input" class="col-xl-4 col-lg-4 col-form-label">SelectionGrade ScaleApplicable<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <select class="form-control" value="{{SelectionGradeScaleApplicable}}" ng-model="SelectionGradeScaleApplicable" ng-change="ChnageID(SelectionGradeScaleApplicable)">
+                                                                        <option value="0">--Select--</option>
+                                                                        <option value="Yes">Yes</option>
+                                                                        <option value="No">No</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row" ng-hide="ISHiide">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label" >SelectionGrade ScaleApplicable Date<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <div class="input-group date">
+                                                                        <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_4_1" ng-model="SelectionGradeScaleApplicableDate" value="{{SelectionGradeScaleApplicableDate}}" />
+                                                                    </div>  
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!--end: Form Wizard Step 3-->
+                                            <!--begin: Form Wizard Step 4-->
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_4">
+
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success">Bank Details</h3>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4  col-form-label">Bank Name<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="bankname" id="bankname" class="form-control m-input" placeholder="Bank Name" autocomplete="off" ng-model="BankName" value="{{BankName}}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label">Branch Name<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="branch" id="branch" class="form-control m-input" placeholder="Branch Name" autocomplete="off" ng-model="BranchName" value="{{BranchName}}" />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="form-group  row">
+                                                        <label class="col-xl-2 col-lg-3 col-form-label">Account Number<span class="required-star">*</span></label>
+                                                        <div class="col-xl-8 col-lg-8">
+                                                            <input type="text" name="bankname" class="form-control m-input" placeholder="Account Number" autocomplete="off" ng-model="AccountNumber" value="{{AccountNumber}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4  col-form-label">IFSCCode<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="" id="" class="form-control m-input" placeholder="IFSC Code" value="{{IFSCCode}}" ng-model="IFSCCode" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label">MICR Code<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="" id="" class="form-control m-input" placeholder="MICR Code" value="{{MICRCode}}" ng-model="MICRCode" />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4  col-form-label">PF Number<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder="PF Number" autocomplete="off" ng-model="PF" value="{{PF}}" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-4 col-lg-4 col-form-label">UAN<span class="required-star">*</span></label>
+                                                                <div class="col-xl-8 col-lg-8">
+                                                                    <input type="text" name="schoolname" id="schoolname" class="form-control m-input" placeholder="UAN" autocomplete="off" ng-model="UAN" value="{{UAN}}" />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_5">
+
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success"> Experience Details</h3>
+                                                    </div>
+                                                    <div id="m_repeater_2">
+                                                        <div class="form-group  m-form__group row" id="m_repeater_2">
+
+                                                            <div class="col-xl-12">
+                                                            
+                                                                <div>
+                                                                    <table class="table table-striped- table-bordered table-hover  table-responsive" id="m_table_2">
+                                                                        <tr>
+                                                                            <th>Sr.No</th>
+                                                                            <th>EXPERIENCE TYPE</th>
+                                                                            <th>ORGANISATION</th>
+                                                                            <th>ORGANISATION ADDRESS</th>
+                                                                            <th>DESIGNATION</th>
+                                                                            <th>PERIOD FROM</th>
+                                                                            <th>PERIOD TO</th>
+                                                                            <th>TOTAL EXPERIENCE</th>
+                                                                            <th>DOCUMENT UPLOAD</th>
+                                                                            <th colspan="2">Actions</th>
+                                                                        </tr>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="m in Sample"  class="align-items-center">
+                                                                                <td>{{$index + 1}}</td>
+                                                                                <td ng-init="GetExperienceType()">
+                                                                                    <select class="form-control" value="{{ExprienceTypeID}}"  id="ExprienceTypeID">
+                                                                                        <option value="0">--Select--</option>
+                                                                                        <option ng-repeat="d in ExperienceTypeList" value="{{d.ExprienceTypeID}}" ng-selected="d.ExprienceTypeID == ExprienceTypeID">{{d.ExprienceType}}</option>
+                                                                                   </select>
+                                                                                @*<input type="text" class="form-control" placeholder="" style="width: 130px" ng-model="ExprienceTypeID" value="{{ExprienceTypeID}}" id="ExprienceTypeID"/>*@
+                                                                                </td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 130px"   value="{{m.Organization}}" id="Organization"/></td>
+                                                                                <td><textarea class="form-control m-input" placeholder="" style="width: 130px" value="{{m.OrganizationAddress}}"  id="OrganizationAddress"></textarea></td>
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 130px"  value="{{m.Designation}}" id="Designation"/></td>
+                                                                                <td>                                                                                   
+                                                                                        <div class="col-xl-8 col-lg-8">
+                                                                                            <div class="input-group date">
+                                                                                                <input type="date" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="PeriodFrom"  value="{{m.PeriodFrom}}" style="width: 200px"/>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        @*<input type="text" class="form-control m-input" placeholder="" style="width: 130px" ng-model="PeriodFrom" value="{{PeriodFrom}}" id="PeriodFrom"/>*@
+</td>
+                                                                                <td>
+                                                                                    <div class="input-group date">
+                                                                                        <input type="date" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="PeriodTo"  value="{{m.PeriodTo}}" />
+                                                                                    </div>
+                                                                                
+                                                                                @*<input type="text" class="form-control m-input" placeholder="" style="width: 130px" ng-model="PeriodTo" value="{{PeriodTo}}" id="PeriodTo"/></td>*@
+                                                                                <td><input type="text" class="form-control m-input" placeholder="" style="width: 130px"  value="{{m.TotalExprience}}" id="TotalExprience"/></td>
+                                                                                <td><input type="file" class="form-control m-input" placeholder="" style="width: 237px" ng-file="ExperienceDocumentType" file-value="{{m.ExperienceDocumentType}}" id="ExperienceDocumentType"/></td>
+                                                                                <td><input type="text" disabled class="form-control m-input" placeholder="" style="width: 237px"  value="{{m.ExprienceID}}" id="ExprienceID" /></td>
+                                                                                @*<th ><input type="button" class="btn-sm btn btn-danger m-btn m-btn--icon m-btn--pill" value="Delete"/></th>*@
+                                                                                <td>
+                                                                                    <button ng-show="AddExp" ng-click="RemoveEX($index)" value="Remove" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
+                                                                                        <i class="fa fa-minus"></i>
+                                                                                    </button>
+                                                                                    <button ng-show="RemoveExp" ng-click="RemoveExperience($index)" value="Remove" class="btn btn-info m-btn m-btn--icon m-btn--icon-only">
+                                                                                        <i class="fa fa-minus"></i>
+                                                                                    </button>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-10">
+                                                                <button type="button" ng-click="AddEXRow($index)" value="Add" class="btn btn-info m-btn m-btn--icon m-btn--icon-only">
+                                                                    <i class="la la-plus"></i>
+                                                                </button>
+                                                               
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <button type="button" ng-show="ExperienceSBtn" ng-click="AddEXRowSave($index)" value="Save Details" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                                    <span>
+                                                                        Save Details
+                                                                    </span>
+                                                                </button>
+                                                                <button type="button" ng-show="ExperienceUBtn" ng-click="UpdateEXRowSave($index)" value="Save Details" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                                                    <span>
+                                                                        Update Details
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_6">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success">Document Upload</h3>
+                                                    </div>
+                                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="section_table_view">
+                                                        <tr>
+                                                            <th>Certificates</th>
+                                                            <th>Browse Certificates</th>
+                                                            <th>Upload Certificates</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <select class="form-control" value="{{DocumentType}}" ng-model="DocumentType">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option>SSC Certificate</option>
+                                                                    <option>HSC-DIPLOMA Certificate</option>
+                                                                    <option>UG Certificate</option>
+                                                                    <option>PG Certificate</option>
+                                                                    <option>Phd Certificate</option>
+                                                                    <option>Aadhar Card</option>
+                                                                    <option>Pan Card</option>
+                                                                    <option>University Approval Letter</option>
+                                                                    <option>Passport Details</option>
+                                                                    <option>Birth Certificate</option>
+                                                                    <option>Caste Certificate</option>
+                                                                    <option>Caste Validity</option>
+                                                                    <option>SET NET Score Card</option>
+                                                                    <option>Any Other</option>
+
+
+                                                                </select>
+
+                                                            </td>
+                                                            <td>
+                                                                <input type="file" name="Path" class="form-control m-input"  multiple="multiple" file-model="Path" file-value="{{Path}}">
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-info" ng-click="UploadData(Path,DocumentType)">
+                                                                    <i class="fa fa-upload"></i> Upload
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="section_table_view">
+                                                        <tr>
+                                                            <td>Sr.no</td>
+                                                            <td>Uploded Documents</td>
+                                                            <td>Downloads</td>
+                                                            <td>Action</td>
+                                                        </tr>
+                                                        <tr ng-repeat="s in DetailsDocument">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{s.DocumentType}}</td>
+                                                            <td>
+                                                                <a href="#" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
+                                                                    <i class="fa fa-download"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <button ng-click="RemoveDocument($index)" value="Remove" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="m-wizard__form-step" id="m_wizard_form_step_7">
+                                                <div class="m-form__section m-form__section--first">
+                                                    <div class="m-form__heading">
+                                                        <h3 class="m-form__heading-title m--font-success">Profile Upload</h3>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <img id="output_image" ng-src="{{ImagePath}}" width="100" />
+                                                            <input type="file" name="ImagePath" class="form-control m-input" onchange="preview_image(event)" multiple="multiple"   file-model="ImagePath" file-value="{{ImagePath}}">
+                                                            @*<a href="{{ImagePath}}">View</a>*@                                                     
+                                                            <label><b>Upload Profile Picture</b></label>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <img id="output_image1" ng-src="{{Sign}}" width="100" />
+                                                            <input type="file" name="Sign" class="form-control m-input" onchange="preview_banner(event)" multiple="multiple" file="Sign" file-model="Sign" file-value="{{Sign}}">
+                                                            
+                                                           
+                                                                  <label><b>Upload Profile Sign </b></label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -789,62 +1121,106 @@
                                             <!--end: Form Wizard Step 4-->
                                         </div>
 
-                                <!--end: Form Body -->
-                                <!--begin: Form Actions -->
-                                <div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
-                                    <div class="m-form__actions">
-                                        <div class="row">
-                                            <div class="col-lg-6 m--align-left">
-                                                <a href="#" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" data-wizard-action="prev">
-                                                    <span>
-                                                        <i class="la la-arrow-left"></i>&nbsp;&nbsp;
-                                                        <span>Back</span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-6 m--align-right">
-                                                <a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
-                                                    <span>
-                                                        <i class="la la-check"></i>&nbsp;&nbsp;
-                                                        <span>Submit</span>
-                                                    </span>
-                                                </a>
-                                                <a href="#" class="btn btn-success m-btn m-btn--custom m-btn--icon" data-wizard-action="next">
-                                                    <span>
-                                                        <span>Save & Continue</span>&nbsp;&nbsp;
-                                                        <i class="la la-arrow-right"></i>
-                                                    </span>
-                                                </a>
+                                    <!--end: Form Body -->
+                                    <!--begin: Form Actions -->
+                                    <div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
+                                        <div class="m-form__actions">
+                                            <div class="row">
+                                                <div class="col-lg-6 m--align-left">
+                                                    <a href="#" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" data-wizard-action="prev">
+                                                        <span>
+                                                            <i class="la la-arrow-left"></i>&nbsp;&nbsp;
+                                                            <span>Back</span>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-6 m--align-right">
+                                                    <button  type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon" ng-disabled="btnsave" data-wizard-action="submit" ng-click="Add(ImagePath,Sign)">
+                                                        <span>
+                                                            <i class="la la-check"></i>&nbsp;&nbsp;
+                                                            <span>Submit</span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" ng-disabled="btnupdate" data-wizard-action="submit" ng-click="Update()">
+                                                        <span>
+                                                            <i class="la la-check"></i>&nbsp;&nbsp;
+                                                            <span>Update</span>
+                                                        </span>
+                                                    </button>
+                                                    <button href="#" class="btn btn-success m-btn m-btn--custom m-btn--icon" data-wizard-action="next" ng-disabled="SaveContinue">
+                                                        <span>
+                                                            <span>Save & Continue</span>&nbsp;&nbsp;
+                                                            <i class="la la-arrow-right"></i>
+                                                        </span>
+                                                    </button>
+                                                    <button class="btn btn-secondary" data-wizard-action="first" ng-click="Clear()">
+                                                        <i class="fa fa-times" data-wizard-action="first"> </i>  Cancel
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!--end: Form Actions -->
-                            </form>
+                                    <!--end: Form Actions -->
+                                </form>
+                            </div>
+
+                            <!--end: Form Wizard Form-->
                         </div>
-
-                        <!--end: Form Wizard Form-->
                     </div>
                 </div>
+
+                <!--end: Form Wizard-->
             </div>
 
-            <!--end: Form Wizard-->
+            <!--end: Portlet Body-->
         </div>
 
-        <!--end: Portlet Body-->
+        <!--End::Main Portlet-->
+        <link href="~/Content/assets/css/custom.css" rel="stylesheet" />
     </div>
 
-    <!--End::Main Portlet-->
-</div><script src="~/Content/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/base/scripts.bundle.js" type="text/javascript"></script>
-<!--end::Global Theme Bundle -->
-<!--begin::Global Theme Bundle -->
-<script src="@Url.Content("~/Content/assets/vendors/custom/datatables/datatables.bundle.js")" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/wizard/wizard.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/wizard.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/form-repeater.js" type="text/javascript"></script>
-<script src="~/Content/assets/demo/demo12/custom/crud/datatables/basic/scrollable.js" type="text/javascript"></script>
 
+
+    <script src="~/Content/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/base/scripts.bundle.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/angularjs/scripts/angular.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Employee/EmployeeModule.js")"></script>
+    <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Employee/Employee.js")" type="text/javascript"></script>
+    <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/Module.js"></script>
+
+    <script>
+                var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
+    </script>
+
+    <!--end::Global Theme Bundle -->
+    <!--begin::Global Theme Bundle -->
+    <script src="@Url.Content("~/Content/assets/vendors/custom/datatables/datatables.bundle.js")" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/wizard/wizard.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/wizard.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/forms/widgets/form-repeater.js" type="text/javascript"></script>
+    <script src="~/Content/assets/demo/demo12/custom/crud/datatables/basic/scrollable.js" type="text/javascript"></script>
+</body>
+</html>
+<script type='text/javascript'>
+                function preview_image(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = document.getElementById('output_image');
+                        output.src = reader.result;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+                function preview_banner(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = document.getElementById('output_image1');
+                        output.src = reader.result;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+</script>
