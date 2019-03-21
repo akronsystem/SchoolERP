@@ -12,10 +12,10 @@ namespace SchoolAPI.API
 {
     public class SectionMasterController : ApiController
     {
-           [httpPost]
+           [HttpPost]
           public object AddSection([FromBody]SectionParam SectionParam)
           {
-			  SectionMasterBussiness Add = new SectionMasterBussiness();
+            SectionMasterBussiness Add = new SectionMasterBussiness();
            
               var result = Add.SaveSection(SectionParam);
             return result;

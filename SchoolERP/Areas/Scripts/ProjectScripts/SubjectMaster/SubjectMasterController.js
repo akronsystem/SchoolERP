@@ -124,11 +124,11 @@ function SubjectMasterController($scope, Service) {
         };
 
         if (event.target.checked == false) {
-            var confirm = window.confirm("Do you want to deactive the Section?");
+            var confirm = window.confirm("Do you want to deactive the Subject?");
 
         }
         else {
-            var confirm = window.confirm("Do you want to active the Section?");
+            var confirm = window.confirm("Do you want to active the Subject?");
         }
         if (confirm == true) {
             Service.Post("SubjectMaster/DeleteSingleSubject", JSON.stringify(data)).then(function (response) {

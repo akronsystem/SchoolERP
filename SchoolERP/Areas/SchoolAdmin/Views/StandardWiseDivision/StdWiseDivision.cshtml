@@ -6,7 +6,7 @@
 <style>
     input {
         margin-right: 20px;
-        margin-top:10px;
+        margin-top: 10px;
     }
 </style>
 <html>
@@ -16,7 +16,7 @@
         <form id="frmCRUD" name="form" class="m-form m-form--fit m-form--label-align-right" ng-init="Initialize()">
 
             <div class="m-content">
-                <div @*ng-show="MainDiv"*@>
+                <div ng-show="MainDiv">
                     <div class="row">
                         <div class="col-lg-12">
                             <!--begin::Portlet-->
@@ -25,7 +25,7 @@
                                     <div class="m-portlet__head-caption">
                                         <div class="m-portlet__head-title">
                                             <h3 class="m-portlet__head-text">
-                                                Standard Wise Division 
+                                                Standard Wise Division
                                             </h3>
                                         </div>
                                     </div>
@@ -44,34 +44,42 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Board <span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control" ng-model="ddlBoard">
-                                                    <option value="0" ng-selected="selected">-Select-</option>
-                                                    <option ng-repeat="b in BoardData" value="{{b.BoardID}}">{{b.BoardName}}</option>
+                                                <select class="form-control m-input" id="exampleBoard" ng-model="ddlBoard">
+                                                    <option value="">-Select-</option>
+                                                    <option ng-repeat="b in BoardData" value="{{b.BoardID}}" ng-selected="ddlBoard==b.BoardID">{{b.BoardName}}</option>
                                                 </select>
+
+                                                <input type="hidden" ng-model="StdWiseDivisionId" />
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Standard <span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                               <select class="form-control" ng-model="ddlStandard">
-                                                   <option value="0" ng-selected="selected">-Select-</option>
-                                                   <option ng-repeat="s in StandardData" value="{{s.StandardId}}">{{s.StandardName}}</option>
-                                               </select>
+                                                <select class="form-control m-input" id="exampleStd" ng-model="StandardID">
+                                                    <option value="">-Select-</option>
+                                                    <option ng-repeat="std in StandardData" value="{{std.StandardId}}" ng-selected="StandardID == std.StandardId">{{std.StandardName}}</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    
+
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Division <span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <label ng-repeat="d in DivisionData" >{{d.DivisionName}}
-                                                    <input type="checkbox" id="{{d.DivisionId}}" ng-model="d.Selected"
-                                                           name="selectedDiv" 
-                                                           value="{{d.DivisionName}}"  />
-                                                  
+                                                <label ng-repeat="d in DivisionData">
+                                                    {{d.DivisionName}}
+                                                    <input type="checkbox" id="{{d.DivisionID}}" ng-model="d.Selected"
+                                                           name="selectedDiv"
+                                                           value="{{d.DivisionName}}" ng-checked="checkID(d.DivisionID)" ng-true-value="true" />
+
                                                 </label>
-                                           
-                                                    
+
+
+
+
+
+
                                             </div>
                                         </div>
 
@@ -84,7 +92,7 @@
                                                 <i class="fa fa-save"> </i>   Save
                                             </button>
 
-                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="Update(DivisionID,DivisionName)">
+                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="Update(StandardID,ddlBoard,StdWiseDivisionId)">
                                                 <i class="fa fa-save"> </i>   Update
                                             </button>
                                             <button class="btn btn-secondary" ng-click="Clear()">
@@ -137,7 +145,7 @@
                             <table class="table table-striped- table-bordered table-hover table-checkable" id="section_table_view">
                                 <thead>
                                     <tr>
-                                      
+
                                         <th>Standard Name</th>
                                         <th>Division Name</th>
                                         <th>Board Name</th>
@@ -161,13 +169,13 @@
 
                                         <td>
 
-                                            <a class="edit-icon" data-toggle="m-tooltip" title="Edit" ng-click="SingleValue(data.DivisionID,data.DivisionName)"><i class="la la-edit"></i></a>
-                                           
+                                            <a class="edit-icon" data-toggle="m-tooltip" title="Edit" ng-click="SingleValue(data.StandardID,data.DivisionID,data.BoardID,data.StdWiseDivisionId)"><i class="la la-edit"></i></a>
+
                                         </td>
                                         <td>
                                             <span class="m-switch m-switch--icon m-switch--danger">
                                                 <label>
-                                                    <input type="checkbox" ng-show="chkStatus" ng-checked="{{data.Status}}" ng-click="Delete(data.DivisionID,data.DivisionName)">
+                                                    <input type="checkbox" ng-show="chkStatus" ng-checked="{{data.Display}}" ng-click="Delete(data.StdWiseDivisionId)">
                                                     <span></span>
                                                 </label>
                                             </span>

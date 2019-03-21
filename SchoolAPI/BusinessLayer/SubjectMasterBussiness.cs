@@ -13,17 +13,32 @@ namespace SchoolAPI.BusinessLayer
         SchoolERPContext db = new SchoolERPContext();
         public object SaveSubject(SubjectParam ObjParam)
         {
-            Tbl_Subject_Master obj = new Tbl_Subject_Master();
-            obj.SubjectName = ObjParam.SubjectName;
-            obj.SubjectCode = ObjParam.SubjectCode;
-            obj.Status = 1;
-            obj.CreatedBy = 1;
-            obj.ModifiedBy = null;
-            obj.ModifiedDate =null;
-            obj.CreatedDate = DateTime.Now;
-            db.Tbl_Subject_Master.Add(obj);
-            db.SaveChanges();
-            return new Result() { IsSucess = true, ResultData = "Subject Save Successfully" };
+            try
+            {
+                var Duplicate = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectName == ObjParam.SubjectName && r.SubjectCode ==ObjParam.SubjectCode);
+                if (Duplicate != null)
+                {
+                    return new Result() { IsSucess = true, ResultData = "Duplicate Entry Not Allowed" };
+                }
+                else
+                {
+                    Tbl_Subject_Master obj = new Tbl_Subject_Master();
+                    obj.SubjectName = ObjParam.SubjectName;
+                    obj.SubjectCode = ObjParam.SubjectCode;
+                    obj.Status = 1;
+                    obj.CreatedBy = 1;
+                    obj.ModifiedBy = null;
+                    obj.ModifiedDate = null;
+                    obj.CreatedDate = DateTime.Now;
+                    db.Tbl_Subject_Master.Add(obj);
+                    db.SaveChanges();
+                    return new Result() { IsSucess = true, ResultData = "Subject Save Successfully" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Error() { IsError = true, Message="Error" };
+            }
 
         }
         public object GetSingleSubject(SubjectParam ObjParam)
@@ -33,13 +48,22 @@ namespace SchoolAPI.BusinessLayer
         }
         public object UpdateSubject(SubjectParam ObjParam)
         {
-            Tbl_Subject_Master obj = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectID == ObjParam.SubjectId);
-            obj.SubjectName = ObjParam.SubjectName;
-            obj.SubjectCode = ObjParam.SubjectCode;
-            obj.ModifiedBy = 1;
-            obj.ModifiedDate = DateTime.Now;
-            db.SaveChanges();
-            return new Result() { IsSucess = true, ResultData = "Record Updated Successfully" };
+            var Duplicate = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectName == ObjParam.SubjectName && r.SubjectCode == ObjParam.SubjectCode);
+            if (Duplicate != null)
+            {
+
+                return new Result() { IsSucess = true, ResultData = "Duplicate Entry Not Allowed" };
+            }
+            else
+            {
+                Tbl_Subject_Master obj = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectID == ObjParam.SubjectId);
+                obj.SubjectName = ObjParam.SubjectName;
+                obj.SubjectCode = ObjParam.SubjectCode;
+                obj.ModifiedBy = 1;
+                obj.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return new Result() { IsSucess = true, ResultData = "Record Updated Successfully" };
+            }
         }
         public object DeleteSubject(SubjectParam ObjParam)
         {

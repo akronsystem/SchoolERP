@@ -42,7 +42,7 @@ namespace SchoolAPI
 		public virtual DbSet<View_SectionDisplay> View_SectionDisplay { get; set; }
 		public virtual DbSet<Tbl_Subject_Master> Tbl_Subject_Master { get; set; }
 		public virtual DbSet<View_Display_Subject> View_Display_Subject { get; set; }
-// public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
+         public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
 		public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
 		public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
 		public virtual DbSet<TblBoardDetail> TblBoardDetails { get; set; }

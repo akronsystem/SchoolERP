@@ -18,7 +18,7 @@ namespace SchoolAPI.BusinessLayer
         }
         public object GetBoard()
         {
-			var result = "";// db.View_Display_Board.Where(r => r.Status == 1).ToList();
+            var result = db.View_Display_Board.Where(r => r.Status == 1).ToList();
             return new Result() { IsSucess = true, ResultData = result };
         }
         public object GetDivision()
