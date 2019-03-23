@@ -10,7 +10,7 @@ namespace SchoolAPI.BusinessLayer
 {
     public class StandardMaster
     {
-        SchoolERPContext db = new SchoolERPContext();
+        SchoolAdminContext db = new SchoolAdminContext();
         
         public object AddStandard (StandardParam StdParam)
         {

@@ -13,7 +13,7 @@ namespace SchoolAPI.Param
 
         public long ExprienceTypeID { get; set; }
 
-        public string DocumentType { get; set; }
+        public string ExperienceDocumentType { get; set; }
 
         public string Organization { get; set; }
 

@@ -12,19 +12,25 @@ function EmployeeController($scope, Service, $window) {
     $scope.Customers = [];
     $scope.Sample = [];
     $scope.StoreData = [];
-    $scope.SaveContinue = false;
+   // $scope.Yes = [];
     $scope.IsVisible = false;
     $scope.Visible = true;
-    $scope.btnupdate = true;
-    $scope.btnsave = true;
-    $scope.UpdateDetails = false;
-    $scope.SaveDetails = true;
+    $scope.btnupdate = false;
+    $scope.BTNSAVE = true;
+    //$scope.UpdateDetails = false;
+    //$scope.SaveDetails = true;
     $scope.RemoveED = true;
     $scope.RemoveSave = true;
     $scope.ExperienceSBtn = true;
     $scope.ExperienceUBtn = false;
     $scope.AddExp = true;
     $scope.RemoveExp = false;
+    $scope.CorrsDistrictTaluka = false;
+    $scope.CorrsIDDistrict = true;
+    $scope.AddRowSaveContinue = false;
+    $scope.SaveContinue = true;
+    $scope.UpdateContin = false;
+    $scope.AddContin = true;
     $scope.Initialize = function () {
         debugger;
         Data = {
@@ -206,8 +212,12 @@ function EmployeeController($scope, Service, $window) {
     $scope.ShowDiv = function () {
         //alert('Heloooo');
         $scope.IsAddress = true;
+       
         if ($scope.Selected == true)
         {
+            $scope.CorrsDistrictTaluka = true;
+            $scope.CorrsIDDistrict = false;
+            
             $scope.CorrespondanceAddress = $scope.PermanentAddress;
             $scope.CorrespondanceStateID = $scope.PermanantStateID;
             $scope.CorrespondanceDistrictID = $scope.PermanantDistrictID;
@@ -218,6 +228,8 @@ function EmployeeController($scope, Service, $window) {
         }
         else
         {
+            $scope.CorrsDistrictTaluka = false;
+            $scope.CorrsIDDistrict = true;
             $scope.CorrespondanceAddress = "";
             $scope.CorrespondanceStateID = "";
             $scope.CorrespondanceDistrictID = "";
@@ -288,7 +300,10 @@ function EmployeeController($scope, Service, $window) {
         }
     }
     //	Educational Details for add row and remove
-    $scope.AddRow = function (index) {
+    $scope.AddRow = function (Yes) {
+        var Data = {
+            Yes:$scope.Yes
+        }
         debugger;
         //Add the new item to the Array.
         var customer = [];
@@ -299,44 +314,127 @@ function EmployeeController($scope, Service, $window) {
         customer.BoardDivisionState = $scope.BoardDivisionState;
         customer.CreditPercentageSGPA = $scope.CreditPercentageSGPA;
         $scope.Customers.push(customer);
-        $scope.SaveContinue = true;
+        
+        //$scope.SaveContinue = false;
+       // $scope.AddRowSaveContinue = true;
+        
     }
     $scope.AddRowSave = function (index) {
-        if (CourseName.length == null) {
-            var EducationDetails = {
-                CourseName: CourseName.value,
-                PassingMothYear: PassingMothYear.value,
-                SchoolCollege: SchoolCollege.value,
-                UniversityBoard: UniversityBoard.value,
-                BoardDivisionState: BoardDivisionState.value,
-                CreditPercentageSGPA: CreditPercentageSGPA.value
+        debugger;
+        if ($scope.Yes == 1 || $scope.Change == 1) {
+
+            if (CourseName.length == null) {
+                $scope.Customers = [];
+                var EducationDetails = {
+                    CourseName: CourseName.value,
+                    PassingMothYear: PassingMothYear.value,
+                    SchoolCollege: SchoolCollege.value,
+                    UniversityBoard: UniversityBoard.value,
+                    BoardDivisionState: BoardDivisionState.value,
+                    CreditPercentageSGPA: CreditPercentageSGPA.value,
+                    EducationID: EducationID.value
+                }
+                $scope.Customers.push(EducationDetails);
+                $scope.Change = 0;
+                $scope.Yes = 0;
+            }
+            else {
+
+                $scope.Customers = [];
+            for (var i = 0; i < CourseName.length; i++) {
+                EducationDetails = {
+                    CourseName: CourseName[i].value,
+                    PassingMothYear: PassingMothYear[i].value,
+                    SchoolCollege: SchoolCollege[i].value,
+                    UniversityBoard: UniversityBoard[i].value,
+                    BoardDivisionState: BoardDivisionState[i].value,
+                    CreditPercentageSGPA: CreditPercentageSGPA[i].value,
+                    EducationID: EducationID[i].value
+                }
+                $scope.Customers.push(EducationDetails);
+                $scope.Change = 0;
+                $scope.Yes = 0;
+                //$scope.SaveContinue = true;
+                // $scope.AddRowSaveContinue = false;
+            }
+            $scope.Yes = 0;
+            }
+            //$scope.SaveContinue = true;
+            //$scope.Customers.splice(0, 1);
+            //Clear the TextBoxes.
+            $scope.CourseName = "";
+            $scope.PassingMothYear = "";
+            $scope.SchoolCollege = "";
+            $scope.UniversityBoard = "";
+            $scope.BoardDivisionState = "";
+            $scope.CreditPercentageSGPA = "";
+        }
+        else if ($scope.Yes == 2 || $scope.Change == 2) {
+            $scope.Store = [];
+            EmployeeID = $scope.EmployeeID;
+            if (TotalExprience.length == null) {
+                debugger;
+                if (ExperienceDocumentType.value == "") {
+                    var Document = null;
+                }
+                else {
+                    Document = ExperienceDocumentType[i].files[0]["name"]
+                }
+                var EXDetails = {
+
+                    ExprienceTypeID: ExprienceTypeID.value,
+                    Organization: Organization.value,
+                    OrganizationAddress: OrganizationAddress.value,
+                    Designation: Designation.value,
+                    PeriodFrom: PeriodFrom.value,
+                    PeriodTo: PeriodTo.value,
+                    TotalExprience: TotalExprience.value,
+                    ExperienceDocumentType: Document,
+                    EmployeeID: EmployeeID,
+                    ExprienceID: ExprienceID.value
+                }
+                $scope.Store.push(EXDetails);
+                $scope.Change = 0;
+                $scope.Yes = 0;
+            }
+            for (var i = 0; i < TotalExprience.length; i++) {
+                debugger;
+                if (ExperienceDocumentType[i].value == "") {
+                    var Document = null;
+                }
+                else {
+                    Document = ExperienceDocumentType[i].files[0]["name"]
+                }
+                EXDetails = {
+                    ExprienceTypeID: ExprienceTypeID[i].value,
+                    Organization: Organization[i].value,
+                    OrganizationAddress: OrganizationAddress[i].value,
+                    Designation: Designation[i].value,
+                    PeriodFrom: PeriodFrom[i].value,
+                    PeriodTo: PeriodTo[i].value,
+                    TotalExprience: TotalExprience[i].value,
+                    EmployeeID: EmployeeID,
+                    ExperienceDocumentType: Document,
+                    ExprienceID: ExprienceID[i].value
+
+                }
+                $scope.Store.push(EXDetails);
+                $scope.Change = 0;
+                $scope.Yes = 0;
 
             }
-            $scope.StoreData.push(EducationDetails);
-        }
-        for (var i = 0; i < CourseName.length; i++) {
-        EducationDetails = {
-                CourseName: CourseName[i].value,
-                PassingMothYear: PassingMothYear[i].value,
-                SchoolCollege: SchoolCollege[i].value,
-                UniversityBoard: UniversityBoard[i].value,
-                BoardDivisionState: BoardDivisionState[i].value,
-                CreditPercentageSGPA: CreditPercentageSGPA[i].value
 
-            }
-        $scope.StoreData.push(EducationDetails);
-        }
 
-       
-        $scope.SaveContinue = false;
-        //$scope.Customers.splice(0, 1);
-        //Clear the TextBoxes.
-        $scope.CourseName = "";
-        $scope.PassingMothYear = "";
-        $scope.SchoolCollege = "";
-        $scope.UniversityBoard = "";
-        $scope.BoardDivisionState = "";
-        $scope.CreditPercentageSGPA = "";
+            //$scope.SaveContinue = true;
+            //$scope.Customers.splice(0, 1);
+            //Clear the TextBoxes.
+            $scope.Organization = "";
+            $scope.OrganizationAddress = "";
+            $scope.Designation = "";
+            $scope.PeriodFrom = "";
+            $scope.PeriodTo = "";
+            $scope.TotalExprience = "";
+        }
     }
 
 
@@ -380,7 +478,7 @@ function EmployeeController($scope, Service, $window) {
         }
 
 
-        $scope.SaveContinue = false;
+        //$scope.SaveContinue = true;
         //$scope.Customers.splice(0, 1);
         //Clear the TextBoxes.
         $scope.CourseName = "";
@@ -411,7 +509,10 @@ function EmployeeController($scope, Service, $window) {
         }
     }
     //Experiance Details for add row and remove
-    $scope.AddEXRow = function (index) {
+    $scope.AddEXRow = function (Yes) {
+        var Data = {
+            Yes: $scope.Yes
+        }
         debugger;
         //Add the new item to the Array.
         var Experiance = [];
@@ -424,7 +525,7 @@ function EmployeeController($scope, Service, $window) {
         Experiance.TotalExprience = $scope.TotalExprience;
         Experiance.ExperienceDocumentType = $scope.ExperienceDocumentType;
         $scope.Sample.push(Experiance);
-        $scope.SaveContinue = true;
+        //$scope.SaveContinue = false;
     }
     $scope.AddEXRowSave = function (index) {
         if (ExprienceTypeID.length == null) {
@@ -468,7 +569,7 @@ function EmployeeController($scope, Service, $window) {
         }
 
         
-        $scope.SaveContinue = false;
+       // $scope.SaveContinue = true;
         //$scope.Customers.splice(0, 1);
         //Clear the TextBoxes.
         $scope.CourseName = "";
@@ -501,7 +602,9 @@ function EmployeeController($scope, Service, $window) {
             if (EmployeeID == undefined) {
                 alert('Undefin');
 
-            } else {
+            } else
+            {
+
                 $scope.GetEmployeeExperienceUpdate(EmployeeID, ExprienceID)
 
             }
@@ -556,7 +659,7 @@ function EmployeeController($scope, Service, $window) {
         }
 
 
-        $scope.SaveContinue = false;
+        //$scope.SaveContinue = true;
         //$scope.Customers.splice(0, 1);
         //Clear the TextBoxes.
         $scope.Organization = "";
@@ -671,9 +774,8 @@ function EmployeeController($scope, Service, $window) {
        
         payload.append("data", JSON.stringify(EmployeeData));
         payload.append("ImagePath",$scope.ImagePath);
-        payload.append("Sign", $scope.Sign); 
-
-        
+        payload.append("Sign", $scope.Sign);
+       // $scope.EducationDetail();
          if ($scope.form.$valid) {
 
             Service.PostFile("EmployeeMaster/AddEmployee", payload).then(function (response) {
@@ -716,7 +818,7 @@ function EmployeeController($scope, Service, $window) {
 
     }
     $scope.EducationDetail = function () {
-        Service.Post("EmployeeMaster/AddEducationDetails", JSON.stringify($scope.StoreData)).then(function (response) {
+        Service.Post("EmployeeMaster/AddEducationDetails", JSON.stringify($scope.Customers)).then(function (response) {
             alert('Education');
         });
 
@@ -779,17 +881,20 @@ function EmployeeController($scope, Service, $window) {
             $scope.IsVisible = true;
             $scope.Visible = false;
             $scope.isDisabled = true;
-            $scope.btnupdate = false;
-            $scope.btnsave = true;
+            $scope.btnupdate = true;
+            $scope.BTNSAVE = false;
             $scope.passwordvisible = false;
-            $scope.UpdateDetails = true;
-            $scope.SaveDetails = false;
+            //$scope.UpdateDetails = true;
+            //$scope.SaveDetails = false;
             $scope.RemoveED = true;
             $scope.RemoveSave = false;
             $scope.ExperienceSBtn = false;
             $scope.ExperienceUBtn = true;
             $scope.AddExp = false;
             $scope.RemoveExp = true;
+            $scope.UpdateContin = true;
+            $scope.AddContin = false;
+            //$scope.SaveContinue = false;
             $scope.SchoolInfo = rd.data.ResultData;
             $scope.Department = rd.data.ResultData.Department;
             $scope.DepartmentID = rd.data.ResultData.DepartmentID;
@@ -882,7 +987,7 @@ function EmployeeController($scope, Service, $window) {
             //alert('getsingle')
             debugger;          
             $scope.Customers = rd.data.ResultData;
-          
+            $scope.EducationData = 1;
 
         })
     }
@@ -1051,7 +1156,7 @@ function EmployeeController($scope, Service, $window) {
         payload.append("data", JSON.stringify(EmployeeData));
         payload.append("ImagePath", $scope.ImagePath);
         payload.append("Sign", $scope.Sign);
-       
+        //$scope.UpdateExperienceDetail();
        
         Service.PostFile("EmployeeMaster/UpdateEmployee", payload).then(function (response) {
             $scope.UpdateAddressDetail(EmployeeAddressDetails);
@@ -1099,8 +1204,12 @@ function EmployeeController($scope, Service, $window) {
     $scope.ShowHide = function () {
         $scope.IsVisible = true;
         $scope.Visible = false;
-        $scope.btnupdate = true;
-        $scope.btnsave = false;
+        $scope.btnupdate = false;
+        $scope.BTNSAVE = true;
+        $scope.RemoveED = false;
+        $scope.RemoveSave = true;
+        $scope.UpdateContin = false;
+        $scope.AddContin = true;
     }
     $scope.Clear = function () {
 
@@ -1122,5 +1231,9 @@ function EmployeeController($scope, Service, $window) {
             }
         })
 
+    }
+    $scope.TextBoxSave = function (Change)
+    {
+        $scope.Change = Change;
     }
 }

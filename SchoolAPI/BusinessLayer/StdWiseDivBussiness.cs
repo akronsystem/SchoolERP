@@ -10,7 +10,7 @@ namespace SchoolAPI.BusinessLayer
 {
     public class StdWiseDivBussiness
     {
-        SchoolERPContext db = new SchoolERPContext();
+        SchoolAdminContext db = new SchoolAdminContext();
         public object GetAllStandard()
         {
             var result = db.ViewDisplayStandards.Where(r => r.Status == 1).ToList();

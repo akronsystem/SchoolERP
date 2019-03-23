@@ -10,7 +10,7 @@ namespace SchoolAPI.BusinessLayer
 {
     public class DivisionMaster
     {
-        SchoolERPContext db = new SchoolERPContext();
+        SchoolAdminContext db = new SchoolAdminContext();
         public object SaveDivision(DivisionParam DivParam)
         {
             Tbl_Division_Master obj = new Tbl_Division_Master();

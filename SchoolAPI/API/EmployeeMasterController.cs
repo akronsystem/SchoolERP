@@ -368,7 +368,7 @@ namespace SchoolAPI.API
             }
         }
         [HttpPost]
-        public object UpdateEducationDetails([FromBody]List<EmployeeEducationParam> obj)
+        public object UpdateEducationDetails([FromBody]List<EmployeeEducationUpdate> obj)
         {
          
             try
@@ -401,6 +401,7 @@ namespace SchoolAPI.API
         [HttpPost]
         public object UpdateBankDetails([FromBody]EmployeeBankParam obj)
         {
+
             try
             {
                 EmployeeBusiness save = new EmployeeBusiness();

@@ -1928,9 +1928,9 @@ pre {
         padding: .75rem;
         vertical-align: top;
         border-top: 1px solid #f4f5f8;
-        position:relative;
-}
-    
+        position: relative;
+    }
+
 
     .table thead th {
         vertical-align: bottom;
@@ -2156,7 +2156,7 @@ pre {
         overflow-x: scroll;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
-        position:relative
+        position: relative
     }
 
         .table-responsive-sm > .table-bordered {
@@ -9941,9 +9941,9 @@ button.bg-dark:focus {
     text-align: right !important
 }
 
-.text-center {
+/*.text-center {
     text-align: center !important
-}
+}*/
 
 @media (min-width: 576px) {
     .text-sm-left {
@@ -22663,9 +22663,7 @@ strong {
 
     .m-badge.m-badge--primary {
         background-color: #5867dd;
-        color: #fff;
-        border-radius:10px
-        
+        color: #fff
     }
 
     .m-badge.m-badge-bordered--primary {
@@ -22674,8 +22672,7 @@ strong {
 
     .m-badge.m-badge--success {
         background-color: #34bfa3;
-        color: #fff;
-        border-radius: 10px
+        color: #fff
     }
 
     .m-badge.m-badge-bordered--success {
@@ -22693,8 +22690,7 @@ strong {
 
     .m-badge.m-badge--warning {
         background-color: #ffb822;
-        color: #111;
-        border-radius: 10px
+        color: #111
     }
 
     .m-badge.m-badge-bordered--warning {
@@ -22703,10 +22699,7 @@ strong {
 
     .m-badge.m-badge--danger {
         background-color: #f4516c;
-        color: #fff;
-        border-radius: 10px;
-        padding-left: 19px;
-        padding-right: 19px
+        color: #fff
     }
 
     .m-badge.m-badge-bordered--danger {
@@ -27792,13 +27785,9 @@ button:focus {
         justify-content: space-between;
         padding: 0;
         padding: 0 2.2rem;
-        height: 4.0rem;
-        
+        height: 5.1rem;
         position: relative
     }
-.bgcolorhead {
-    background-color: #00c5dc;
-}
 
         .m-portlet .m-portlet__head .m-portlet__head-progress {
             position: absolute;
@@ -27885,7 +27874,7 @@ button:focus {
                     -ms-flex-align: center;
                     align-items: center;
                     font-size: 1.3rem;
-                    font-weight: 400;
+                    font-weight: 500;
                     font-family: Roboto;
                     margin: 0;
                     padding: 0
@@ -27896,8 +27885,7 @@ button:focus {
                         padding-left: 5px;
                         font-size: 1rem;
                         font-weight: 300;
-                        font-family: Roboto;
-                        padding-bottom:10PX;
+                        font-family: Roboto
                     }
 
                     .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-text .m-portlet__head-desc {
@@ -37267,7 +37255,7 @@ td > .m-checkbox.m-checkbox--single {
 
     .m-form .m-form__section:first-child,
     .m-form .m-form__section.m-form__section--first {
-        margin-top: 0
+        margin-top: -27px
     }
 
     .m-form .m-form__section:last-child,
@@ -39102,7 +39090,7 @@ td > .m-checkbox.m-checkbox--single {
 }
 
     .m-wizard.m-wizard--3 .m-wizard__head {
-        padding: 5rem 4rem
+        padding: 5rem 1rem
     }
 
         .m-wizard.m-wizard--3 .m-wizard__head .m-wizard__progress {
@@ -39135,8 +39123,8 @@ td > .m-checkbox.m-checkbox--single {
                 }
 
                     .m-wizard.m-wizard--3 .m-wizard__head .m-wizard__nav .m-wizard__steps .m-wizard__step .m-wizard__step-info .m-wizard__step-number > span {
-                        width: 4rem;
-                        height: 4rem;
+                        width: 2rem;
+                        height: 2rem;
                         border-radius: 100%;
                         -webkit-box-pack: center;
                         -ms-flex-pack: center;
@@ -39162,7 +39150,7 @@ td > .m-checkbox.m-checkbox--single {
                     .m-wizard.m-wizard--3 .m-wizard__head .m-wizard__nav .m-wizard__steps .m-wizard__step .m-wizard__step-info .m-wizard__step-line > span {
                         margin-left: 0.8rem;
                         margin-right: 0.7rem;
-                        width: 2.6rem;
+                        width: 0.6rem;
                         height: 0.32rem;
                         display: block;
                         border-radius: .6rem
@@ -57290,25 +57278,4 @@ body.m-content--skin-light2 {
             .m-footer .m-footer__nav .m-nav__item {
                 padding: 0 0 0 5px
             }
-  
-}
-.divSpace-top {
-    margin-top: 10px;
-}
-
-.divSpace-bottom {
-    padding-bottom: 10px;
-   
-}
-
-.divSpace-right {
-    padding-right: 10px;
-}
-
-.divSpace-left {
-    padding-left: 10px;
-}
-
-.display-inline {
-    display: inline;
 }

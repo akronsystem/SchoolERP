@@ -431,11 +431,14 @@ namespace SchoolAPI.BusinessLayer
         {
             try
             {
+                List<ViewDistrictList> Info=null;
                 var data = db.ViewDistrictLists.Where(r => r.Status == 1 && r.StateID==p.StateId).ToList();
                 if (data == null)
                 {
-                    return new Error() { IsError = true, Message = "No Records Found !!" };
+                    Info = db.ViewDistrictLists.Where(r => r.Status == 1).ToList();
+                    return Info;
                 }
+
                 return data;
 
             }
