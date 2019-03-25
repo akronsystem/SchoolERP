@@ -847,19 +847,20 @@ namespace SchoolAPI.BusinessLayer
             }
 
         }
-        public object UpdateEmployeeEducation(List<EmployeeEducationParam> b)
+        public object UpdateEmployeeEducation(List<EmployeeEducationUpdate> b)
         {
             try
-            {               
+            {
                 //Update Education Details
                 Tbl_EmployeeEducationDetails objedu = new Tbl_EmployeeEducationDetails();
-                var EmpID = b[0].EmployeeID;
-                var Data = db.Tbl_EmployeeEducationDetails.Where(r => r.EducationID == EmpID).ToList();
-                if (Data.Count != 0)
+                var EmpID = b[0].EducationID;
+                var Data = db.Tbl_EmployeeEducationDetails.Where(r => r.EducationID == EmpID && r.Status == 1).ToList();
+                var Info = db.Tbl_EmployeeEducationDetails.First(r => r.EducationID == EmpID);
+                if (Data.Count == b.Count)
                 {
                     for (int i = 0; i < Data.Count; i++)
                     {
-                        objedu.EmployeeID =Data[i].EmployeeID;
+                        objedu.EmployeeID = Data[i].EmployeeID;
                         objedu.CourseName = Data[i].CourseName;
                         objedu.PassingMothYear = Data[i].PassingMothYear;
                         objedu.SchoolCollege = Data[i].SchoolCollege;
@@ -868,29 +869,51 @@ namespace SchoolAPI.BusinessLayer
                         objedu.CreditPercentageSGPA = Data[i].CreditPercentageSGPA;
                         objedu.ModifiedBy = null;
                         objedu.ModifiedDate = System.DateTime.Today.Date;
+                        objedu.Status = 1;
                         db.Tbl_EmployeeEducationDetails.Add(objedu);
                         db.SaveChanges();
                     }
                 }
-                for (int i = 0; i < b.Count; i++)
+                else
                 {
-                    var ID = b[i].EmployeeID;
-                    var Info  = db.Tbl_EmployeeEducationDetails.First(r => r.EmployeeID == ID);
-                    Info.EmployeeID = b[i].EmployeeID;
-                    Info.CourseName = b[i].CourseName;
-                    Info.PassingMothYear = b[i].PassingMothYear;
-                    Info.SchoolCollege = b[i].SchoolCollege;
-                    Info.UniversityBoard = b[i].UniversityBoard;
-                    Info.BoardDivisionState = b[i].BoardDivisionState;
-                    Info.CreditPercentageSGPA = b[i].CreditPercentageSGPA;
-                    Info.ModifiedBy = null;
-                    Info.ModifiedDate = System.DateTime.Today.Date;
-                   
-                    db.SaveChanges();
+
+
+                    for (int i = 0; i < b.Count; i++)
+                    {
+                        if (b[i].EducationID == 0)
+                        {
+                            objedu.EmployeeID= Info.EmployeeID;
+                            objedu.CourseName = b[i].CourseName;
+                            objedu.PassingMothYear = b[i].PassingMothYear;
+                            objedu.SchoolCollege = b[i].SchoolCollege;
+                            objedu.UniversityBoard = b[i].UniversityBoard;
+                            objedu.BoardDivisionState = b[i].BoardDivisionState;
+                            objedu.CreditPercentageSGPA = b[i].CreditPercentageSGPA;
+                            objedu.ModifiedBy = null;
+                            objedu.ModifiedDate = System.DateTime.Today.Date;
+                            objedu.Status = 1;
+                            db.Tbl_EmployeeEducationDetails.Add(objedu);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            var ID = b[i].EducationID;
+                           //var Info = db.Tbl_EmployeeEducationDetails.First(r => r.EducationID == ID);
+                            Info.EmployeeID = Info.EmployeeID;
+                            Info.CourseName = b[i].CourseName;
+                            Info.PassingMothYear = b[i].PassingMothYear;
+                            Info.SchoolCollege = b[i].SchoolCollege;
+                            Info.UniversityBoard = b[i].UniversityBoard;
+                            Info.BoardDivisionState = b[i].BoardDivisionState;
+                            Info.CreditPercentageSGPA = b[i].CreditPercentageSGPA;
+                            Info.ModifiedBy = null;
+                            Info.ModifiedDate = System.DateTime.Today.Date;
+                            db.SaveChanges();
+                        }
+                    }
+
+
                 }
-
-
-
                 return new Result() { IsSucess = true, ResultData = "Updated Employee" };
             }
             catch (Exception e)
@@ -974,30 +997,32 @@ namespace SchoolAPI.BusinessLayer
                 var EmpID = b[0].EmployeeID;
                 Tbl_EmployeeExprienceDetails objedu = new Tbl_EmployeeExprienceDetails();
                 var Data = db.Tbl_EmployeeExprienceDetails.Where(r => r.EmployeeID == EmpID && r.Status==1).ToList();
+                var Info = db.Tbl_EmployeeExprienceDetails.First(r => r.EmployeeID == EmpID);
                 if (Data.Count == b.Count)
                 {
+
                     for (int i = 0; i < Data.Count; i++)
                     {
                         var ID = Data[i].EmployeeID;
                         //var Info = db.Tbl_EmployeeExprienceDetails.Where(r => r.EmployeeID == ID).ToList();
-                        Data[i].EmployeeID = ID;
-                        Data[i].ExprienceTypeID = b[i].ExprienceTypeID;
-                        if (Data[i].ExperienceDocumentType == null)
+                        objedu.EmployeeID = ID;
+                        objedu.ExprienceTypeID = b[i].ExprienceTypeID;
+                        if (b[i].ExperienceDocumentType == null)
                         {
-                            Data[i].ExperienceDocumentType = Data[i].ExperienceDocumentType;
+                            objedu.ExperienceDocumentType = Data[i].ExperienceDocumentType;
                         }
                         else
                         {
-                            Data[i].ExperienceDocumentType = b[i].DocumentType;
+                            objedu.ExperienceDocumentType = b[i].ExperienceDocumentType;
                         }
-                        Data[i].Organization = b[i].Organization;
-                        Data[i].OrganizationAddress = b[i].OrganizationAddress;
-                        Data[i].Designation = b[i].Designation;
-                        Data[i].PeriodFrom = System.DateTime.Today.Date;
-                        Data[i].PeriodTo = System.DateTime.Today.Date;
-                        Data[i].TotalExprience = b[i].TotalExprience;
-                        Data[i].ModifiedBy = null;
-                        Data[i].ModifiedDate = System.DateTime.Today.Date;
+                        objedu.Organization = b[i].Organization;
+                        objedu.OrganizationAddress = b[i].OrganizationAddress;
+                        objedu.Designation = b[i].Designation;
+                        objedu.PeriodFrom = System.DateTime.Today.Date;
+                        objedu.PeriodTo = System.DateTime.Today.Date;
+                        objedu.TotalExprience = b[i].TotalExprience;
+                        objedu.ModifiedBy = null;
+                        objedu.ModifiedDate = System.DateTime.Today.Date;
                        // Data[i].Status = 1;
                         
                         db.SaveChanges();
@@ -1010,51 +1035,52 @@ namespace SchoolAPI.BusinessLayer
                     for (int i = 0; i < b.Count; i++)
                     {
                         var ID = b[i].EmployeeID;
-                        var Info = db.Tbl_EmployeeExprienceDetails.Where(r => r.EmployeeID == ID).ToList();
-                        Info[i].EmployeeID = ID;
-                        if(Info[i].ExprienceID==0)
+                        
+                        //Info[i].EmployeeID = ID;
+                        if(b[i].ExprienceID==0)
                         {
-                            Info[i].ExprienceTypeID = b[i].ExprienceTypeID;
-                            if (b[i].DocumentType == null)
+                            objedu.ExprienceTypeID = b[i].ExprienceTypeID;
+                            objedu.EmployeeID = EmpID;
+                            if (b[i].ExperienceDocumentType == null)
                             {
-                                Info[i].ExperienceDocumentType = Info[i].ExperienceDocumentType;
+                                objedu.ExperienceDocumentType = Info.ExperienceDocumentType;
                             }
                             else
                             {
-                                Info[i].ExperienceDocumentType = b[i].DocumentType;
+                                objedu.ExperienceDocumentType = b[i].ExperienceDocumentType;
                             }
-                            Info[i].Organization = b[i].Organization;
-                            Info[i].OrganizationAddress = b[i].OrganizationAddress;
-                            Info[i].Designation = b[i].Designation;
-                            Info[i].PeriodFrom = System.DateTime.Today.Date;
-                            Info[i].PeriodTo = System.DateTime.Today.Date;
-                            Info[i].TotalExprience = b[i].TotalExprience;
-                            Info[i].ModifiedBy = null;
-                            Info[i].ModifiedDate = System.DateTime.Today.Date;
-                            Info[i].Status = 1;
-                            db.Tbl_EmployeeExprienceDetails.Add(Info[i]);
+                            objedu.Organization = b[i].Organization;
+                            objedu.OrganizationAddress = b[i].OrganizationAddress;
+                            objedu.Designation = b[i].Designation;
+                            objedu.PeriodFrom = System.DateTime.Today.Date;
+                            objedu.PeriodTo = System.DateTime.Today.Date;
+                            objedu.TotalExprience = b[i].TotalExprience;
+                            objedu.ModifiedBy = null;
+                            objedu.ModifiedDate = System.DateTime.Today.Date;
+                            objedu.Status = 1;
+                            db.Tbl_EmployeeExprienceDetails.Add(objedu);
                             db.SaveChanges();
                         }
                         else
                         {
-                            Info[i].ExprienceTypeID = b[i].ExprienceTypeID;
-                            if (b[i].DocumentType == null)
+                            Info.ExprienceTypeID = b[i].ExprienceTypeID;
+                            if (b[i].ExperienceDocumentType == null)
                             {
-                                Info[i].ExperienceDocumentType = Info[i].ExperienceDocumentType;
+                                b[i].ExperienceDocumentType = Info.ExperienceDocumentType;
                             }
                             else
                             {
-                                Info[i].ExperienceDocumentType = b[i].DocumentType;
+                                b[i].ExperienceDocumentType = Info.ExperienceDocumentType;
                             }
-                            Info[i].Organization = b[i].Organization;
-                            Info[i].OrganizationAddress = b[i].OrganizationAddress;
-                            Info[i].Designation = b[i].Designation;
-                            Info[i].PeriodFrom = System.DateTime.Today.Date;
-                            Info[i].PeriodTo = System.DateTime.Today.Date;
-                            Info[i].TotalExprience = b[i].TotalExprience;
-                            Info[i].ModifiedBy = null;
-                            Info[i].ModifiedDate = System.DateTime.Today.Date;
-                            Info[i].Status = 1;
+                            Info.Organization = b[i].Organization;
+                            Info.OrganizationAddress = b[i].OrganizationAddress;
+                            Info.Designation = b[i].Designation;
+                            Info.PeriodFrom = System.DateTime.Today.Date;
+                            Info.PeriodTo = System.DateTime.Today.Date;
+                            Info.TotalExprience = b[i].TotalExprience;
+                            Info.ModifiedBy = null;
+                            Info.ModifiedDate = System.DateTime.Today.Date;
+                            Info.Status = 1;
                             //db.Tbl_EmployeeExprienceDetails.Add(Info[i]);
                             db.SaveChanges();
                         }

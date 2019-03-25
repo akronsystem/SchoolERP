@@ -11,7 +11,7 @@ namespace SchoolAPI.BusinessLayer
     public class SectionMasterBussiness
     {
 
-        SchoolERPContext db = new SchoolERPContext();
+        SchoolAdminContext db = new SchoolAdminContext();
         public object SaveSection(SectionParam objParam)
         {
             Tbl_Section_Master obj = new Tbl_Section_Master();

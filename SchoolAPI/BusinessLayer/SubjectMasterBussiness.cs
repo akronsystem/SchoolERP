@@ -10,7 +10,7 @@ namespace SchoolAPI.BusinessLayer
 {
     public class SubjectMasterBussiness
     {
-        SchoolERPContext db = new SchoolERPContext();
+        SchoolAdminContext db = new SchoolAdminContext();
         public object SaveSubject(SubjectParam ObjParam)
         {
             try

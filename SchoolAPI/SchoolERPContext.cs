@@ -34,17 +34,17 @@ namespace SchoolAPI
 		public virtual DbSet<ViewBindMenuListUpdate> ViewBindMenuListUpdates { get; set; }
 		public virtual DbSet<View_MenuList> View_MenuList { get; set; }
 		public virtual DbSet<ViewDisplayTemplateMaster> ViewDisplayTemplateMasters { get; set; }
-		public virtual DbSet<Tbl_StandardMaster> Tbl_StandardMaster { get; set; }
-		public virtual DbSet<ViewDisplayStandard> ViewDisplayStandards { get; set; }
-		public virtual DbSet<Tbl_Section_Master> Tbl_Section_Master { get; set; }
-		public virtual DbSet<Tbl_Division_Master> Tbl_Division_Master { get; set; }
-		public virtual DbSet<View_DisplayDivision> View_DisplayDivision { get; set; }
-		public virtual DbSet<View_SectionDisplay> View_SectionDisplay { get; set; }
-		public virtual DbSet<Tbl_Subject_Master> Tbl_Subject_Master { get; set; }
-		public virtual DbSet<View_Display_Subject> View_Display_Subject { get; set; }
-         public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
-		public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
-		public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
+		//public virtual DbSet<Tbl_StandardMaster> Tbl_StandardMaster { get; set; }
+		//public virtual DbSet<ViewDisplayStandard> ViewDisplayStandards { get; set; }
+		//public virtual DbSet<Tbl_Section_Master> Tbl_Section_Master { get; set; }
+		//public virtual DbSet<Tbl_Division_Master> Tbl_Division_Master { get; set; }
+		//public virtual DbSet<View_DisplayDivision> View_DisplayDivision { get; set; }
+		//public virtual DbSet<View_SectionDisplay> View_SectionDisplay { get; set; }
+		//public virtual DbSet<Tbl_Subject_Master> Tbl_Subject_Master { get; set; }
+		//public virtual DbSet<View_Display_Subject> View_Display_Subject { get; set; }
+  //       public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
+		//public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
+		//public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
 		public virtual DbSet<TblBoardDetail> TblBoardDetails { get; set; }
 		public virtual DbSet<View_SchoolDetails> View_SchoolDetails { get; set; }
 
