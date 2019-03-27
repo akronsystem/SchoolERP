@@ -7,7 +7,7 @@
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default" ng-app="ERP">
     @using System.Configuration;
-
+ 
     <div ng-controller="NotificationController">
         <form id="frmCRUD" name="form" class="m-form m-form--fit m-form--label-align-right" ng-init="Initialize()">
             <!-- BEGIN: Subheader -->
@@ -178,7 +178,10 @@
 
             </div>
         </form>
+      
+     
     </div>
+   
     <script src="@Url.Content("~/Content/angularjs/scripts/angular.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Notification/NotificationModule.js")"></script>
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>

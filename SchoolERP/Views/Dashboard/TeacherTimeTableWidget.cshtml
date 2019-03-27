@@ -15,81 +15,69 @@
     <!--RTL version:<link href="assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
     <link href="~/Content/assets/demo/demo12/base/style.bundle.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/assets/css/custom.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/assets/css/table.css" rel="stylesheet" />
-    
 
 </head>
 
 
-    <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="m-portlet m-portlet--mobile ">
-                    <div class="m-portlet__head bgcolorhead">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h4 class="m-portlet__head-text" style="color:white;">
-                                    <i class="fa flaticon-squares" style="padding-right:10px;"></i>
-                                   My Today's TimeTable
-                                </h4>
-                            </div>
-
+    <dv class="row">
+        <div class="col-xl-6">
+            <div class="m-portlet m-portlet--responsive-mobile ">
+                <div class="m-portlet__head bgcolorhead col-md-12">
+                    <div class="m-portlet__head-caption col-md-6">
+                        <div class="m-portlet__head-title">
+                            <h4 class="m-portlet__head-text" style="color:white;">
+                                <i class="fa flaticon-squares" style="padding-right:10px;"></i>
+                                My Today's Time Table
+                            </h4>
                         </div>
 
                     </div>
 
-                    <section class="">
-                        <!--begin: Datatable -->
-                        <div class="contain">
-                            <table>
-                                <thead>
-                                    <tr class="header">
-                                        <th>
-                                            Time Slot
-                                            <div>Time Slot</div>
-                                        </th>
-                                        <th>
-                                            Class
-                                            <div>Class</div>
-                                        </th>
-                                        <th>
-                                            Division
-                                            <div>Division</div>
-                                        </th>
-                                        <th>
-                                            Subject
-                                            <div>Subject</div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>10 - 11</td><td class="m-datatable__cell">I</td><td>A</td><td>Marathi</td></tr>
-                                    <tr><td>11 - 12</td><td class="m-datatable__cell">III</td><td>A</td><td>English</td></tr>
-                                    <tr> <td>12 - 1</td><td class="m-datatable__cell">IV</td><td>B</td><td>English</td></tr>
 
-                                    <tr style="color:red;"><td>1.30 - 2.30</td><td class="m-datatable__cell">V</td><td>C</td><td>English</td></tr>
-                                    <tr><td>2.30 - 3.30</td><td class="m-datatable__cell">I</td><td>A</td><td>English</td></tr>
-                                    <tr> <td>3.30 - 4.30</td><td class="m-datatable__cell">II</td><td>A</td><td>Maths</td></tr>
 
-                                    <tr><td>4.30 - 5.30</td><td class="m-datatable__cell">X</td><td>C</td><td>Marathi</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
 
-                        <!--end: Datatable -->
 
-</div>
+                </div>
+
+
+                <div style="height: 440px; width: auto;overflow-x:hidden; border-style: none;overflow-y: scroll;" id="tblAttendance">
+
+                    <table class="datatable table table-striped table-bordered table-hover datatable2">
+
+                        <tr class="m-datatable__row" style="left: 0px;">
+                            <th class="m-datatable__head">Slot</th>
+                            <th class="m-datatable__head"> Teacher Name</th>
+                            <th class="m-datatable__head"> Subject</th>
+
+                        </tr>
+                        <tr><td>10-11</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">Marathi</td></tr>
+                        <tr><td>11-12</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">Hindi</td></tr>
+                        <tr> <td>12-1</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">English</td></tr>
+                        <tr><td>1-2</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">History</td></tr>
+                        <tr><td>2-3</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">Maths</td></tr>
+                        <tr> <td>3-4</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">Geography</td></tr>
+                        <tr> <td>4-5</td><td class="m-datatable__cell">A</td><td class="m-datatable__cell">Geography</td></tr>
+
+
+
+                    </table>
+                </div>
+
+
             </div>
-
-
-
-
-
-
         </div>
 
-    </body>
 
-</section>
+
+
+
+
+
+
+
+
+</body>
+
 </html>

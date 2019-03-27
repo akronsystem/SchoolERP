@@ -5,7 +5,7 @@ namespace SchoolAPI
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-     using SchoolAPI.Models; 
+    using SchoolAPI.Models; 
 
     public partial class SchoolAdminContext : DbContext
     {
@@ -83,8 +83,35 @@ namespace SchoolAPI
         public virtual DbSet<ViewEventMasterList> ViewEventMasterLists { get; set; }
         public virtual DbSet<Tbl_NotificationType> Tbl_NotificationType { get; set; }
         public virtual DbSet<ViewNotificationTypeList> ViewNotificationTypeLists { get; set; }
+        public virtual DbSet<Tbl_EmployeeAddressDetails> Tbl_EmployeeAddressDetails { get; set; }
+        public virtual DbSet<Tbl_EmployeeAppointmentDetails> Tbl_EmployeeAppointmentDetails { get; set; }
+        public virtual DbSet<Tbl_EmployeeAttachedDocuments> Tbl_EmployeeAttachedDocuments { get; set; }
+        public virtual DbSet<Tbl_EmployeeBankDetails> Tbl_EmployeeBankDetails { get; set; }
+        public virtual DbSet<Tbl_EmployeeEducationDetails> Tbl_EmployeeEducationDetails { get; set; }
+        public virtual DbSet<Tbl_EmployeeExprienceDetails> Tbl_EmployeeExprienceDetails { get; set; }
+        public virtual DbSet<Tbl_EmployeeMaster> Tbl_EmployeeMaster { get; set; }
+        public virtual DbSet<View_SectionDisplay> View_SectionDisplay { get; set; }
+        public virtual DbSet<ViewCategoryReligionCaste> ViewCategoryReligionCastes { get; set; }
+        public virtual DbSet<ViewEmployeeMasterList> ViewEmployeeMasterLists { get; set; }
+        public virtual DbSet<ViewEmployeeDocumentDetail> ViewEmployeeDocumentDetails { get; set; }
+        public virtual DbSet<ViewEmployeeEducationList> ViewEmployeeEducationLists { get; set; }
+        public virtual DbSet<ViewEmployeeExperienceList> ViewEmployeeExperienceLists { get; set; }
+
+        //Section
+        public virtual DbSet<Tbl_StandardMaster> Tbl_StandardMaster { get; set; }
+        public virtual DbSet<ViewDisplayStandard> ViewDisplayStandards { get; set; }
+        public virtual DbSet<Tbl_Section_Master> Tbl_Section_Master { get; set; }
+        public virtual DbSet<Tbl_Division_Master> Tbl_Division_Master { get; set; }
+        public virtual DbSet<View_DisplayDivision> View_DisplayDivision { get; set; }
+        //public virtual DbSet<View_SectionDisplay> View_SectionDisplay { get; set; }
+        public virtual DbSet<Tbl_Subject_Master> Tbl_Subject_Master { get; set; }
+        public virtual DbSet<View_Display_Subject> View_Display_Subject { get; set; }
+        public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
+        public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
+        public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
         }
     }
 }

@@ -115,6 +115,8 @@
     <Content Include="Areas\Scripts\ProjectScripts\Department\DesignationController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\District\DistrictController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\District\DistrictModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\DivMaster\Division.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\DivMaster\DivisionModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\Event.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\EventMaster.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\EventModule.js" />
@@ -143,6 +145,8 @@
     <Content Include="Areas\Scripts\ProjectScripts\SchoolBoard\BoardModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\School\SchoolController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\School\SchoolModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\SectionMaster\SectionController.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\SectionMaster\SectionModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Shift\Shift.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Shift\ShiftDetails.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Shift\ShiftModule.js" />
@@ -150,8 +154,14 @@
     <Content Include="Areas\Scripts\ProjectScripts\SideBar\SideBarController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\SMTP\SMTP.js" />
     <Content Include="Areas\Scripts\ProjectScripts\SMTP\SMTPModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\StandardWiseDivision\StdWiseDivController.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\StandardWiseDivision\StdWiseDivModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\State\StateController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\State\StateModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\StdMaster\StdMatserController.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\StdMaster\StdModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\SubjectMaster\SubjectMasterController.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\SubjectMaster\SubjectModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Taluka\TalukaController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Taluka\TalukaModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\TemplateType\TemplateMaster.js" />
@@ -468,6 +478,11 @@
     <Content Include="Content\assets\vendors\custom\jqvmap\jqvmap.bundle.css" />
     <Content Include="Content\assets\vendors\custom\jqvmap\jqvmap.bundle.js" />
     <Content Include="Content\assets\vendors\custom\jqvmap\jqvmap.bundle.rtl.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\CommonScript\Service.js" />
     <Content Include="Scripts\ProjectScripts\Login\ForgetPassword.js" />
@@ -481,10 +496,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\AchievementTypeMasterController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\CasteController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\EmployeeMasterController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\SchoolAchievementDetailsController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\SchoolMasterController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\SectionMasterController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\StandardWiseDivisionController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\StdDivMasterController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\SubjectMasterController.cs" />
     <Compile Include="Areas\SchoolAdmin\SchoolAdminAreaRegistration.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AchievementTypeMasterController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AdmissionController.cs" />
@@ -640,6 +661,13 @@
     <Content Include="Areas\SchoolAdmin\Views\SchoolMaster\ShiftMaster.cshtml" />
     <Content Include="Areas\SchoolAdmin\Views\SchoolMaster\SMTPMaster.cshtml" />
     <Content Include="Areas\SchoolAdmin\Views\SchoolMaster\WidgetMaster.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\AchievementTypeMaster\Index.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\SchoolAchievementDetails\Index.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\SectionMaster\SectionMasterUI.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\StandardWiseDivision\StdWiseDivision.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\StdDivMaster\DivisionMaster.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\StdDivMaster\StandardMaster.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\SubjectMaster\SubjectMaster.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Login\ForgetPass.cshtml" />
