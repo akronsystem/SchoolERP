@@ -12,7 +12,11 @@ namespace SchoolAPI
 			: base("name=SchoolERPContext")
 		{
 		}
-		public virtual DbSet<TblBoard> TblBoards { get; set; }
+
+		public virtual DbSet<TblBoard> TblBoards { get; set; }	  
+		public virtual DbSet<TblBoardDetail> TblBoardDetails { get; set; }
+		public virtual DbSet<Tbl_Widget_Master> Tbl_Widget_Master { get; set; }
+		public virtual DbSet<ViewWidgetList> ViewWidgetLists { get; set; }  
 		public virtual DbSet<TblLanguage> TblLanguages { get; set; }
 		public virtual DbSet<ViewTemplateMaster> ViewTemplateMasters { get; set; }
 		public virtual DbSet<ViewTemplateType> ViewTemplateTypes { get; set; }
@@ -45,8 +49,7 @@ namespace SchoolAPI
 		//public virtual DbSet<View_Display_Subject> View_Display_Subject { get; set; }
   //       public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
 		//public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
-		//public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
-		public virtual DbSet<TblBoardDetail> TblBoardDetails { get; set; }
+		//public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }	  
 		public virtual DbSet<View_SchoolDetails> View_SchoolDetails { get; set; }
 
 	}
