@@ -16,5 +16,8 @@ namespace SchoolAPI.Models
         public string WidgetName { get; set; }
 
         public int? Status { get; set; }
+
+        [StringLength(100)]
+        public string ActionName { get; set; }
     }
 }

@@ -65,10 +65,10 @@ namespace SchoolERP.Areas.SchoolAdmin.Controllers
         {
             return View();
         }
-        public ActionResult WidgetMaster()
-        {
-            return View();
-        }
+        //public ActionResult WidgetMaster()
+        //{
+        //    return View();
+        //}
         public ActionResult RoleMaster()
         {
             return View();
@@ -91,6 +91,11 @@ namespace SchoolERP.Areas.SchoolAdmin.Controllers
 
         }
         public ActionResult NotificationType()
+        {
+            return View();
+        }
+
+        public ActionResult AssignWidget()
         {
             return View();
         }

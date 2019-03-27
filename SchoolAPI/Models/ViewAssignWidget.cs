@@ -6,10 +6,11 @@ namespace SchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Tbl_Widget_Master
+    [Table("ViewAssignWidget")]
+    public partial class ViewAssignWidget
     {
-        [Key]
-        public long WidgetID { get; set; }
+        [StringLength(50)]
+        public string Role { get; set; }
 
         [StringLength(50)]
         public string WidgetName { get; set; }
@@ -17,14 +18,16 @@ namespace SchoolAPI.Models
         [StringLength(100)]
         public string ActionName { get; set; }
 
-        public long? CreatedBy { get; set; }
+        public int? Sequence { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
-        public long? ModifiedBy { get; set; }
-
-        public DateTime? ModifiedDate { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long RoleID { get; set; }
 
         public int? Status { get; set; }
+
+        public long? AssignWidgetID { get; set; }
     }
 }

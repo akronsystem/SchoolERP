@@ -38,6 +38,7 @@ function WidgetController($scope, Service) {
             $scope.ViewGetStudentInfoes = result.data;
 
             $scope.WidgetName = result.data.ResultData.WidgetName;
+            $scope.ActionName = result.data.ResultData.ActionName;
             $scope.WidgetID = result.data.ResultData.WidgetID;
             // $scope.Students = result.data.ResultData;
 
@@ -58,14 +59,16 @@ function WidgetController($scope, Service) {
 
         $scope.WidgetName = null;
         $scope.WidgetID = null;
+        $scope.ActionName = null;
         $scope.IsVisible = false;
         // $scope.Initialize();
     }
-    $scope.Add = function (WidgetID, WidgetName) {
+    $scope.Add = function (WidgetID, WidgetName, ActionName) {
+        debugger;
         var data = {
             WidgetID: WidgetID,
-            WidgetName: WidgetName
-
+            WidgetName: WidgetName,
+            ActionName:ActionName
         };
         if ($scope.form.$valid) {
             Service.Post("Widget/AddWidget", JSON.stringify(data)).then(function (response) {
@@ -97,11 +100,11 @@ function WidgetController($scope, Service) {
         }
     }
 
-    $scope.AddUpdate = function (WidgetID, WidgetName) {
+    $scope.AddUpdate = function (WidgetID, WidgetName, ActionName) {
         var data = {
             WidgetID: WidgetID,
-            WidgetName: WidgetName
-
+            WidgetName: WidgetName,
+            ActionName: ActionName
         };
         if ($scope.form.$valid) {
             Service.Post("Widget/UpdateWidget", JSON.stringify(data)).then(function (response) {

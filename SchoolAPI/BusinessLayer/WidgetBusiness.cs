@@ -10,7 +10,7 @@ namespace SchoolAPI.BusinessLayer
 {
     public class WidgetBusiness
     {
-        SchoolAdminContext db = new SchoolAdminContext();
+        SchoolERPContext db = new SchoolERPContext();
         public object SaveWidget(WidgetParam b)
         {
             if (b.WidgetName == null)
@@ -26,6 +26,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 Tbl_Widget_Master obj = new Tbl_Widget_Master();
                 obj.WidgetName = b.WidgetName;
+                obj.ActionName = b.ActionName;
                 obj.Status = 1;
                 obj.CreatedBy = 1;
                 obj.CreatedDate = System.DateTime.Today.Date;
@@ -33,7 +34,7 @@ namespace SchoolAPI.BusinessLayer
                 obj.ModifiedDate = System.DateTime.Today.Date;
                 db.Tbl_Widget_Master.Add(obj);
                 db.SaveChanges();
-                return new Result() { IsSucess = true, ResultData = "Created Widget" };
+                return new Result() { IsSucess = true, ResultData = "Widget Created Successfully!" };
             }
             catch (Exception e)
             {
@@ -52,10 +53,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 Tbl_Widget_Master obj = new Tbl_Widget_Master();
                 data.WidgetName = b.WidgetName;
+                data.ActionName = b.ActionName;
                 data.ModifiedBy = null;
                 data.ModifiedDate = System.DateTime.Today.Date;
                 db.SaveChanges();
-                return new Result() { IsSucess = true, ResultData = "Update Widget" };
+                return new Result() { IsSucess = true, ResultData = "Widget Updated Successfully!" };
             }
             catch (Exception e)
             {

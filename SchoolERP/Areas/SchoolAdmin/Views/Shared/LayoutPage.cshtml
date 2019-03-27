@@ -654,7 +654,7 @@
                                 <span class="m-menu__link-text">MASTER</span><i class="m-menu__ver-arrow la la-angle-right"></i>
                             </a>
 
-                            <div class="m-menu__submenu ">
+                            @*<div class="m-menu__submenu ">
 
                                 <span class="m-menu__arrow"></span>
 
@@ -668,11 +668,57 @@
                                         <div class="m-menu__submenu ">
                                             <span class="m-menu__arrow"></span>
                                             <ul class="m-menu__subnav">
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Board","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">STANDARD MASTER</span></a></li>
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Board","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DIVISION MASTER</span></a></li>
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Board","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DEMO MASTER</span></a></li>
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Board","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">TEST MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">STANDARD MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DIVISION MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DEMO MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("","Master")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">TEST MASTER</span></a></li>
 
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>*@
+                            <div class="m-menu__submenu ">
+
+                                <span class="m-menu__arrow"></span>
+
+                                <ul class="m-menu__subnav">
+                                    <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                            <span class="m-menu__item-here"></span>
+                                            <i class="m-menu__link-icon flaticon-layers"></i>
+                                            <span class="m-menu__link-text">SCHOOL MASTER</span><i class="m-menu__ver-arrow la la-angle-right"></i>
+                                        </a>
+                                        <div class="m-menu__submenu ">
+                                            <span class="m-menu__arrow"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("AcademicYear","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">ACADEMIC YEAR</span></a></li>
+
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("AssignWidget","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">ASSIGN WIDGET</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("BoardMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">BOARD MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("CommitteeMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">COMMITTEE MASTER</span></a></li>
+
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("State","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">STATE MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("District","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DISTRICT MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Taluka","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">TALUKA MASTER</span></a></li>
+                                              
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("EventMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">EVENT MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("EventType","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">EVENT TYPE</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("ExperienceType","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">EXPERIENCE TYPE</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("FeeTypeMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">FEE TYPE MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("NotificationType","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">NOTIFICATION TYPE</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("RoleMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">ROLE MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("ShiftMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">SHIFT MASTER</span></a></li>
+
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("ShiftDetails","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">SHIFT DETAILS</span></a></li>
+
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("SMTPMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">SMTP MASTER</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("TermMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">TERM MASTER</span></a></li>
+
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("TermCommecement","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">TERM COMMECEMENT</span></a></li>
+                                               <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("UnitMaster","SCHOOLMASTER")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">UNIT MASTER</span></a></li>
+                                             
                                             </ul>
                                         </div>
                                     </li>
@@ -680,6 +726,77 @@
 
                             </div>
                             <div class="m-menu__submenu ">
+
+                                <span class="m-menu__arrow"></span>
+
+                                <ul class="m-menu__subnav">
+                                    <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                            <span class="m-menu__item-here"></span>
+                                            <i class="m-menu__link-icon flaticon-layers"></i>
+                                            <span class="m-menu__link-text">CASTE MASTER</span><i class="m-menu__ver-arrow la la-angle-right"></i>
+                                        </a>
+                                        <div class="m-menu__submenu ">
+                                            <span class="m-menu__arrow"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Religion","Caste")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">RELIGION</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Category","Caste")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text"> CATEGORY</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Minority","Caste")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text"> MINORITY</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Caste","Caste")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text"> CASTE</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("SubCaste","Caste")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text"> SUB CASTE</span></a></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="m-menu__submenu ">
+
+                                <span class="m-menu__arrow"></span>
+
+                                <ul class="m-menu__subnav">
+                                    <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                            <span class="m-menu__item-here"></span>
+                                            <i class="m-menu__link-icon flaticon-layers"></i>
+                                            <span class="m-menu__link-text">DEPARTMENT MASTER</span><i class="m-menu__ver-arrow la la-angle-right"></i>
+                                        </a>
+                                        <div class="m-menu__submenu ">
+                                            <span class="m-menu__arrow"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Department","Department")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">DEPARTMENT</span></a></li>
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Designation","Department")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text"> DESIGNATION</span></a></li>
+                                           
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="m-menu__submenu ">
+
+                                <span class="m-menu__arrow"></span>
+
+                                <ul class="m-menu__subnav">
+                                    <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                            <span class="m-menu__item-here"></span>
+                                            <i class="m-menu__link-icon flaticon-layers"></i>
+                                            <span class="m-menu__link-text">EMPLOYEE MASTER</span><i class="m-menu__ver-arrow la la-angle-right"></i>
+                                        </a>
+                                        <div class="m-menu__submenu ">
+                                            <span class="m-menu__arrow"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Index","EmployeeMaster")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">EMPLOYEE MASTER</span></a></li>
+                                              
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            @*<div class="m-menu__submenu ">
 
                                 <span class="m-menu__arrow"></span>
 
@@ -700,22 +817,22 @@
                                     </li>
                                 </ul>
 
-                            </div>
-                            <div class="m-menu__submenu ">
+                            </div>*@
+                            @*<div class="m-menu__submenu ">
 
                                 <span class="m-menu__arrow"></span>
 
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item" aria-haspopup="true">
-                                        <a href="dashboard.cshtml" class="m-menu__link"><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">SMS</span></a>
+                                        <a href="#" class="m-menu__link"><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">SMS</span></a>
                                     </li>
                                 </ul>
 
-                            </div>
+                            </div>*@
                         </li>
                         <!-- MASTER END -->
                         <!-- REPORT START-->
-                        <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                        @*<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <span class="m-menu__item-here"></span>
                                 <i class="m-menu__link-icon flaticon-layers"></i>
@@ -769,10 +886,10 @@
 
                             </div>
 
-                        </li>
+                        </li>*@
                         <!-- REPORT END-->
                         <!-- EXAMINATION start-->
-                        <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                        @*<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <span class="m-menu__item-here"></span>
                                 <i class="m-menu__link-icon flaticon-layers"></i>
@@ -792,10 +909,10 @@
                             </div>
 
 
-                        </li>
+                        </li>*@
                         <!-- EXAMINATION end-->
                         <!-- LIBRARY START-->
-                        <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+                        @*<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
                             <a href="javascript:;" class="m-menu__link m-menu__toggle">
                                 <span class="m-menu__item-here"></span>
                                 <i class="m-menu__link-icon flaticon-layers"></i>
@@ -815,12 +932,12 @@
                             </div>
 
 
-                        </li>
+                        </li>*@
                         <!-- LIBRARY END-->
                         <!--EXAM SCHEDULE START-->
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="dashboard.cshtml" class="m-menu__link"><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">EXAM SCHEDULE</span></a>
-                        </li>
+                        @*<li class="m-menu__item" aria-haspopup="true">
+                            <a href="#" class="m-menu__link"><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-line-graph"></i><span class="m-menu__link-text">EXAM SCHEDULE</span></a>
+                        </li>*@
                         <!--EXAM SCHEDULE END-->
                     </ul>
                 </div>

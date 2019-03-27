@@ -108,11 +108,7 @@ offcanvas-default" ng-app="ERP">
                                             </label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
 
-                                                @*<select multiple="multiple" class="multiselect-ui" id="dates-field2" name="test" ng-model="Menu">
-
-                                                        <option ng-repeat="s in Menulist" value="{{s.ModuleId}}">{{s.ModuleName}}</option>
-
-                                                    </select>*@
+                                          
                                                 <script>
                                                     function showDiv() {
                                                         document.getElementById('DropDown').style.display = "block";
@@ -120,14 +116,13 @@ offcanvas-default" ng-app="ERP">
                                                 </script>
                                                 <div class="dropdown">
                                                     <button class="btn btn-success dropdown-toggle" onclick="showDiv()" data-toggle="dropdown" aria-expanded="false" type="button" aria-haspopup="false" style="width:300px">Select Menu</button>
-                                                    @*<a href="#DropDown">Select Menu</a>*@
+                                                   
                                                     <div id="DropDown" style="display:none">
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                                                             <div style="width: 300px; height: 150px; overflow-y: scroll;">
                                                                 
-                                                                @*<input type="checkbox" ng-model="selectAll" ng-change="change(Menulist,active=true)" /> Select All*@
-
+                                                            
                                                                 <div ng-repeat="s in Menulist" class="dropdown-item">
 
                                                                     <label for="{{s.ModuleId}}" >
