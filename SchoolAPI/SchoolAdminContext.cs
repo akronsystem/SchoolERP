@@ -13,6 +13,13 @@ namespace SchoolAPI
             : base("name=SchoolAdminContext1")
         {
         }
+        public virtual DbSet<ViewGetAssignWidgetRoleWise> ViewGetAssignWidgetRoleWises { get; set; }
+
+        public virtual DbSet<TblAssignWidgetDetail> TblAssignWidgetDetails { get; set; }
+        public virtual DbSet<TblAssignWidgetMaster> TblAssignWidgetMasters { get; set; }
+
+        public virtual DbSet<ViewAssignWidget> ViewAssignWidgets { get; set; }
+        
         public virtual DbSet<ViewSchoolAchievementDetail> ViewSchoolAchievementDetails { get; set; }
 
         public virtual DbSet<TblSchoolAchievementDetail> TblSchoolAchievementDetails { get; set; }
@@ -63,8 +70,7 @@ namespace SchoolAPI
         public virtual DbSet<ViewCommitteMasterList> ViewCommitteMasterLists { get; set; }
         public virtual DbSet<Tbl_SMTPConfiguration> Tbl_SMTPConfiguration { get; set; }
         public virtual DbSet<ViewSMTPList> ViewSMTPLists { get; set; }
-        public virtual DbSet<Tbl_Widget_Master> Tbl_Widget_Master { get; set; }
-        public virtual DbSet<ViewWidgetList> ViewWidgetLists { get; set; }
+      
         public virtual DbSet<Tbl_Role_Master> Tbl_Role_Master { get; set; }
         public virtual DbSet<ViewRoleList> ViewRoleLists { get; set; }
         public virtual DbSet<Tbl_Shift_Master> Tbl_Shift_Master { get; set; }

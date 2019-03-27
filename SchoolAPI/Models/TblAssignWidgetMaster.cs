@@ -6,16 +6,14 @@ namespace SchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Tbl_Widget_Master
+    [Table("TblAssignWidgetMaster")]
+    public partial class TblAssignWidgetMaster
     {
         [Key]
-        public long WidgetID { get; set; }
+        public long AssignWidgetID { get; set; }
 
         [StringLength(50)]
-        public string WidgetName { get; set; }
-
-        [StringLength(100)]
-        public string ActionName { get; set; }
+        public string RoleID { get; set; }
 
         public long? CreatedBy { get; set; }
 

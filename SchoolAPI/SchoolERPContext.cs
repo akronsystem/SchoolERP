@@ -5,7 +5,7 @@ namespace SchoolAPI
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Linq;
 	using SchoolAPI.Models;
-
+ 
 	public partial class SchoolERPContext : DbContext
 	{
 		public SchoolERPContext()
@@ -29,6 +29,7 @@ namespace SchoolAPI
 		public virtual DbSet<TblMenu> TblMenus { get; set; }
 		public virtual DbSet<Vw_MenuSubMenu> Vw_MenuSubMenu { get; set; }
 		public virtual DbSet<ViewModuleMaster> ViewModuleMasters { get; set; }
+ 
 
 		public virtual DbSet<View_Template> View_Template { get; set; }
 		public virtual DbSet<ViewBindMenuListUpdate> ViewBindMenuListUpdates { get; set; }

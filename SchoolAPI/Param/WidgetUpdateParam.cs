@@ -9,7 +9,7 @@ namespace SchoolAPI.Param
     {
         public long WidgetID { get; set; }
         public string WidgetName { get; set; }
-
+        public string ActionName { get; set; }
         public long CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
