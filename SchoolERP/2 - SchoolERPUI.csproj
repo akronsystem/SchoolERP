@@ -117,6 +117,8 @@
     <Content Include="Areas\Scripts\ProjectScripts\District\DistrictModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\DivMaster\Division.js" />
     <Content Include="Areas\Scripts\ProjectScripts\DivMaster\DivisionModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Employee\Employee.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Employee\EmployeeModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\Event.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\EventMaster.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Event\EventModule.js" />
@@ -174,6 +176,8 @@
     <Content Include="Areas\Scripts\ProjectScripts\Term\TermModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Unit\UnitController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Unit\UnitModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Widget\AssignWidget.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Widget\AssignWidgetController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Widget\Widget.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Widget\WidgetModule.js" />
     <Content Include="Content\angularjs\plugins\ng-table\css\ng-table.min.css" />
@@ -518,6 +522,7 @@
     <Compile Include="Areas\SuperAdmin\Controllers\SideBarController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\TemplateMasterController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\TemplateTypeController.cs" />
+    <Compile Include="Areas\SuperAdmin\Controllers\WidgetMasterController.cs" />
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Global.asax.cs">
@@ -668,6 +673,7 @@
     <Content Include="Areas\SchoolAdmin\Views\StdDivMaster\DivisionMaster.cshtml" />
     <Content Include="Areas\SchoolAdmin\Views\StdDivMaster\StandardMaster.cshtml" />
     <Content Include="Areas\SchoolAdmin\Views\SubjectMaster\SubjectMaster.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\WidgetMaster\WidgetMaster.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Login\ForgetPass.cshtml" />

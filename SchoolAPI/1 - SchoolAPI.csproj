@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="API\AcademicYearController.cs" />
     <Compile Include="API\AchievementTypeMasterController.cs" />
+    <Compile Include="API\AssignWidgetController.cs" />
     <Compile Include="API\BoardController.cs" />
     <Compile Include="API\CasteController.cs" />
     <Compile Include="API\DepartmentController.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLayer\AcademicYearBussiness.cs" />
     <Compile Include="BusinessLayer\AchievementTypeMasterBL.cs" />
+    <Compile Include="BusinessLayer\AssignWidgetBL.cs" />
     <Compile Include="BusinessLayer\BoardBussiness.cs" />
     <Compile Include="BusinessLayer\CasteBL.cs" />
     <Compile Include="BusinessLayer\CommitteeBusiness.cs" />
@@ -175,6 +177,8 @@
     <Compile Include="Models\CryptIt.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\TblAchievementTypeMaster.cs" />
+    <Compile Include="Models\TblAssignWidgetDetail.cs" />
+    <Compile Include="Models\TblAssignWidgetMaster.cs" />
     <Compile Include="Models\TblBoard.cs" />
     <Compile Include="Models\TblBoardDetail.cs" />
     <Compile Include="Models\TblLanguage.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Models\Tbl_Widget_Master.cs" />
     <Compile Include="Models\ViewAcademicYearList.cs" />
     <Compile Include="Models\ViewAchievementTypeMaster.cs" />
+    <Compile Include="Models\ViewAssignWidget.cs" />
     <Compile Include="Models\ViewBindMenuListUpdate.cs" />
     <Compile Include="Models\ViewBoardList.cs" />
     <Compile Include="Models\ViewCasteList.cs" />
@@ -250,6 +255,7 @@
     <Compile Include="Models\ViewEventTypeList.cs" />
     <Compile Include="Models\ViewExperienceTypeList.cs" />
     <Compile Include="Models\ViewFeeTypeList.cs" />
+    <Compile Include="Models\ViewGetAssignWidgetRoleWise.cs" />
     <Compile Include="Models\ViewMinorityList.cs" />
     <Compile Include="Models\ViewModuleMaster.cs" />
     <Compile Include="Models\ViewNotificationTypeList.cs" />
@@ -282,6 +288,7 @@
     <Compile Include="Param\AcademicParam.cs" />
     <Compile Include="Param\AchievementTypeMasterParam.cs" />
     <Compile Include="Param\ActiveParam.cs" />
+    <Compile Include="Param\AssignWidgetParam.cs" />
     <Compile Include="Param\BoardParam.cs" />
     <Compile Include="Param\CasteParam.cs" />
     <Compile Include="Param\CategoryParam.cs" />
