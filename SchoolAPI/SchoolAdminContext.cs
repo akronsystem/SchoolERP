@@ -103,6 +103,14 @@ namespace SchoolAPI
         public virtual DbSet<View_Display_Board> View_Display_Board { get; set; }
         public virtual DbSet<Tbl_StandardWiseDivision> Tbl_StandardWiseDivision { get; set; }
         public virtual DbSet<View_Display_StandardWiseDivision> View_Display_StandardWiseDivision { get; set; }
+
+        //Institute
+
+        public virtual DbSet<Tbl_Institute_Address_Details> Tbl_Institute_Address_Details { get; set; }
+        public virtual DbSet<Tbl_Institute_Bank_Details> Tbl_Institute_Bank_Details { get; set; }
+        public virtual DbSet<Tbl_Institute_Logo_Details> Tbl_Institute_Logo_Details { get; set; }
+        public virtual DbSet<Tbl_Institute_Master> Tbl_Institute_Master { get; set; }
+        public virtual DbSet<View_InstituteList> View_InstituteList { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
