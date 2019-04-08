@@ -94,7 +94,7 @@ namespace SchoolAPI.API
             try
             {
                 DepartmentBL OBJSAVE = new DepartmentBL();
-                var result = OBJSAVE.SaveDesignation(PR);
+                 var result = OBJSAVE.SaveDesignation(PR);
                 return result;
             }
             catch (Exception e)

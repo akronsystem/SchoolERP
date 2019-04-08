@@ -101,12 +101,15 @@ function EmployeeController($scope, Service) {
           
             Service.Post("Institute/AddInstitute", JSON.stringify(InstituteData)).then(function (response) {
                 debugger;
-                $scope.AddressAdd(AddressData);
-                $scope.AddBank(BankData);
-                $scope.AddLogo();
-                $scope.Initialize();
-                $scope.IsVisible = false;
-                $scope.Visible = true;
+                if (response.data.IsSucess) {
+                    $scope.AddressAdd(AddressData);
+                    $scope.AddBank(BankData);
+                    $scope.AddLogo();
+                    CustomizeApp.AddMessage();
+                    $scope.Initialize();
+                    $scope.IsVisible = false;
+                    $scope.Visible = true;
+                }
             });
        
     }
@@ -250,9 +253,13 @@ function EmployeeController($scope, Service) {
         }
          
         Service.Post("Institute/UpdateInstitute", JSON.stringify(InstituteData)).then(function (response) {
-            $scope.UpdateAddressDetail(AddressData);
-            $scope.UpdateBankDetail(BankData);
-            $scope.UpdateLogoDetail(LogoData);
+            if (response.data.IsSucess) {
+                $scope.UpdateAddressDetail(AddressData);
+                $scope.UpdateBankDetail(BankData);
+                $scope.UpdateLogoDetail(LogoData);
+                CustomizeApp.UpdateMessage();
+            }
+
 
         });
         $scope.Initialize();

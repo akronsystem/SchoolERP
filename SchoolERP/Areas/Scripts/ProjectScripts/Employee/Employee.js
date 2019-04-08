@@ -789,11 +789,10 @@ function EmployeeController($scope, Service, $window) {
                     $scope.AppointmentDetail(AppointmentDetails);    
                     $scope.DocumentDetailSave();
                     $scope.ExperienceDetail();
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    alert(response.data.ResultData);
+                    Initialize
+                   
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -801,11 +800,8 @@ function EmployeeController($scope, Service, $window) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    ShowMessage(0, response.data.Message);
+                       }
 
             });
         }
@@ -813,32 +809,32 @@ function EmployeeController($scope, Service, $window) {
     $scope.SaveAddressDetail = function (AddressDetails) {
         debugger;
         Service.Post("EmployeeMaster/AddAddressDetails", JSON.stringify(AddressDetails)).then(function (response) {
-            alert('Address');
+            //alert('Address');
         });
 
     }
     $scope.EducationDetail = function () {
         Service.Post("EmployeeMaster/AddEducationDetails", JSON.stringify($scope.Customers)).then(function (response) {
-            alert('Education');
+            //alert('Education');
         });
 
     }
     $scope.BankDetail = function (BankDetails) {
         Service.Post("EmployeeMaster/AddBankDetails", JSON.stringify(BankDetails)).then(function (response) {
-            alert('Bank');
+            //alert('Bank');
         });
 
     }
     $scope.AppointmentDetail = function (AppointmentDetails) {
         Service.Post("EmployeeMaster/AddAppointmentDetails", JSON.stringify(AppointmentDetails)).then(function (response) {
-            alert('Appointment');
+            //alert('Appointment');
         });
 
     }
     $scope.ExperienceDetail = function () {
         debugger;
         Service.Post("EmployeeMaster/AddExperienceDetails", JSON.stringify($scope.Store)).then(function (response) {
-            alert('ExperienceDetail');
+            //alert('ExperienceDetail');
         });
 
     }
@@ -862,7 +858,7 @@ function EmployeeController($scope, Service, $window) {
        
         debugger;
         Service.PostFile("EmployeeMaster/AddUploadDetails", payload1).then(function (response) {
-            alert('Appointment');
+            //alert('Appointment');
         });
 
     }
@@ -1159,11 +1155,21 @@ function EmployeeController($scope, Service, $window) {
         //$scope.UpdateExperienceDetail();
        
         Service.PostFile("EmployeeMaster/UpdateEmployee", payload).then(function (response) {
-            $scope.UpdateAddressDetail(EmployeeAddressDetails);
-            $scope.UpdateEducationDetail(Data);
-           $scope.UpdateAppointmentDetail(AppointmentDetails);
-           $scope.UpdateBankDetail(BankDetails);
-           $scope.UpdateExperienceDetail();
+            if (response.data.IsSucess) {
+                $scope.UpdateAddressDetail(EmployeeAddressDetails);
+                $scope.UpdateEducationDetail(Data);
+                $scope.UpdateAppointmentDetail(AppointmentDetails);
+                $scope.UpdateBankDetail(BankDetails);
+                $scope.UpdateExperienceDetail();
+                CustomizeApp.UpdateMessage();
+                $scope.Initialize();
+                $scope.IsVisible = false;
+                $scope.Visible = true;
+            }
+            else
+            {
+                ShowMessage(0, response.data.Message);
+            }
 
         });
     }
@@ -1171,33 +1177,33 @@ function EmployeeController($scope, Service, $window) {
     $scope.UpdateAddressDetail = function (EmployeeAddressDetails) {
         debugger;
         Service.Post("EmployeeMaster/UpdateEmployeeAddressDetails", JSON.stringify(EmployeeAddressDetails)).then(function (response) {
-            alert('Address');
+            //alert('Address');
         });
 
     }
     $scope.UpdateEducationDetail = function (Data) {
         //$scope.Customers.push({ EmployeeID: Data });
         Service.Post("EmployeeMaster/UpdateEducationDetails", JSON.stringify($scope.Customers)).then(function (response) {
-            alert('Education');
+            //alert('Education');
         });
 
     }
     $scope.UpdateAppointmentDetail = function (AppointmentDetails) {
         Service.Post("EmployeeMaster/UpdateAppointmentDetails", JSON.stringify(AppointmentDetails)).then(function (response) {
-            alert('Appointment');
+            //alert('Appointment');
         });
 
     }
     $scope.UpdateBankDetail = function (BankDetails) {
         Service.Post("EmployeeMaster/UpdateBankDetails", JSON.stringify(BankDetails)).then(function (response) {
-            alert('Bank');
+            //alert('Bank');
         });
 
     }
     $scope.UpdateExperienceDetail = function () {
         debugger;
         Service.Post("EmployeeMaster/UpdateExperienceDetails", JSON.stringify($scope.Store)).then(function (response) {
-            alert('ExperienceDetail');
+            //alert('ExperienceDetail');
         });
 
     }

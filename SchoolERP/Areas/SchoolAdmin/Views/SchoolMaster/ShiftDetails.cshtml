@@ -51,7 +51,7 @@
                                <div class="form-group m-form__group mb-3 row">
                                  <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">In Time<span class="required-star" style="color:red">*</span></label>
                                      <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                         <input class="form-control" id="m_timepicker_1" value={{InTime}} ng-model="InTime" readonly placeholder="Select time" type="text" />
+                                         <input class="form-control" id="m_timepicker_1" value={{InTime}} ng-model="InTime" readonly placeholder="Select time" type="text"  required/>
                                          <input type="hidden" value="{{ShiftDetailID}}" />
                                      </div>
                                 </div>
@@ -59,31 +59,31 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">OutTime<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text"  class="form-control" id="m_timepicker_2" value={{OutTime}} ng-model="OutTime" autocomplete="off" name="outtime"   />
+                                                <input type="text"  class="form-control" id="m_timepicker_2" value={{OutTime}} ng-model="OutTime" autocomplete="off" name="outtime"  required />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">LateMark<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" class="form-control" id="m_timepicker_3" value={{LateMark}} ng-model="LateMark" autocomplete="off" name="LateMark"    />
+                                                <input type="text" class="form-control" id="m_timepicker_3" value={{LateMark}} ng-model="LateMark" autocomplete="off" name="LateMark"    required/>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">EarlyGoing<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" class="form-control" id="m_timepicker_4" value={{EarlyGoing}}  ng-model="EarlyGoing" autocomplete="off" name="EarlyGoing"    />
+                                                <input type="text" class="form-control" id="m_timepicker_4" value={{EarlyGoing}}  ng-model="EarlyGoing" autocomplete="off" name="EarlyGoing"    required/>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">HalfDayLate<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" class="form-control" id="m_timepicker_5" value={{HalfDayLate}}  ng-model="HalfDayLate" autocomplete="off" name="HalfDayLate"    />
+                                                <input type="text" class="form-control" id="m_timepicker_5" value={{HalfDayLate}}  ng-model="HalfDayLate" autocomplete="off" name="HalfDayLate"  required/>
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">HalfDayEarly<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text"  class="form-control" id="m_timepicker_6" value={{HalfDayEarly}} ng-model="HalfDayEarly" autocomplete="off" name="HalfDayEarly"    />
+                                                <input type="text"  class="form-control" id="m_timepicker_6" value={{HalfDayEarly}} ng-model="HalfDayEarly" autocomplete="off" name="HalfDayEarly" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -211,6 +211,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Shift/ShiftDetails.js")" type="text/javascript"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

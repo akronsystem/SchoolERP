@@ -47,6 +47,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required ExprienceType" };
             }
+            var Info = db.Tbl_ExprienceType_Master.FirstOrDefault(r => r.ExprienceType == b.ExprienceType);
+            if (Info != null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_ExprienceType_Master.Where(r => r.ExprienceTypeID == b.ExprienceTypeID).FirstOrDefault();
             try
             {

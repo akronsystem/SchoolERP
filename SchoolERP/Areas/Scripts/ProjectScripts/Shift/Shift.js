@@ -59,7 +59,7 @@ function ShiftController($scope, Service) {
         $scope.ShiftName = null;
         $scope.ShiftID = null;
         $scope.IsVisible = false;
-        // $scope.Initialize();
+       $scope.Initialize();
     }
     $scope.Add = function (ShiftID, ShiftName) {
         var data = {
@@ -72,14 +72,11 @@ function ShiftController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                   CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -87,8 +84,8 @@ function ShiftController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                   ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }
@@ -108,14 +105,11 @@ function ShiftController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -123,8 +117,8 @@ function ShiftController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }

@@ -37,13 +37,16 @@ function SectionController($scope, Service) {
                 $scope.btnUpdate = false;
                 $scope.btnSave = true;
                 if (response.data.IsSucess) {
+                    CustomizeApp.AddMessage();
+                    $scope.Clear();
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                   
+                    
                 }
                 else {
-
-
-                    alert(response.data.ResultData);
+                    ShowMessage(0, response.data.Message);
+                    $scope.Clear();
+                    $scope.Initialize();
                 }
 
             });
@@ -92,18 +95,15 @@ function SectionController($scope, Service) {
                 $scope.MainDiv = false;
                 if (response.data.IsSucess) {
                     debugger;
-
-
+                    CustomizeApp.UpdateMessage();
+                    $scope.Clear();
                     $scope.Initialize();
-
-                    alert(response.data.ResultData);
-
-
+                    //alert(response.data.ResultData);
                 }
                 else {
                     debugger;
-
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                 }
 
             });
@@ -142,11 +142,11 @@ function SectionController($scope, Service) {
     }
     //Code For Clear
     $scope.Clear = function () {
-
-
-        $scope.AddDiv = false;
-        $scope.StandardName = null;
+      
+        $scope.SectionName = "";
+        //$scope.AddDiv = false;       
         $scope.IsVisible = false;
+        $scope.MainDiv = false;
 
     }
 }

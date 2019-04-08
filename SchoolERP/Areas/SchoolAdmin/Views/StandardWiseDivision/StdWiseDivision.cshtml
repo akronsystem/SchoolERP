@@ -40,11 +40,11 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Board <span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control m-input" id="exampleBoard" ng-model="ddlBoard">
+                                                <select class="form-control m-input" id="exampleBoard" ng-model="ddlBoard" required>
                                                     <option value="">-Select-</option>
                                                     <option ng-repeat="b in BoardData" value="{{b.BoardID}}" ng-selected="ddlBoard==b.BoardID">{{b.BoardName}}</option>
                                                 </select>
@@ -56,7 +56,7 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Standard <span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control m-input" id="exampleStd" ng-model="StandardID">
+                                                <select class="form-control m-input" id="std" ng-model="StandardID" required>
                                                     <option value="">-Select-</option>
                                                     <option ng-repeat="std in StandardData" value="{{std.StandardId}}" ng-selected="StandardID == std.StandardId">{{std.StandardName}}</option>
                                                 </select>
@@ -197,6 +197,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/StandardWiseDivision/StdWiseDivController.js")"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

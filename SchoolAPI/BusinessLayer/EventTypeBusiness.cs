@@ -47,6 +47,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Event Type" };
             }
+            var Info = db.Tbl_EventType_Master.FirstOrDefault(r => r.EventType == b.EventType);
+            if (Info != null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_EventType_Master.Where(r => r.EventTypeID == b.EventTypeID).FirstOrDefault();
             try
             {
@@ -179,6 +184,11 @@ namespace SchoolAPI.BusinessLayer
             if (b.EventTypeID == 0)
             {
                 return new Error() { IsError = true, Message = "Required Event Type" };
+            }
+            var Info = db.Tbl_EventMaster.FirstOrDefault(r => r.EventName == b.EventName);
+            if (Info != null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
             }
             var data = db.Tbl_EventMaster.Where(r => r.EventID == b.EventID).FirstOrDefault();
             try

@@ -75,11 +75,11 @@ function ExprienceTypeController($scope, Service) {
 
 
 
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -87,8 +87,8 @@ function ExprienceTypeController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }
@@ -111,11 +111,11 @@ function ExprienceTypeController($scope, Service) {
 
 
 
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                   // alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -123,8 +123,8 @@ function ExprienceTypeController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }
@@ -143,9 +143,10 @@ function ExprienceTypeController($scope, Service) {
 
         if (event.target.checked == false) {
             var confirm = window.confirm("Do you want to deactive the ExperienceType?");
-
+            //var confirm = ShowMessage(1, "Do you want to deactive the ExperienceType?");
         }
         else {
+            //var confirm = ShowMessage(1, "Do you want to active the ExperienceType?");
             var confirm = window.confirm("Do you want to active the ExperienceType?");
         }
         if (confirm == true) {

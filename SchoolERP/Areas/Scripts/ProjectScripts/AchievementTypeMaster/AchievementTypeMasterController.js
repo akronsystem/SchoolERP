@@ -62,10 +62,10 @@ function AchievementTypeMasterController($scope, Service)
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    CustomizeApp.AddMessage();
                 }
                 else {
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
@@ -86,11 +86,11 @@ function AchievementTypeMasterController($scope, Service)
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    CustomizeApp.UpdateMessage();
                 }
                 else {
                    
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });

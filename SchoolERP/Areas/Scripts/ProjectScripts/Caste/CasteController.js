@@ -89,29 +89,23 @@ function CasteController($scope, Service) {
             ReligionID: ReligionID,
             CategoryID:CategoryID,
             CasteName: CasteName,
-            BtnStatus: BtnStatus
+            BtnStatus: BtnStatus 
         };
         if ($scope.form.$valid) {
             Service.Post("Caste/SaveCaste", JSON.stringify(data)).then(function (response) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
+           
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                    ShowMessage(0, response.data.Message);
+                  
                 }
             });
         }

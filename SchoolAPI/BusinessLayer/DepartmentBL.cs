@@ -38,7 +38,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Department_Master objDepartment = db.Tbl_Department_Master.Where(r => r.DepartmentID == MP.DepartmentID).FirstOrDefault();
-
+                    var Data = db.Tbl_Department_Master.Where(r => r.Department == MP.Department.ToUpper()).FirstOrDefault();
+                    if (Data != null)
+                    {
+                        return new Error() { IsError = true, Message = "Department Name Already Exists!" };
+                    }
                     objDepartment.Department = MP.Department.ToUpper();
                     objDepartment.ModifiedDate = DateTime.Now;
                     objDepartment.DepartmentID = MP.DepartmentID;
@@ -83,7 +87,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Designation_Master objDesignation = db.Tbl_Designation_Master.Where(r => r.DesignationID == MP.DesignationID).FirstOrDefault();
-
+                    var Data = db.Tbl_Designation_Master.Where(r => r.Designation == MP.Designation.ToUpper()).FirstOrDefault();
+                    if (Data != null)
+                    {
+                        return new Error() { IsError = true, Message = "Designation Name Already Exists!" };
+                    }
                     objDesignation.Designation = MP.Designation.ToUpper();
                     objDesignation.ModifiedDate = DateTime.Now;
                     objDesignation.DesignationID = MP.DesignationID;

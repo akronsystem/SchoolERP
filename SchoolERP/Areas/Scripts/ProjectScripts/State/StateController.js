@@ -55,9 +55,8 @@ function StateController($scope, Service) {
 
 
     $scope.Clear = function () {
-
-        $scope.IsVisible = false;
         $scope.Initialize();
+        $scope.IsVisible = false;      
         $scope.State = "";
     }
     $scope.Add = function (StateID, State) {
@@ -71,25 +70,16 @@ function StateController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
+                   
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                    ShowMessage(0, response.data.Message);
+                  
                 }
 
             });
@@ -107,25 +97,17 @@ function StateController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
+                    
                 }
-                else {
+                else
+                {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                    ShowMessage(0, response.data.Message);
+                   
                 }
 
             });

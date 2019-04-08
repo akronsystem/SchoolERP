@@ -35,7 +35,7 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">AcademicYear Type<span class="required-star" style="color:red">*</span></label>
@@ -51,7 +51,7 @@
                                                     <div class="col-xl-8 col-lg-8">
                                                        
                                                         <div class="input-group date">
-                                                            <input type="text" class="form-control m-input" autocomplete="off"  placeholder="Selectdate" id="m_datepicker_1"  ng-model="StartDate" value="{{StartDate}}" />
+                                                            <input type="text" class="form-control m-input" autocomplete="off"  placeholder="Selectdate" id="m_datepicker_1"  ng-model="StartDate" value="{{StartDate}}" required/>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -74,7 +74,7 @@
                                                             </div>
                                                         </div>*@
                                                         <div class="input-group date">
-                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2"  ng-model="EndDate" value="{{EndDate}}" />
+                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2"  ng-model="EndDate" value="{{EndDate}}" required/>
                                                               <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -196,6 +196,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/AcademicYear/AcademicYearController.js")" type="text/javascript"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

@@ -47,12 +47,12 @@ function StandardController($scope, Service) {
                 $scope.btnSave = true;
                 if (response.data.IsSucess) {
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    CustomizeApp.AddMessage();
                 }
                 else {
                     
 
-                    alert(response.data.ResultData);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
@@ -102,18 +102,13 @@ function StandardController($scope, Service) {
                     debugger;
 
                    
-                    $scope.Initialize();
-                 
-                    alert(response.data.ResultData);
-
-
+                    $scope.Initialize();                 
+                    CustomizeApp.UpdateMessage();
                 }
                 else {
                     debugger;
-
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
                 }
-
             });
         }
     }

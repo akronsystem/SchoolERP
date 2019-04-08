@@ -71,37 +71,37 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Port<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Port}} ng-model="Port" id="Port" class="form-control m-input" autocomplete="off" required />
+                                                <input type="text" value={{Port}} ng-model="Port" id="Port" name="Port" class="form-control m-input" autocomplete="off"  required />
                                                 <input type="hidden" value="{{ConfigurationID}}" />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Secure<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Secure}} ng-model="Secure" id="Secure" class="form-control m-input" autocomplete="off" required />
+                                                <input type="text" value={{Secure}} ng-model="Secure" id="Secure" name="Secure" class="form-control m-input" autocomplete="off" required />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Host<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Host}} ng-model="Host" id="host" class="form-control m-input" autocomplete="off" required />
+                                                <input type="text" value={{Host}} ng-model="Host" id="host" name="host" class="form-control m-input" autocomplete="off" required />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">UserName<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{UserName}} ng-model="UserName" id="username" class="form-control m-input" autocomplete="off" required />
+                                                <input type="text" value={{UserName}} ng-model="UserName" id="username" name="username" class="form-control m-input" autocomplete="off" required />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row" ng-show="password">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Password<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="password" value={{Password}} ng-model="Password" id="password"  class="form-control m-input" autocomplete="off" required />
+                                                <input type="password" value={{Password}} ng-model="Password" id="password" name="password"  class="form-control m-input" autocomplete="off" required />
                                             </div>
                                         </div>
 
@@ -217,6 +217,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/SMTP/SMTP.js")" type="text/javascript"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <link href="~/Content/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/assets/vendors/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
     <script>

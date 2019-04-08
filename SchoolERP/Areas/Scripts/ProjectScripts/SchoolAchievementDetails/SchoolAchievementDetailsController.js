@@ -88,21 +88,20 @@ function SchoolAchievementDetailsController($scope, Service) {
             Service.Post("SchoolAchievementDetails/SaveAchievementDetails", JSON.stringify(data)).then(function (response) {
                 debugger;
                 if (response.data.IsSucess) {
-                    
-                    //CustomizeApp.UpdateMessage();
+                CustomizeApp.AddMessage();
                     $scope.Clear();
                    
                     $scope.GetAchievementType();
                  
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                       }
 
             });
@@ -122,21 +121,20 @@ function SchoolAchievementDetailsController($scope, Service) {
             Service.Post("SchoolAchievementDetails/UpdateAchievementDetails", JSON.stringify(data)).then(function (response) {
                 debugger;
                 if (response.data.IsSucess) {
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
 
                     $scope.GetAchievementType();
 
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                   
 
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                 }
 
             });
