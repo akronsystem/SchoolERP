@@ -71,13 +71,13 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Religion<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control m-input" id="exampleCaste" ng-model="ReligionID">
-                                                    <option value="0">-Select-</option>
+                                                <select class="form-control m-input" id="exampleCaste" ng-model="ReligionID" required>
+                                                    <option value="">-Select-</option>
                                                     <option ng-repeat="s in Religions" ng-selected="s.ReligionID==ReligionID" value="{{s.ReligionID}}">{{s.ReligionName}}</option>
 
                                                 </select>
@@ -88,8 +88,8 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Category<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control m-input" id="exampleCaste1" ng-model="CategoryID">
-                                                    <option value="0">-Select-</option>
+                                                <select class="form-control m-input" id="exampleCaste1" ng-model="CategoryID" required>
+                                                    <option value="">-Select-</option>
                                                     <option ng-repeat="s in Categorys" ng-selected="s.CategoryID==CategoryID" value="{{s.CategoryID}}">{{s.CategoryName}}</option>
 
                                                 </select>
@@ -99,7 +99,7 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Caste Name<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{CasteName}} ng-model="CasteName" name="CasteName" class="form-control m-input" required />
+                                                <input type="text" value={{CasteName}} ng-model="CasteName" name="CasteName" class="form-control m-input" pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$" title="Caste Should be Alphabate only" autocomplete="off" required />
                                                 <input type="hidden" value="{{CasteID}}" />
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                         <th>Caste Name</th>
                                         <th>Religion</th>
                                         <th>Category</th>
-                                        <th>Created Date</th>
+                                        @*<th>Created Date</th>*@
                                         <th colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -188,9 +188,9 @@
                                         <td>
                                             {{data.CategoryName}}
                                         </td>
-                                        <td>
+                                        @*<td>
                                             {{data.CreatedDate}}
-                                        </td>
+                                        </td>*@
 
                                         <td>
 
@@ -221,8 +221,10 @@
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Caste/Caste.js")"></script>
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Caste/CasteController.js")" type="text/javascript"></script>
-
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

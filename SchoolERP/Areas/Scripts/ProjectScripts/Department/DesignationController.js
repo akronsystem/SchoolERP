@@ -69,23 +69,14 @@ function DesignationController($scope, Service) {
             Service.Post("Department/SaveDesignation", JSON.stringify(data)).then(function (response) {
 
                 if (response.data.IsSucess) {
-                    debugger;
-
-                    //CustomizeApp.UpdateMessage();
+                   CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
-                    $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
+                    $scope.Initialize();                  
                 }
                 else {
-                    debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                    ShowMessage(0, response.data.Message);
+                   
                 }
             });
         }

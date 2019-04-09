@@ -70,12 +70,12 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">ExperienceType<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{ExprienceType}} ng-model="ExprienceType" name="expname" class="form-control m-input" required />
+                                                <input type="text" value={{ExprienceType}} ng-model="ExprienceType" name="expname" id="expname" class="form-control m-input" pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$" title="ExprienceType Should be Alphabate only" autocomplete="off" required />
                                                 <input type="hidden" value="{{ExprienceTypeID}}" />
                                             </div>
                                         </div>
@@ -184,6 +184,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/ExprienceType/ExprienceType.js")" type="text/javascript"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <link href="~/Content/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/assets/vendors/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
     <script>

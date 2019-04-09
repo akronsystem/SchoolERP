@@ -75,11 +75,11 @@ function EventTypeController($scope, Service) {
 
 
 
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -87,8 +87,8 @@ function EventTypeController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }
@@ -111,11 +111,11 @@ function EventTypeController($scope, Service) {
 
 
 
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -123,8 +123,8 @@ function EventTypeController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }

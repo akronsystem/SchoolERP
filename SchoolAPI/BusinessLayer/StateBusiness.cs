@@ -99,6 +99,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required State" };
             }
+            var Info = db.Tbl_State.FirstOrDefault(r => r.State == b.State && r.Status==1);
+            if (Info != null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_State.Where(r => r.StateID == b.StateId).FirstOrDefault();
             try
             {

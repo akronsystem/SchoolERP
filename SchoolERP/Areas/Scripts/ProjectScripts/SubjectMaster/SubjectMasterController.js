@@ -39,12 +39,12 @@ function SubjectMasterController($scope, Service) {
                 $scope.btnSave = true;
                 if (response.data.IsSucess) {
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    CustomizeApp.AddMessage();
                 }
                 else {
 
 
-                    alert(response.data.ResultData);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
@@ -100,14 +100,14 @@ function SubjectMasterController($scope, Service) {
 
                     $scope.Initialize();
 
-                    alert(response.data.ResultData);
+                    CustomizeApp.UpdateMessage();
 
 
                 }
                 else {
                     debugger;
 
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
@@ -146,10 +146,10 @@ function SubjectMasterController($scope, Service) {
     }
     //Code For Clear
     $scope.Clear = function () {
-
-
+        $scope.MainDiv = false;
         $scope.AddDiv = false;
-        $scope.StandardName = null;
+        $scope.SubjectName = null;
+        $scope.SubjectCode = null;
         $scope.IsVisible = false;
 
     }

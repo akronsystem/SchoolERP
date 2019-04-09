@@ -83,11 +83,11 @@ function EventController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
@@ -95,8 +95,8 @@ function EventController($scope, Service) {
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }
@@ -125,20 +125,19 @@ function EventController($scope, Service) {
 
 
 
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                    //alert(response.data.ResultData);
                     // window.location = "./ParentGrievance"
 
                     //alert(result.data);
 
                 }
                 else {
-                    debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
+                    //alert(response.data.Message);
                     //$scope.clear();
                     //window.location = "./PostGrievance"
                 }

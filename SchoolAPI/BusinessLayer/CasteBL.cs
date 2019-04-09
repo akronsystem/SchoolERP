@@ -98,7 +98,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Religion_Master objReligion = db.TblReligionMasters.Where(r => r.ReligionID == MP.ReligionID).FirstOrDefault();
-
+                    var Data = db.TblReligionMasters.Where(r => r.ReligionName == MP.ReligionName.ToUpper()).FirstOrDefault();
+                    if (Data != null)
+                    {
+                        return new Error() { IsError = true, Message = "Religion Name Already Exists!" };
+                    }
                     objReligion.ReligionName = MP.ReligionName.ToUpper();
                     objReligion.ModifiedDate = DateTime.Now;
                     objReligion.ReligionID = MP.ReligionID;
@@ -142,7 +146,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Category_Master objCategory = db.Tbl_Category_Master.Where(r => r.CategoryID == MP.CategoryID).FirstOrDefault();
-
+                    var data = db.Tbl_Category_Master.Where(r => r.CategoryName == MP.CategoryName).FirstOrDefault();
+                    if(data!=null)
+                    {
+                        return new Error() { IsError = true, Message = "Category Name Already Exists!" };
+                    }
                     objCategory.CategoryName = MP.CategoryName.ToUpper();
                     objCategory.ModifiedDate = DateTime.Now;
                     objCategory.CategoryID = MP.CategoryID;
@@ -186,7 +194,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Minority_Master objMinority = db.Tbl_Minority_Master.Where(r => r.MinorityID == MP.MinorityID).FirstOrDefault();
-
+                    var Data = db.Tbl_Minority_Master.Where(r => r.MinorityName == MP.MinorityName.ToUpper()).FirstOrDefault();
+                    if (Data != null)
+                    {
+                        return new Error() { IsError = true, Message = "Minority Name Already Exists!" };
+                    }
                     objMinority.MinorityName = MP.MinorityName.ToUpper();
                     objMinority.ModifiedDate = DateTime.Now;
                     objMinority.MinorityID = MP.MinorityID;
@@ -281,7 +293,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     Tbl_Sub_Caste_Master objSubCaste = db.Tbl_Sub_Caste_Master.Where(r => r.SubCasteID == MP.SubCasteID).FirstOrDefault();
-
+                    var Data = db.Tbl_Sub_Caste_Master.Where(r => r.SubCasteName == MP.SubCasteName.ToUpper()).FirstOrDefault();
+                    if (Data != null)
+                    {
+                        return new Error() { IsError = true, Message = "Sub Caste Name Already Exists!" };
+                    }
                     objSubCaste.SubCasteName = MP.SubCasteName.ToUpper();
                     objSubCaste.CasteID = MP.CasteID;
                     objSubCaste.SubCasteID = MP.SubCasteID;

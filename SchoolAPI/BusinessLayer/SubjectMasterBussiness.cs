@@ -18,7 +18,7 @@ namespace SchoolAPI.BusinessLayer
                 var Duplicate = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectName == ObjParam.SubjectName && r.SubjectCode ==ObjParam.SubjectCode);
                 if (Duplicate != null)
                 {
-                    return new Result() { IsSucess = true, ResultData = "Duplicate Entry Not Allowed" };
+                    return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace SchoolAPI.BusinessLayer
             if (Duplicate != null)
             {
 
-                return new Result() { IsSucess = true, ResultData = "Duplicate Entry Not Allowed" };
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
             }
             else
             {

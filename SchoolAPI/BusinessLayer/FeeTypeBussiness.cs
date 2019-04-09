@@ -47,6 +47,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Fee Type" };
             }
+            var Info = db.Tbl_FeeType_Master.FirstOrDefault(r => r.FeetType == b.FeetType);
+            if (Info != null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_FeeType_Master.Where(r => r.FeeTypeID == b.FeeTypeID).FirstOrDefault();
             try
             {

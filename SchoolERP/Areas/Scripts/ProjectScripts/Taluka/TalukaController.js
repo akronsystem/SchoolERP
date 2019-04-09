@@ -81,25 +81,16 @@ function TalukaController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.AddMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
+                   
                 }
                 else {
                     debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                    ShowMessage(0, response.data.Message);
+                    
                 }
 
             });
@@ -120,25 +111,15 @@ function TalukaController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
-                    //CustomizeApp.UpdateMessage();
+                    CustomizeApp.UpdateMessage();
                     $scope.Clear();
                     $scope.IsVisible = false;
                     $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
                 }
-                else {
-                    debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                else
+                {
+                    ShowMessage(0, response.data.Message);
+                   
                 }
 
             });
@@ -154,11 +135,11 @@ function TalukaController($scope, Service) {
         };
 
         if (event.target.checked == false) {
-            var confirm = window.confirm("Do you want to deactive the State?");
+            var confirm = window.confirm("Do you want to deactive the Taluka?");
 
         }
         else {
-            var confirm = window.confirm("Do you want to active the State?");
+            var confirm = window.confirm("Do you want to active the Taluka?");
         }
         if (confirm == true) {
             Service.Post("StateMaster/DeleteTaluka", JSON.stringify(data)).then(function (response) {

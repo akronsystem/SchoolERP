@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "SubCaste";
-    Layout = "~/Areas/SuperAdmin/Views/Shared/MasterLayout.cshtml";
+    Layout = "~/Areas/SchoolAdmin/Views/Shared/LayoutPage.cshtml";
 }
 
 <html lang="en" class="no-js">
@@ -71,15 +71,14 @@
                                 <div class="row d-block m-0 mt-1 form-block-wrapper">
 
                                     @*<form class="m-form m-form--fit m-form--label-align-right">*@
-                                    <div class="m-portlet__body">
+                                    <div class="form-body m-portlet__body">
 
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Caste<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <select class="form-control m-input" id="exampleCaste" ng-model="CasteID">
-                                                    <option value="0">-Select-</option>
+                                                <select class="form-control m-input" id="exampleCaste" ng-model="CasteID" required>
+                                                    <option value="">-Select-</option>
                                                     <option ng-repeat="s in Castes" ng-selected="s.CasteID==CasteID" value="{{s.CasteID}}">{{s.CasteName}}</option>
-
                                                 </select>
 
                                             </div>
@@ -88,7 +87,7 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Sub Caste Name<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{SubCasteName}} ng-model="SubCasteName" name="SubCasteName" class="form-control m-input" required />
+                                                <input type="text" value={{SubCasteName}} ng-model="SubCasteName" name="SubCasteName" class="form-control m-input" pattern="[a-zA-Z0-9\s]+" title="SubCasteName Should be Alphabate only" autocomplete="off" required />
                                                 <input type="hidden" value="{{SubCasteID}}" />
                                             </div>
                                         </div>
@@ -157,7 +156,7 @@
                                         <th>Sub Caste Id</th>
                                         <th>Sub Caste Name</th>
                                         <th>Caste</th>
-                                        <th>Created Date</th>
+                                        @*<th>Created Date</th>*@
                                         <th colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -173,9 +172,9 @@
                                         <td>
                                             {{data.CasteName}}
                                         </td>
-                                        <td>
+                                        @*<td>
                                             {{data.CreatedDate}}
-                                        </td>
+                                        </td>*@
 
                                         <td>
 
@@ -208,6 +207,9 @@
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/Caste/SubCasteController.js")" type="text/javascript"></script>
 
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

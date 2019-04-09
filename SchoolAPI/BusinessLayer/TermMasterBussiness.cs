@@ -144,9 +144,9 @@ namespace SchoolAPI.BusinessLayer
         //Unit/Terminal
         public object SaveUnit(UnitMasterParam b)
         {
-            if (b.UnitName == null)
+            if (b.TermID == 0)
             {
-                return new Error() { IsError = true, Message = "Required Unit Name" };
+                return new Error() { IsError = true, Message = " Required Term Name" };
             }
             var data = db.Tbl_Unit_Master.FirstOrDefault(r => r.UnitName == b.UnitName);
             if (data != null)

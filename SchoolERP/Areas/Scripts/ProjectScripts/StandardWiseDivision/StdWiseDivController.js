@@ -81,13 +81,12 @@ function StdWiseDivisionController($scope, Service) {
                 $scope.btnUpdate = false;
                 $scope.btnSave = true;
                 if (response.data.IsSucess) {
+                    CustomizeApp.AddMessage();
                     $scope.Initialize();
-                    alert(response.data.ResultData);
+                 
                 }
                 else {
-
-
-                    alert(response.data.ResultData);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
@@ -189,12 +188,7 @@ function StdWiseDivisionController($scope, Service) {
                 $scope.btnSave = false;
                 $scope.MainDiv = false;
                 if (response.data.IsSucess) {
-                    debugger;
-
-
-
-
-                    alert(response.data.ResultData);
+                    CustomizeApp.UpdateMessage();
                     $scope.StandardId = null;
                     $scope.DivisionID = null;
                     $scope.BoardID = null;
@@ -202,9 +196,7 @@ function StdWiseDivisionController($scope, Service) {
 
                 }
                 else {
-                    debugger;
-
-                    alert(response.data.Message);
+                    ShowMessage(0, response.data.Message);
                 }
 
             });
