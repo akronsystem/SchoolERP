@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Scripts\CommonScript\bootbox.min.js" />
+    <Content Include="Areas\Scripts\CommonScript\CoomonFunctions.js" />
+    <Content Include="Areas\Scripts\CommonScript\customize.js" />
     <Content Include="Areas\Scripts\CommonScript\Module.js" />
     <Content Include="Areas\Scripts\ProjectScripts\AcademicYear\AcademicYearController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\AcademicYear\AcademicYearModule.js" />
@@ -126,6 +129,8 @@
     <Content Include="Areas\Scripts\ProjectScripts\ExprienceType\ExprienceTypeModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\FeeType\FeeType.js" />
     <Content Include="Areas\Scripts\ProjectScripts\FeeType\FeeTypeModule.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Institute\InstituteController.js" />
+    <Content Include="Areas\Scripts\ProjectScripts\Institute\InstituteModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Languages\Language.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Languages\LanguageModule.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Login\ForgetPassword.js" />
@@ -504,6 +509,7 @@
     <Compile Include="Areas\SchoolAdmin\Controllers\CasteController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\EmployeeMasterController.cs" />
+    <Compile Include="Areas\SchoolAdmin\Controllers\InstituteController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\SchoolAchievementDetailsController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\SchoolMasterController.cs" />
     <Compile Include="Areas\SchoolAdmin\Controllers\SectionMasterController.cs" />
@@ -514,7 +520,6 @@
     <Compile Include="Areas\SuperAdmin\Controllers\AchievementTypeMasterController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AdmissionController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\SuperAdmin\Controllers\InstituteController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\MasterController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\ModuleController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\RoleController.cs" />
@@ -674,6 +679,7 @@
     <Content Include="Areas\SchoolAdmin\Views\StdDivMaster\StandardMaster.cshtml" />
     <Content Include="Areas\SchoolAdmin\Views\SubjectMaster\SubjectMaster.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\WidgetMaster\WidgetMaster.cshtml" />
+    <Content Include="Areas\SchoolAdmin\Views\Institute\Institute.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Login\ForgetPass.cshtml" />

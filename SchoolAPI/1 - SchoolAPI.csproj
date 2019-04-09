@@ -118,6 +118,7 @@
     <Compile Include="API\EventMasterController.cs" />
     <Compile Include="API\ExperienceTypeController.cs" />
     <Compile Include="API\FeeTypeController.cs" />
+    <Compile Include="API\InstituteController.cs" />
     <Compile Include="API\LoginController.cs" />
     <Compile Include="API\MenuSubMenuController.cs" />
     <Compile Include="API\ModuleController.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="BusinessLayer\EventTypeBusiness.cs" />
     <Compile Include="BusinessLayer\ExperienceTypeBussiness.cs" />
     <Compile Include="BusinessLayer\FeeTypeBussiness.cs" />
+    <Compile Include="BusinessLayer\InstituteBusiness.cs" />
     <Compile Include="BusinessLayer\MenuBussiness.cs" />
     <Compile Include="BusinessLayer\ModuleMasterBL.cs" />
     <Compile Include="BusinessLayer\NotificationBusiness.cs" />
@@ -214,6 +216,10 @@
     <Compile Include="Models\Tbl_EventType_Master.cs" />
     <Compile Include="Models\Tbl_ExprienceType_Master.cs" />
     <Compile Include="Models\Tbl_FeeType_Master.cs" />
+    <Compile Include="Models\Tbl_Institute_Address_Details.cs" />
+    <Compile Include="Models\Tbl_Institute_Bank_Details.cs" />
+    <Compile Include="Models\Tbl_Institute_Logo_Details.cs" />
+    <Compile Include="Models\Tbl_Institute_Master.cs" />
     <Compile Include="Models\Tbl_Minority_Master.cs" />
     <Compile Include="Models\Tbl_NotificationType.cs" />
     <Compile Include="Models\Tbl_Religion_Master.cs" />
@@ -279,6 +285,7 @@
     <Compile Include="Models\View_Display_Board.cs" />
     <Compile Include="Models\View_Display_StandardWiseDivision.cs" />
     <Compile Include="Models\View_Display_Subject.cs" />
+    <Compile Include="Models\View_InstituteList.cs" />
     <Compile Include="Models\View_MenuList.cs" />
     <Compile Include="Models\View_SchoolDetails.cs" />
     <Compile Include="Models\View_SectionDisplay.cs" />
@@ -325,6 +332,14 @@
     <Compile Include="Param\FeeTypeUpdateParam.cs" />
     <Compile Include="Param\ForgetPassword.cs" />
     <Compile Include="Param\GetSchool.cs" />
+    <Compile Include="Param\InstituteAddressDetailsParam.cs" />
+    <Compile Include="Param\InstituteAdressUpdateParam.cs" />
+    <Compile Include="Param\InstituteBankParam.cs" />
+    <Compile Include="Param\InstituteBankUpdateParam.cs" />
+    <Compile Include="Param\InstituteLogoParam.cs" />
+    <Compile Include="Param\InstituteLogoUpdateParam.cs" />
+    <Compile Include="Param\InstituteParam.cs" />
+    <Compile Include="Param\InstituteUpdateParam.cs" />
     <Compile Include="Param\LanguageParam.cs" />
     <Compile Include="Param\MenuSubMenuParam.cs" />
     <Compile Include="Param\MinorityParam.cs" />
