@@ -76,14 +76,14 @@
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Port<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Port}} ng-model="Port" id="Port" name="Port" class="form-control m-input" autocomplete="off"  required />
+                                                <input type="text" value={{Port}} ng-model="Port" id="Port" name="Port" class="form-control m-input" autocomplete="off" pattern="[0-9]+"  required />
                                                 <input type="hidden" value="{{ConfigurationID}}" />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Secure<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Secure}} ng-model="Secure" id="Secure" name="Secure" class="form-control m-input" autocomplete="off" required />
+                                                <input type="text" value={{Secure}} ng-model="Secure" id="Secure" name="Secure" class="form-control m-input" autocomplete="off" pattern="[a-zA-Z\s]+" required />
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group mb-3 row">

@@ -70,7 +70,7 @@ offcanvas-default" ng-app="ERP">
                                                                  style="color:red">*</span>
                                             </label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
-                                                <input type="text" value={{Achievement}} ng-model="Achievement" name="Achievement" class="form-control m-input" pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$" title="Achievement Should be Alphabate only" autocomplete="off" required />
+                                                <input type="text" value={{Achievement}} ng-model="Achievement" name="Achievement" class="form-control m-input" pattern="[a-zA-Z\s]+" title="Achievement Should be Alphabate only" autocomplete="off" required />
 
                                             </div>
                                         </div>
