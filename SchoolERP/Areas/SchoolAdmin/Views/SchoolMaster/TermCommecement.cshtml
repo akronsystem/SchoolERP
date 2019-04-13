@@ -54,7 +54,7 @@
                                                     <div class="col-xl-8 col-lg-8">                     
                                                         <div class="input-group date">
                                                             @*<input type="text" class="form-control" id="m_datepicker_1" readonly placeholder="Select date" />*@
-                                                            <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_1" ng-model="StartDate" value="{{StartDate}}"  required />
+                                                            <input type="text" class="form-control m-input" autocomplete="off" placeholder="Selectdate" id="m_datepicker_1" ng-model="StartDate" value="{{StartDate}}"   />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -69,7 +69,7 @@
                                                     <label for="example-text-input" class="col-xl-4 col-lg-4 col-md-2 col-form-label">Till Date<span class="required-star" style="color:red">*</span></label>
                                                     <div class="col-xl-8 col-lg-8">
                                                          <div class="input-group date">
-                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2" ng-model="EndDate" value="{{EndDate}}"  required />
+                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2" ng-model="EndDate" value="{{EndDate}}"   />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -86,12 +86,12 @@
 
                                     <div class="m-portlet__foot">
                                         <div class="row m-0 justify-content-end">
-                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(TermID,TermCommID)">
-                                                <i class="fa fa-save"> </i>   Save
+                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-disabled="btns" ng-click="Add(TermID)">
+                                                <i class="fa fa-save"> </i>   Save<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
 
-                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="AddUpdate(TermID,TermCommID)">
-                                                <i class="fa fa-save"> </i>   Update
+                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-disabled="btnu" ng-click="AddUpdate(TermID,TermCommID)">
+                                                <i class="fa fa-save"> </i>   Update<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
                                             <button class="btn btn-secondary" ng-click="Clear()">
                                                 <i class="fa fa-times"> </i>  Cancel

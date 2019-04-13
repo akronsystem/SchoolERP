@@ -1,13 +1,17 @@
 ﻿var app = angular.module('ERP').controller('SMTPController', SMTPController);
 
-function SMTPController($scope, Service) {
+function SMTPController($scope, Service, $timeout) {
 
-    var form = $(".student-admission-wrapper");
+    var form = $(".m-form--label-align-right");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.ispassword = true;
     $scope.btnactive = 1;
-
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.Initialize = function () {
         debugger;
@@ -44,6 +48,7 @@ function SMTPController($scope, Service) {
             $scope.Host = result.data.ResultData.Host;
             $scope.Secure = result.data.ResultData.Secure; 
             $scope.UserName = result.data.ResultData.UserName;
+            $scope.Password = result.data.ResultData.Password;
             // $scope.Students = result.data.ResultData;
 
             $scope.Initialize();
@@ -67,68 +72,91 @@ function SMTPController($scope, Service) {
         $scope.Host = null;
         $scope.UserName = null;
         $scope.Password = null;
-        $scope.IsVisible = false;
+        //$scope.IsVisible = false;
+         window.location.reload();
         // $scope.Initialize();
     }
-    $scope.Add = function (ConfigurationID, Port, Secure, Host, UserName, Password) {
+    $scope.Add = function () {       
+
         var data = {
-            ConfigurationID: ConfigurationID,
-            Port: Port,
-            Secure: Secure,
-            Host: Host,
-            UserName: UserName,
-            Password: Password
+            ConfigurationID: $scope.ConfigurationID,
+            Port: $scope.Port,
+            Secure: $scope.Secure,
+            Host: $scope.Host,
+            UserName: $scope.UserName,
+            Password: $scope.Password
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SMTP/AddSMTP", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("SMTP/AddSMTP", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();                
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
 
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                        //$scope.clear();
+                        //window.location = "./PostGrievance"
+                    }
 
-            });
+                });
+            }, 3000);
         }
+      
     }
 
-    $scope.AddUpdate = function (ConfigurationID, Port, Secure, Host, UserName) {
+    $scope.AddUpdate = function () {
+        
         var data = {
-            ConfigurationID: ConfigurationID,
-            Port: Port,
-            Secure: Secure,
-            Host: Host,
-            UserName: UserName
+            ConfigurationID: $scope.ConfigurationID,
+            Port: $scope.Port,
+            Secure: $scope.Secure,
+            Host: $scope.Host,
+            UserName: $scope.UserName
            
         };
-       
-            Service.Post("SMTP/UpdateSMTP", JSON.stringify(data)).then(function (response) {
+        if ($scope.form.$valid) {
+            $scope.btnu = true;
 
-                if (response.data.IsSucess) {
-                    debugger;
-                     CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                 }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                  
-                }
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-            });
+                $scope.btnValue = "SAVE";
+                Service.Post("SMTP/UpdateSMTP", JSON.stringify(data)).then(function (response) {
+
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+
+                    }
+
+                });
+            }, 3000);
+        }
         
     }
 

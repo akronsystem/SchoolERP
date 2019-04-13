@@ -1,11 +1,16 @@
 ﻿angular.module('ERP').controller('DivisionController', DivisionController);
-function DivisionController($scope, Service)
+function DivisionController($scope, Service, $timeout)
 {
     $scope.UserCredentialModel = {};
     $scope.MainDiv = false;
     $scope.btnUpdate = false;
     $scope.btnSave = true;
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     //Display
 
@@ -39,21 +44,30 @@ function DivisionController($scope, Service)
 
         };
         if ($scope.form.$valid) {
-            Service.Post("Division/AddDivision", JSON.stringify(data)).then(function (response) {
-                $scope.MainDiv = false;
-                $scope.btnUpdate = false;
-                $scope.btnSave = true;
-                if (response.data.IsSucess) {
-                    $scope.Initialize();
-                    alert(response.data.ResultData);
-                }
-                else {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("Division/AddDivision", JSON.stringify(data)).then(function (response) {
+                    $scope.MainDiv = false;
+                    $scope.btnUpdate = false;
+                    $scope.btnSave = true;
+                    if (response.data.IsSucess) {
+                        CustomizeApp.AddMessage();
+                        $scope.Initialize();
+                        
+                    }
+                    else {
 
 
-                    alert(response.data.ResultData);
-                }
+                        ShowMessage(0, response.data.Message);
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
     //code for get single standard
@@ -91,27 +105,35 @@ function DivisionController($scope, Service)
 
         };
         if ($scope.form.$valid) {
-            Service.Post("Division/UpdateDivision", JSON.stringify(data)).then(function (response) {
-                $scope.btnUpdate = true;
-                $scope.btnSave = false;
-                $scope.AddDiv = false;
-                if (response.data.IsSucess) {
-                    debugger;
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
+
+                $scope.btnValue = "SAVE";
+                Service.Post("Division/UpdateDivision", JSON.stringify(data)).then(function (response) {
+                    $scope.btnUpdate = true;
+                    $scope.btnSave = false;
+                    $scope.AddDiv = false;
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.UpdateMessage();
+                        $scope.Initialize();
+
+                        
 
 
-                    $scope.Initialize();
+                    }
+                    else {
+                        debugger;
 
-                    alert(response.data.ResultData);
+                        ShowMessage(0, response.data.Message);
+                    }
 
-
-                }
-                else {
-                    debugger;
-
-                    alert(response.data.Message);
-                }
-
-            });
+                });
+            }, 3000);
         }
     }
     $scope.Clear = function () {

@@ -1,11 +1,16 @@
 ﻿var app = angular.module('ERP').controller('ShiftController', ShiftController);
 
-function ShiftController($scope, Service) {
+function ShiftController($scope, Service, $timeout) {
 
     var form = $(".student-admission-wrapper");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
 
     $scope.Initialize = function () {
@@ -62,68 +67,86 @@ function ShiftController($scope, Service) {
        $scope.Initialize();
     }
     $scope.Add = function (ShiftID, ShiftName) {
+       
         var data = {
             ShiftID: ShiftID,
             ShiftName: ShiftName
 
         };
         if ($scope.form.$valid) {
-            Service.Post("ShiftMaster/AddShift", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("ShiftMaster/AddShift", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
-                   CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+                        //alert(response.data.ResultData);
+                        // window.location = "./ParentGrievance"
 
-                    //alert(result.data);
+                        //alert(result.data);
 
-                }
-                else {
-                    debugger;
-                   ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                        //$scope.clear();
+                        //window.location = "./PostGrievance"
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 
     $scope.AddUpdate = function (ShiftID, ShiftName) {
+       
         var data = {
             ShiftID: ShiftID,
             ShiftName: ShiftName
 
         };
         if ($scope.form.$valid) {
-            Service.Post("ShiftMaster/UpdateShift", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("ShiftMaster/UpdateShift", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+                        //alert(response.data.ResultData);
+                        // window.location = "./ParentGrievance"
 
-                    //alert(result.data);
+                        //alert(result.data);
 
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                        //$scope.clear();
+                        //window.location = "./PostGrievance"
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 

@@ -1,12 +1,16 @@
 ﻿angular.module('ERP').controller('StdWiseDivisionController', StdWiseDivisionController);
-function StdWiseDivisionController($scope, Service) {
+function StdWiseDivisionController($scope, Service, $timeout) {
 
     $scope.UserCredentialModel = {};
     $scope.ViewGetStudentInfoes = {};
     $scope.btnactive = 1;
     $scope.TempId = {};
     $scope.Status = 1;
-
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.chkvalue = 0;
     //Hide Show Div
@@ -76,20 +80,28 @@ function StdWiseDivisionController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("StdWiseDivision/AddStdWiseDivision", JSON.stringify(data)).then(function (response) {
-                $scope.MainDiv = false;
-                $scope.btnUpdate = false;
-                $scope.btnSave = true;
-                if (response.data.IsSucess) {
-                    CustomizeApp.AddMessage();
-                    $scope.Initialize();
-                 
-                }
-                else {
-                    ShowMessage(0, response.data.Message);
-                }
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("StdWiseDivision/AddStdWiseDivision", JSON.stringify(data)).then(function (response) {
+                    $scope.MainDiv = false;
+                    $scope.btnUpdate = false;
+                    $scope.btnSave = true;
+                    if (response.data.IsSucess) {
+                        CustomizeApp.AddMessage();
+                        $scope.Initialize();
 
-            });
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+                    }
+
+                });
+            }, 3000);
         }
     }
 
@@ -180,26 +192,35 @@ function StdWiseDivisionController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            if (data.DivisionID == "") {
-                data.DivisionID = $scope.TempId;
-            }
-            Service.Post("StdWiseDivision/UpdateStdDiv", JSON.stringify(data)).then(function (response) {
-                $scope.btnUpdate = true;
-                $scope.btnSave = false;
-                $scope.MainDiv = false;
-                if (response.data.IsSucess) {
-                    CustomizeApp.UpdateMessage();
-                    $scope.StandardId = null;
-                    $scope.DivisionID = null;
-                    $scope.BoardID = null;
-                    $scope.Initialize();
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
+                $scope.btnValue = "SAVE";
+                if (data.DivisionID == "") {
+                    data.DivisionID = $scope.TempId;
                 }
-                else {
-                    ShowMessage(0, response.data.Message);
-                }
+                Service.Post("StdWiseDivision/UpdateStdDiv", JSON.stringify(data)).then(function (response) {
+                    $scope.btnUpdate = true;
+                    $scope.btnSave = false;
+                    $scope.MainDiv = false;
+                    if (response.data.IsSucess) {
+                        CustomizeApp.UpdateMessage();
+                        $scope.StandardId = null;
+                        $scope.DivisionID = null;
+                        $scope.BoardID = null;
+                        $scope.Initialize();
 
-            });
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+                    }
+
+                });
+            }, 3000);
         }
     }
 
