@@ -1,12 +1,14 @@
 ﻿var app = angular.module('ERP').controller('BoardController', BoardController);
 
-function BoardController($scope, Service) {
+function BoardController($scope, Service, $timeout) {
 
     var form = $(".student-admission-wrapper");
+    $scope.myText = "/Content/Loader.gif";
+    $scope.isCheck = true;
+    $scope.btnValue = "SAVE";
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
-
 
     $scope.Initialize = function () {
         debugger;
@@ -51,6 +53,7 @@ function BoardController($scope, Service) {
         $scope.btnUpdate = false;
         $scope.btnSave = true;
         $scope.IsVisible = true;
+        $scope.isCheck = true;
     }
 
 
@@ -68,27 +71,31 @@ function BoardController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SchoolMaster/AddBoard", JSON.stringify(data)).then(function (response) {
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("SchoolMaster/AddBoard", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
+                    if (response.data.IsSucess) {
+                        debugger;
 
 
-                    CustomizeApp.AddMessage();
-                     $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                        CustomizeApp.AddMessage();
+                        window.location.reload();
+                       
+                       
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                       
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 
@@ -103,25 +110,15 @@ function BoardController($scope, Service) {
 
                 if (response.data.IsSucess) {
                     debugger;
-
-
-
                     CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
+                    window.location.reload();
+                   
 
                 }
                 else {
                     debugger;
                     ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
+                   
                 }
 
             });

@@ -98,7 +98,7 @@
                                                 <input type="text" value={{UserName}} ng-model="UserName" id="username" name="username" class="form-control m-input" autocomplete="off" required />
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group mb-3 row" ng-show="password">
+                                        <div class="form-group m-form__group mb-3 row" ng-show="ispassword">
                                             <label for="example-text-input" class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-form-label">Password<span class="required-star" style="color:red">*</span></label>
                                             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
                                                 <input type="password" value={{Password}} ng-model="Password" id="password" name="password"  class="form-control m-input" autocomplete="off" required />
@@ -109,12 +109,12 @@
 
                                     <div class="m-portlet__foot">
                                         <div class="row m-0 justify-content-end">
-                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(ConfigurationID,Port,Secure,Host,UserName,Password)">
-                                                <i class="fa fa-save"> </i>   Save
+                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-disabled="btns" ng-click="Add()">
+                                                <i class="fa fa-save"> </i>   Save<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
 
-                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="AddUpdate(ConfigurationID,Port,Secure,Host,UserName,Password)">
-                                                <i class="fa fa-save"> </i>   Update
+                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-disabled="btnu" ng-click="AddUpdate()">
+                                                <i class="fa fa-save"> </i>   Update<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
                                             <button class="btn btn-secondary" ng-click="Clear()">
                                                 <i class="fa fa-times"> </i>  Cancel

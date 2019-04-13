@@ -1,11 +1,16 @@
 ﻿var app = angular.module('ERP').controller('UnitController', UnitController);
 
-function UnitController($scope, Service) {
+function UnitController($scope, Service, $timeout) {
 
     var form = $(".m-form m-form--fit m-form--label-align-right");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
 
     $scope.Initialize = function () {
@@ -74,23 +79,31 @@ function UnitController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("TermMaster/AddUnit", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("TermMaster/AddUnit", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                   
-                }
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
 
-            });
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+
+                    }
+
+                });
+            }, 3000);
         }
     }
 
@@ -102,23 +115,32 @@ function UnitController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("TermMaster/UpdateUnit", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                   
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                  
-                }
+                $scope.btnValue = "SAVE";
+                Service.Post("TermMaster/UpdateUnit", JSON.stringify(data)).then(function (response) {
 
-            });
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+
+                    }
+
+                });
+            }, 3000);
         }
     }
 

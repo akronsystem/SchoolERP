@@ -50,12 +50,12 @@
 
                                     <div class="m-portlet__foot">
                                         <div class="row m-0 justify-content-end">
-                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(DivisionName)">
-                                                <i class="fa fa-save"> </i>   Save
+                                            <button class="btn btn-primary" ng-show="btnSave" ng-disabled="btns" ng-model="Save" ng-click="Add(DivisionName)">
+                                                <i class="fa fa-save"> </i>   Save<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
 
-                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="Update(DivisionID,DivisionName)">
-                                                <i class="fa fa-save"> </i>   Update
+                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-disabled="btnu" ng-click="Update(DivisionID,DivisionName)">
+                                                <i class="fa fa-save"> </i>   Update<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
                                             <button class="btn btn-secondary" ng-click="Clear()">
                                                 <i class="fa fa-times"> </i>  Cancel
@@ -150,6 +150,9 @@
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/DivMaster/Division.js")"></script>
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
+    <script src="~/Areas/Scripts/CommonScript/bootbox.min.js"></script>
     <script>
                 var baseURL = "@ConfigurationManager.AppSettings["BaseUrlPath"].ToString()";
     </script>

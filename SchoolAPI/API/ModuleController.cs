@@ -7,10 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http; 
-using SchoolAPI.BusinessLayer;
-using SchoolAPI.Param;
 using SchoolAPI.Param.SchoolAPI.Param;
-using SchoolAPI.ResultModel; 
 
 namespace SchoolAPI.API
 {

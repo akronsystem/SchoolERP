@@ -1,11 +1,16 @@
 ﻿var app = angular.module('ERP').controller('TermCommencementController', TermCommencementController);
 
-function TermCommencementController($scope, Service) {
-
+function TermCommencementController($scope, Service, $timeout) {
+    
     var form = $(".m-form m-form--fit m-form--label-align-right");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
 
     $scope.Initialize = function () {
@@ -70,33 +75,40 @@ function TermCommencementController($scope, Service) {
         $scope.EndDate = "";
 
     }
-    $scope.Add = function (TermID, TermCommID) {
+    $scope.Add = function (TermID) {
         debugger
         var StartDate = $('#m_datepicker_1').val();
         var EndDate = $('#m_datepicker_2').val();
         var data = {
             TermID: TermID,
-            TermCommID: TermCommID,
-            StartDate: StartDate,
+             StartDate: StartDate,
             EndDate: EndDate
 
         };
         if ($scope.form.$valid) {
-            Service.Post("TermMaster/AddTermCommencement", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("TermMaster/AddTermCommencement", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    
-                }
-                else {
-                   ShowMessage(0, response.data.Message);
-                  
-                }
+                    if (response.data.IsSucess) {
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
 
-            });
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+
+                    }
+
+                });
+            }, 3000);
         }
     }
 
@@ -111,21 +123,30 @@ function TermCommencementController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("TermMaster/UpdateTermCommencement", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-                if (response.data.IsSucess) {
-                   CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                   
-                }
-                else {
-                   ShowMessage(0, response.data.Message);
-                  
-                }
+                $scope.btnValue = "SAVE";
+                Service.Post("TermMaster/UpdateTermCommencement", JSON.stringify(data)).then(function (response) {
 
-            });
+                    if (response.data.IsSucess) {
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+
+                    }
+
+                });
+            }, 3000);
         }
     }
 

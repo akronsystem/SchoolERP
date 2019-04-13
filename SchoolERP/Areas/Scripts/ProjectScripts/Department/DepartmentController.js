@@ -1,11 +1,16 @@
 ﻿var app = angular.module('ERP').controller('DepartmentController', DepartmentController);
 
-function DepartmentController($scope, Service) {
+function DepartmentController($scope, Service, $timeout) {
 
     var form = $(".student-admission-wrapper");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
 
     $scope.Initialize = function () {
@@ -66,22 +71,31 @@ function DepartmentController($scope, Service) {
             BtnStatus: BtnStatus
         };
         if ($scope.form.$valid) {
-            Service.Post("Department/SaveDepartment", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("Department/SaveDepartment", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                   
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                   
-                }
-            });
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+
+                    }
+                });
+            }, 3000);
         }
     }
 

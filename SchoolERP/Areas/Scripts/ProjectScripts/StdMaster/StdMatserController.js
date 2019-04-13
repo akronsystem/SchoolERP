@@ -1,5 +1,5 @@
 ﻿angular.module('ERP').controller('StandardController', StandardController);
-function StandardController($scope, Service) {
+function StandardController($scope, Service, $timeout) {
 
    
 
@@ -7,7 +7,11 @@ function StandardController($scope, Service) {
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
-   
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
 
     //code for Display all data
@@ -41,21 +45,29 @@ function StandardController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("Standard/SaveStandard", JSON.stringify(data)).then(function (response) {
-                $scope.AddDiv = false;
-                $scope.btnUpdate = false;
-                $scope.btnSave = true;
-                if (response.data.IsSucess) {
-                    $scope.Initialize();
-                    CustomizeApp.AddMessage();
-                }
-                else {
-                    
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("Standard/SaveStandard", JSON.stringify(data)).then(function (response) {
+                    $scope.AddDiv = false;
+                    $scope.btnUpdate = false;
+                    $scope.btnSave = true;
+                    if (response.data.IsSucess) {
+                        $scope.Initialize();
+                        CustomizeApp.AddMessage();
+                    }
+                    else {
 
-                    ShowMessage(0, response.data.Message);
-                }
 
-            });
+                        ShowMessage(0, response.data.Message);
+                    }
+
+                });
+            }, 3000);
         }
     }
     //code for get single standard
@@ -94,22 +106,31 @@ function StandardController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("Standard/UpdateStandard", JSON.stringify(data)).then(function (response) {
-                $scope.btnUpdate = true;
-                $scope.btnSave = false;
-                $scope.AddDiv = false;
-                if (response.data.IsSucess) {
-                    debugger;
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-                   
-                    $scope.Initialize();                 
-                    CustomizeApp.UpdateMessage();
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                }
-            });
+                $scope.btnValue = "SAVE";
+                Service.Post("Standard/UpdateStandard", JSON.stringify(data)).then(function (response) {
+                    $scope.btnUpdate = true;
+                    $scope.btnSave = false;
+                    $scope.AddDiv = false;
+                    if (response.data.IsSucess) {
+                        debugger;
+
+
+                        $scope.Initialize();
+                        CustomizeApp.UpdateMessage();
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                    }
+                });
+            }, 3000);
         }
     }
     //Code For Delete

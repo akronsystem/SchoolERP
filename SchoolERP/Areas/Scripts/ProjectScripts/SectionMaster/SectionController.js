@@ -1,9 +1,14 @@
 ﻿angular.module('ERP').controller('SectionController', SectionController);
-function SectionController($scope, Service) {
+function SectionController($scope, Service, $timeout) {
 
     $scope.UserCredentialModel = {};
     $scope.ViewGetStandardInfoes = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
     //Hide Show Div
     $scope.ShowHideSave = function () {
         $scope.MainDiv = true;
@@ -32,24 +37,32 @@ function SectionController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SectionMaster/AddSection", JSON.stringify(data)).then(function (response) {
-                $scope.MainDiv = false;
-                $scope.btnUpdate = false;
-                $scope.btnSave = true;
-                if (response.data.IsSucess) {
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.Initialize();
-                   
-                    
-                }
-                else {
-                    ShowMessage(0, response.data.Message);
-                    $scope.Clear();
-                    $scope.Initialize();
-                }
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("SectionMaster/AddSection", JSON.stringify(data)).then(function (response) {
+                    $scope.MainDiv = false;
+                    $scope.btnUpdate = false;
+                    $scope.btnSave = true;
+                    if (response.data.IsSucess) {
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.Initialize();
 
-            });
+
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+                        $scope.Clear();
+                        $scope.Initialize();
+                    }
+
+                });
+            }, 3000);
         }
     }
     //code for Get Single Value
@@ -89,24 +102,33 @@ function SectionController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SectionMaster/UpdateSection", JSON.stringify(data)).then(function (response) {
-                $scope.btnUpdate = true;
-                $scope.btnSave = false;
-                $scope.MainDiv = false;
-                if (response.data.IsSucess) {
-                    debugger;
-                    CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                }
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-            });
+                $scope.btnValue = "SAVE";
+                Service.Post("SectionMaster/UpdateSection", JSON.stringify(data)).then(function (response) {
+                    $scope.btnUpdate = true;
+                    $scope.btnSave = false;
+                    $scope.MainDiv = false;
+                    if (response.data.IsSucess) {
+                        debugger;
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.Initialize();
+                        //alert(response.data.ResultData);
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                    }
+
+                });
+            }, 3000);
         }
     }
 

@@ -1,12 +1,17 @@
 ﻿var app = angular.module('ERP').controller('AchievementTypeMasterController', AchievementTypeMasterController);
 
-function AchievementTypeMasterController($scope, Service)
+function AchievementTypeMasterController($scope, Service,$timeout)
 {
     var form = $(".student-admission-wrapper");
     
     $scope.UserCredentialModel = {};
     $scope.AchievementTypeMasterList = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.Initialize = function () {
       
@@ -56,19 +61,25 @@ function AchievementTypeMasterController($scope, Service)
             AchievementType: AchievementType
         };
         if ($scope.form.$valid) {
-            Service.Post("AchievementTypeMaster/AddAchievementTypeMaster", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("AchievementTypeMaster/AddAchievementTypeMaster", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    CustomizeApp.AddMessage();
-                }
-                else {
-                    ShowMessage(0, response.data.Message);
-                }
+                    if (response.data.IsSucess) {                      
+                        $scope.Initialize();
+                        CustomizeApp.AddMessage();
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 
@@ -79,21 +90,31 @@ function AchievementTypeMasterController($scope, Service)
             AchievementType: AchievementType
         };
         if ($scope.form.$valid) {
-            Service.Post("AchievementTypeMaster/UpdateAchievementTypeMaster", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-                if (response.data.IsSucess) {
-                   
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    CustomizeApp.UpdateMessage();
-                }
-                else {
-                   
-                    ShowMessage(0, response.data.Message);
-                }
+                $scope.btnValue = "SAVE";
+                Service.Post("AchievementTypeMaster/UpdateAchievementTypeMaster", JSON.stringify(data)).then(function (response) {
 
-            });
+                    if (response.data.IsSucess) {
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        //$scope.IsVisible = false;
+                        $scope.Initialize();
+                        //window.location.reload();
+                        
+                    }
+                    else {
+
+                        ShowMessage(0, response.data.Message);
+                    }
+
+                });
+            }, 3000);
         }
     }
     
