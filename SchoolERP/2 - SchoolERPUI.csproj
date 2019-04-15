@@ -185,6 +185,7 @@
     <Content Include="Areas\Scripts\ProjectScripts\Widget\AssignWidgetController.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Widget\Widget.js" />
     <Content Include="Areas\Scripts\ProjectScripts\Widget\WidgetModule.js" />
+    <Content Include="Content\3.gif" />
     <Content Include="Content\angularjs\plugins\ng-table\css\ng-table.min.css" />
     <Content Include="Content\angularjs\plugins\ng-table\js\ng-table.min.js" />
     <Content Include="Content\angularjs\scripts\angular.min.js" />
@@ -491,6 +492,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Loader.gif" />
+    <Content Include="Content\Loader2.gif" />
+    <Content Include="Content\Loader4.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\CommonScript\Service.js" />

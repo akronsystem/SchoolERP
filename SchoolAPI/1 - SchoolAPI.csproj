@@ -112,6 +112,7 @@
     <Compile Include="API\AssignWidgetController.cs" />
     <Compile Include="API\BoardController.cs" />
     <Compile Include="API\CasteController.cs" />
+    <Compile Include="API\CommiteeMasterController.cs" />
     <Compile Include="API\DepartmentController.cs" />
     <Compile Include="API\DivisionController.cs" />
     <Compile Include="API\EmployeeMasterController.cs" />
