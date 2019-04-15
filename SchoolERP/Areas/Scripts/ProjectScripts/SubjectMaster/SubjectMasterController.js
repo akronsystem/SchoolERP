@@ -1,9 +1,15 @@
 ﻿angular.module('ERP').controller('SubjectMasterController', SubjectMasterController);
-function SubjectMasterController($scope, Service) {
+function SubjectMasterController($scope, Service,$timeout) {
 
     $scope.UserCredentialModel = {};
     $scope.ViewGetStandardInfoes = {};
     $scope.btnactive = 1;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
+
     //Hide Show Div
     $scope.ShowHideSave = function () {
         $scope.MainDiv = true;
@@ -33,21 +39,29 @@ function SubjectMasterController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SubjectMaster/AddSubject", JSON.stringify(data)).then(function (response) {
-                $scope.MainDiv = false;
-                $scope.btnUpdate = false;
-                $scope.btnSave = true;
-                if (response.data.IsSucess) {
-                    $scope.Initialize();
-                    CustomizeApp.AddMessage();
-                }
-                else {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("SubjectMaster/AddSubject", JSON.stringify(data)).then(function (response) {
+                    $scope.MainDiv = false;
+                    $scope.btnUpdate = false;
+                    $scope.btnSave = true;
+                    if (response.data.IsSucess) {
+                        $scope.Initialize();
+                        CustomizeApp.AddMessage();
+                    }
+                    else {
 
 
-                    ShowMessage(0, response.data.Message);
-                }
+                        ShowMessage(0, response.data.Message);
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
     //code for Get Single Value
@@ -90,27 +104,36 @@ function SubjectMasterController($scope, Service) {
 
         };
         if ($scope.form.$valid) {
-            Service.Post("SubjectMaster/UpdateSingleSubject", JSON.stringify(data)).then(function (response) {
-                $scope.btnUpdate = true;
-                $scope.btnSave = false;
-                $scope.MainDiv = false;
-                if (response.data.IsSucess) {
-                    debugger;
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
+
+                $scope.btnValue = "SAVE";
+                Service.Post("SubjectMaster/UpdateSingleSubject", JSON.stringify(data)).then(function (response) {
+                    $scope.btnUpdate = true;
+                    $scope.btnSave = false;
+                    $scope.MainDiv = false;
+                    if (response.data.IsSucess) {
+                        debugger;
 
 
-                    $scope.Initialize();
+                        $scope.Initialize();
 
-                    CustomizeApp.UpdateMessage();
+                        CustomizeApp.UpdateMessage();
 
 
-                }
-                else {
-                    debugger;
+                    }
+                    else {
+                        debugger;
 
-                    ShowMessage(0, response.data.Message);
-                }
+                        ShowMessage(0, response.data.Message);
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 

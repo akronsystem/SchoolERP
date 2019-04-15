@@ -13,7 +13,7 @@ namespace SchoolAPI.Models
 
         public int? Port { get; set; }
 
-        [StringLength(5)]
+        [StringLength(50)]
         public string Secure { get; set; }
 
         [StringLength(50)]

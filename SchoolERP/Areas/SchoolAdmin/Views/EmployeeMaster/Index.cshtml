@@ -1164,25 +1164,28 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="col-lg-6 m--align-right">
+                                                <div class="col-lg-6 m--align-right" style="display:inline;">
                                                  
 
-                                                    <div class="m--align-right" ng-show="BTNSAVE">
+                                                    <div class="m--align-right" ng-show="BTNSAVE" >
                                                         
-                                                        <button type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit" ng-click="Add(ImagePath,Sign)">
+                                                        <button type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon" ng-disabled="btns" data-wizard-action="submit" ng-click="Add(ImagePath,Sign)">
                                                             <span>
                                                                 <i class="la la-check"></i>&nbsp;&nbsp;
                                                                 <span>Submit</span>
+                                                                
                                                             </span>
+                                                            <p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                                         </button>
                                                     </div>
                                                     <div class="m--align-right" ng-show="btnupdate">
                                                        
-                                                        <button type="submit" class="btn btn-secondary m-btn m-btn--custom m-btn--icon"  data-wizard-action="submit" ng-click="Update()">
+                                                        <button type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon" ng-disabled="btnu"  data-wizard-action="submit" ng-click="Update()">
                                                             <span>
                                                                 <i class="la la-check"></i>&nbsp;&nbsp;
                                                                 <span>Update</span>
                                                             </span>
+                                                            <p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                                         </button>
                                                     </div>
                                                   

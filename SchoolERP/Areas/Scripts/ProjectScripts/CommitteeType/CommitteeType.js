@@ -1,12 +1,16 @@
 ﻿var app = angular.module('ERP').controller('CommitteeTypeController', CommitteeTypeController);
 
-function CommitteeTypeController($scope, Service) {
+function CommitteeTypeController($scope, Service, $timeout) {
 
     var form = $(".student-admission-wrapper");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
-
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.Initialize = function () {
         debugger;
@@ -58,78 +62,79 @@ function CommitteeTypeController($scope, Service) {
 
         $scope.CommitteeType = null;
         $scope.CommitteeTypeId = null;
-        $scope.IsVisible = false;
+        window.location.reload();
+        //$scope.IsVisible = false;
         // $scope.Initialize();
     }
     $scope.Add = function (CommitteeTypeId, CommitteeType) {
+      
         var data = {
             CommitteeTypeId: CommitteeTypeId,
             CommitteeType: CommitteeType
 
         };
         if ($scope.form.$valid) {
-            Service.Post("CommiteeMaster/AddCommitteeType", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("CommiteeMaster/AddCommitteeType", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
+                    if (response.data.IsSucess) {
+                        CustomizeApp.AddMessage();
+                        $scope.IsVisible = false;
+                        //$scope.Initialize();
+                        $scope.Clear();
+                      
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        
+                    }
 
-
-
-                    //CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
-                }
-                else {
-                    debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
-
-            });
+                });
+            }, 3000);
         }
     }
 
     $scope.AddUpdate = function (CommitteeTypeId, CommitteeType) {
+       
         var data = {
             CommitteeTypeId: CommitteeTypeId,
             CommitteeType: CommitteeType
 
         };
         if ($scope.form.$valid) {
-            Service.Post("CommiteeMaster/UpdateCommitteType", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnUpdate = false;
 
-                if (response.data.IsSucess) {
-                    debugger;
+                $scope.btnValue = "SAVE";
+                Service.Post("CommiteeMaster/UpdateCommitteType", JSON.stringify(data)).then(function (response) {
 
+                    if (response.data.IsSucess) {
+                        CustomizeApp.UpdateMessage();                     
+                        //$scope.IsVisible = false;
+                        //$scope.Initialize();
+                        $scope.Clear();
+                      
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                       
+                    }
 
+                });
 
-                    //CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
-
-                    //alert(result.data);
-
-                }
-                else {
-                    debugger;
-                    //ShowMessage(0, response.data.Message);
-                    alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
-
-            });
+            }, 3000);
         }
     }
 
@@ -152,9 +157,10 @@ function CommitteeTypeController($scope, Service) {
             Service.Post("CommiteeMaster/DeleteCommitteType", JSON.stringify(data)).then(function (response) {
 
                 debugger;
-                if (response.data)
+                if (response.data.IsSucess) {
                     $scope.Initialize();
-                alert(response.data.ResultData);
+                    alert(response.data.ResultData);
+                }
             });
         }
         $scope.Clear();

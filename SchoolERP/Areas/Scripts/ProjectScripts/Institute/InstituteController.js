@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ERP').controller('EmployeeController', EmployeeController);
 
-function EmployeeController($scope, Service) {
+function EmployeeController($scope, Service, $timeout) {
     var form = $(".m-form m-form--label-align-left- m-form--state-");
     $scope.ViewGetStudentInfoes = {};
     $scope.btnactive = 1;
@@ -9,7 +9,11 @@ function EmployeeController($scope, Service) {
     $scope.Visible = true;
     $scope.btnupdate = true;
     $scope.SaveSubmit = true;
-
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.Initialize = function () {
         debugger;
@@ -98,7 +102,13 @@ function EmployeeController($scope, Service) {
             AccountNumber: $scope.AccountNumber,
 
         }    
-          
+        $scope.btns = true;
+        $scope.isCheck = false;
+        $scope.btnValue = "SAVING.........";
+        $timeout(function () {
+            $scope.isCheck = true;
+            $scope.SaveSubmit = true;
+            $scope.btnValue = "SAVE";
             Service.Post("Institute/AddInstitute", JSON.stringify(InstituteData)).then(function (response) {
                 debugger;
                 if (response.data.IsSucess) {
@@ -111,6 +121,7 @@ function EmployeeController($scope, Service) {
                     $scope.Visible = true;
                 }
             });
+        }, 3000);
        
     }
     $scope.AddressAdd = function (AddressData)
@@ -251,17 +262,25 @@ function EmployeeController($scope, Service) {
         var LogoData = {
             InstituteId: $scope.InstituteId
         }
-         
-        Service.Post("Institute/UpdateInstitute", JSON.stringify(InstituteData)).then(function (response) {
-            if (response.data.IsSucess) {
-                $scope.UpdateAddressDetail(AddressData);
-                $scope.UpdateBankDetail(BankData);
-                $scope.UpdateLogoDetail(LogoData);
-                CustomizeApp.UpdateMessage();
-            }
+        $scope.btnu = true;
+        $scope.isCheck = false;
+        $scope.btnValue = "SAVING.........";
+        $timeout(function () {
+            $scope.isCheck = true;
+            $scope.btnUpdate = true;
+
+            $scope.btnValue = "SAVE";
+            Service.Post("Institute/UpdateInstitute", JSON.stringify(InstituteData)).then(function (response) {
+                if (response.data.IsSucess) {
+                    $scope.UpdateAddressDetail(AddressData);
+                    $scope.UpdateBankDetail(BankData);
+                    $scope.UpdateLogoDetail(LogoData);
+                    CustomizeApp.UpdateMessage();
+                }
 
 
-        });
+            });
+        }, 3000);
         $scope.Initialize();
         $scope.IsVisible = false;
         $scope.Visible = true;

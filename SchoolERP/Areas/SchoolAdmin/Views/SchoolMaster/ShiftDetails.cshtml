@@ -90,12 +90,12 @@
 
                                     <div class="m-portlet__foot">
                                         <div class="row m-0 justify-content-end">
-                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(ShiftDetailID,ShiftID)">
-                                                <i class="fa fa-save"> </i>   Save
+                                            <button class="btn btn-primary" ng-show="btnSave" ng-disabled="btns" ng-model="Save" ng-click="Add(ShiftDetailID,ShiftID)">
+                                                <i class="fa fa-save"> </i>   Save<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
 
-                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-click="AddUpdate(ShiftDetailID,ShiftID)">
-                                                <i class="fa fa-save"> </i>   Update
+                                            <button class="btn btn-primary" ng-show="btnUpdate" ng-model="Update" ng-disabled="btnu" ng-click="AddUpdate(ShiftDetailID,ShiftID)">
+                                                <i class="fa fa-save"> </i>   Update<p ng-hide="isCheck" style="display:inline;">    <img src="{{ myText }}" alt="images" style="height:19px;" /></p>
                                             </button>
                                             <button class="btn btn-secondary" ng-click="Clear()">
                                                 <i class="fa fa-times"> </i>  Cancel

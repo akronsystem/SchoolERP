@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ERP').controller('EmployeeController', EmployeeController);
 
-function EmployeeController($scope, Service, $window) {
+function EmployeeController($scope, Service, $window, $timeout) {
 
     var form = $(".student-admission-wrapper");
     $scope.ViewGetStudentInfoes = {};
@@ -31,6 +31,11 @@ function EmployeeController($scope, Service, $window) {
     $scope.SaveContinue = true;
     $scope.UpdateContin = false;
     $scope.AddContin = true;
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
     $scope.Initialize = function () {
         debugger;
         Data = {
@@ -777,33 +782,40 @@ function EmployeeController($scope, Service, $window) {
         payload.append("Sign", $scope.Sign);
        // $scope.EducationDetail();
          if ($scope.form.$valid) {
+             $scope.btns = true;
+             $scope.isCheck = false;
+             $scope.btnValue = "SAVING.........";
+             $timeout(function () {
+                 $scope.isCheck = true;
+                 $scope.BTNSAVE = true;
+                 $scope.btnValue = "SAVE";
+                 Service.PostFile("EmployeeMaster/AddEmployee", payload).then(function (response) {
+                     debugger;
 
-            Service.PostFile("EmployeeMaster/AddEmployee", payload).then(function (response) {
-                debugger;
-              
-                if (response.data.IsSucess) {
-                    debugger;
-                    $scope.SaveAddressDetail(AddressDetails);
-                    $scope.BankDetail(BankDetails);
-                    $scope.EducationDetail();
-                    $scope.AppointmentDetail(AppointmentDetails);    
-                    $scope.DocumentDetailSave();
-                    $scope.ExperienceDetail();
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    Initialize
-                   
-                    // window.location = "./ParentGrievance"
+                     if (response.data.IsSucess) {
+                         debugger;
+                         $scope.SaveAddressDetail(AddressDetails);
+                         $scope.BankDetail(BankDetails);
+                         $scope.EducationDetail();
+                         $scope.AppointmentDetail(AppointmentDetails);
+                         $scope.DocumentDetailSave();
+                         $scope.ExperienceDetail();
+                         CustomizeApp.AddMessage();
+                         $scope.Clear();
+                         Initialize
 
-                    //alert(result.data);
+                         // window.location = "./ParentGrievance"
 
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                       }
+                         //alert(result.data);
 
-            });
+                     }
+                     else {
+                         debugger;
+                         ShowMessage(0, response.data.Message);
+                     }
+
+                 });
+             }, 3000);
         }
     }
     $scope.SaveAddressDetail = function (AddressDetails) {
@@ -1153,25 +1165,34 @@ function EmployeeController($scope, Service, $window) {
         payload.append("ImagePath", $scope.ImagePath);
         payload.append("Sign", $scope.Sign);
         //$scope.UpdateExperienceDetail();
-       
-        Service.PostFile("EmployeeMaster/UpdateEmployee", payload).then(function (response) {
-            if (response.data.IsSucess) {
-                $scope.UpdateAddressDetail(EmployeeAddressDetails);
-                $scope.UpdateEducationDetail(Data);
-                $scope.UpdateAppointmentDetail(AppointmentDetails);
-                $scope.UpdateBankDetail(BankDetails);
-                $scope.UpdateExperienceDetail();
-                CustomizeApp.UpdateMessage();
-                $scope.Initialize();
-                $scope.IsVisible = false;
-                $scope.Visible = true;
-            }
-            else
-            {
-                ShowMessage(0, response.data.Message);
-            }
+        if ($scope.form.$valid) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnupdate = true;
 
-        });
+                $scope.btnValue = "SAVE";
+                Service.PostFile("EmployeeMaster/UpdateEmployee", payload).then(function (response) {
+                    if (response.data.IsSucess) {
+                        $scope.UpdateAddressDetail(EmployeeAddressDetails);
+                        $scope.UpdateEducationDetail(Data);
+                        $scope.UpdateAppointmentDetail(AppointmentDetails);
+                        $scope.UpdateBankDetail(BankDetails);
+                        $scope.UpdateExperienceDetail();
+                        CustomizeApp.UpdateMessage();
+                        $scope.Initialize();
+                        $scope.IsVisible = false;
+                        $scope.Visible = true;
+                    }
+                    else {
+                        ShowMessage(0, response.data.Message);
+                    }
+
+                });
+            }, 3000);
+        }
     }
 
     $scope.UpdateAddressDetail = function (EmployeeAddressDetails) {

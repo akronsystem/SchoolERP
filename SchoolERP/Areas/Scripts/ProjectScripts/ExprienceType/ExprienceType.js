@@ -1,12 +1,16 @@
 ﻿var app = angular.module('ERP').controller('ExprienceTypeController', ExprienceTypeController);
 
-function ExprienceTypeController($scope, Service) {
+function ExprienceTypeController($scope, Service, $timeout) {
 
     var form = $(".student-admission-wrapper");
     $scope.ViewGetStudentInfoes = {};
     $scope.UserCredentialModel = {};
     $scope.btnactive = 1;
-
+    $scope.myText = "/Content/Loader4.gif";
+    $scope.isCheck = true;
+    $scope.btnu = false;
+    $scope.btns = false;
+    $scope.btnValue = "SAVE";
 
     $scope.Initialize = function () {
         debugger;
@@ -62,74 +66,92 @@ function ExprienceTypeController($scope, Service) {
         // $scope.Initialize();
     }
     $scope.Add = function (ExprienceTypeID, ExprienceType) {
+       
         var data = {
             ExprienceTypeID: ExprienceTypeID,
             ExprienceType: ExprienceType
 
         };
         if ($scope.form.$valid) {
-            Service.Post("ExperienceType/AddExperienceType", JSON.stringify(data)).then(function (response) {
+            $scope.btns = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("ExperienceType/AddExperienceType", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
+                    if (response.data.IsSucess) {
+                        debugger;
 
 
 
-                    CustomizeApp.AddMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                    //alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
+                        CustomizeApp.AddMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+                        //alert(response.data.ResultData);
+                        // window.location = "./ParentGrievance"
 
-                    //alert(result.data);
+                        //alert(result.data);
 
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                        //$scope.clear();
+                        //window.location = "./PostGrievance"
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 
     $scope.AddUpdate = function (ExprienceTypeID, ExprienceType) {
+       
         var data = {
             ExprienceTypeID: ExprienceTypeID,
             ExprienceType: ExprienceType
 
         };
         if ($scope.form.$valid) {
-            Service.Post("ExperienceType/UpdateExprienceType", JSON.stringify(data)).then(function (response) {
+            $scope.btnu = true;
+            $scope.isCheck = false;
+            $scope.btnValue = "SAVING.........";
+            $timeout(function () {
+                $scope.isCheck = true;
+                $scope.btnSave = false;
+                $scope.btnValue = "SAVE";
+                Service.Post("ExperienceType/UpdateExprienceType", JSON.stringify(data)).then(function (response) {
 
-                if (response.data.IsSucess) {
-                    debugger;
+                    if (response.data.IsSucess) {
+                        debugger;
 
 
 
-                    CustomizeApp.UpdateMessage();
-                    $scope.Clear();
-                    $scope.IsVisible = false;
-                    $scope.Initialize();
-                   // alert(response.data.ResultData);
-                    // window.location = "./ParentGrievance"
+                        CustomizeApp.UpdateMessage();
+                        $scope.Clear();
+                        $scope.IsVisible = false;
+                        $scope.Initialize();
+                        // alert(response.data.ResultData);
+                        // window.location = "./ParentGrievance"
 
-                    //alert(result.data);
+                        //alert(result.data);
 
-                }
-                else {
-                    debugger;
-                    ShowMessage(0, response.data.Message);
-                    //alert(response.data.Message);
-                    //$scope.clear();
-                    //window.location = "./PostGrievance"
-                }
+                    }
+                    else {
+                        debugger;
+                        ShowMessage(0, response.data.Message);
+                        //alert(response.data.Message);
+                        //$scope.clear();
+                        //window.location = "./PostGrievance"
+                    }
 
-            });
+                });
+            }, 3000);
         }
     }
 
