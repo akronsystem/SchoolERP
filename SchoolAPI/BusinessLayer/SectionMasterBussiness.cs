@@ -48,6 +48,11 @@ namespace SchoolAPI.BusinessLayer
 
         public object UpdateSection(SectionParam objParam)
         {
+            var Data = db.Tbl_Section_Master.Where(r => r.SectionName == objParam.SectionName).FirstOrDefault();
+            if(Data==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             Tbl_Section_Master obj= db.Tbl_Section_Master.SingleOrDefault(r => r.SectionId == objParam.Sectionid);
             obj.SectionName = objParam.SectionName;
             obj.ModifiedBy = 1;

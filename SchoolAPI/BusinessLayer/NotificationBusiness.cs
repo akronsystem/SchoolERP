@@ -47,6 +47,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Notification" };
             }
+            var Info = db.Tbl_NotificationType.Where(r => r.Notification == b.Notification).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_NotificationType.Where(r => r.NotificationTypeID == b.NotificationTypeID).FirstOrDefault();
             try
             {

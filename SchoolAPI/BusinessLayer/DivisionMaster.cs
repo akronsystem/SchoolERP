@@ -46,6 +46,11 @@ namespace SchoolAPI.BusinessLayer
         }
         public object UpdateDivision(DivisionParam DivParam)
         {
+            var Data = db.Tbl_Division_Master.Where(r => r.DivisionName == DivParam.DivisionName).FirstOrDefault();
+            if(Data==null)
+            {
+                return new Error() { IsError = true, Message = "DivisionName Already Exists!" };
+            }
             Tbl_Division_Master obj = db.Tbl_Division_Master.SingleOrDefault(r => r.DivisionID == DivParam.DivisionId);
             obj.DivisionName = DivParam.DivisionName;
             db.SaveChanges();

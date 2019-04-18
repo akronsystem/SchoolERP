@@ -117,6 +117,8 @@ namespace SchoolAPI
         public virtual DbSet<Tbl_Institute_Logo_Details> Tbl_Institute_Logo_Details { get; set; }
         public virtual DbSet<Tbl_Institute_Master> Tbl_Institute_Master { get; set; }
         public virtual DbSet<View_InstituteList> View_InstituteList { get; set; }
+        public virtual DbSet<Tbl_Menu> Tbl_Menu { get; set; }
+        public virtual DbSet<Tbl_ModuleMaster> Tbl_ModuleMaster { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

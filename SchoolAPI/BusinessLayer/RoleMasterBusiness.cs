@@ -47,6 +47,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Role" };
             }
+            var Info = db.Tbl_Role_Master.Where(r => r.Role == b.Role).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_Role_Master.Where(r => r.RoleID == b.RoleID).FirstOrDefault();
             try
             {

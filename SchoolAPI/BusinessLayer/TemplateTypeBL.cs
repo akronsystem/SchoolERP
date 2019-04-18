@@ -39,7 +39,11 @@ namespace SchoolAPI.BusinessLayer
                 else
                 {
                     TblTemplateTypeMaster objTempalte = db.TblTemplateTypeMasters.Where(r => r.TemplateTypeId == TP.TemplateTypeId).FirstOrDefault();
-
+                    var Data = db.TblTemplateTypeMasters.Where(r => r.TemplateType == TP.TemplateType && r.TemplateTypeId == TP.TemplateTypeId).FirstOrDefault();
+                    if(Data==null)
+                    {
+                        return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+                    }
                     objTempalte.TemplateType = TP.TemplateType.ToUpper();
                     objTempalte.ModifiedBy = TP.ModifiedBy;
                     objTempalte.ModifiedDate = DateTime.Now;

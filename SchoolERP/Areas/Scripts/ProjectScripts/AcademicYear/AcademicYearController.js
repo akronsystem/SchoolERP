@@ -66,12 +66,11 @@ function AcademicController($scope, Service) {
         $scope.EndDate = "";
         
     }
-    $scope.Add = function (AcademicID, Type, StartDate, EndDate) {
+    $scope.Add = function (Type, StartDate, EndDate) {
         debugger;
         var StartDate = $('#m_datepicker_1').val();
         var EndDate = $('#m_datepicker_2').val();
-        var data = {
-            AcademicID: AcademicID,
+        var data = {           
             Type: Type,
             StartDate: StartDate,
             EndDate: EndDate

@@ -51,6 +51,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Port" };
             }
+            var Info = db.Tbl_SMTPConfiguration.Where(r => r.UserName == b.UserName).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_SMTPConfiguration.Where(r => r.ConfigurationID == b.ConfigurationID).FirstOrDefault();
             try
             {
