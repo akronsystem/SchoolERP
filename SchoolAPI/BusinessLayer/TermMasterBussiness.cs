@@ -98,6 +98,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Term" };
             }
+            var Info = db.Tbl_Term_Master.Where(r => r.TermName == b.TermName).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_Term_Master.Where(r => r.TermID == b.TermID).FirstOrDefault();
             try
             {
@@ -148,8 +153,8 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = " Required Term Name" };
             }
-            var data = db.Tbl_Unit_Master.FirstOrDefault(r => r.UnitName == b.UnitName);
-            if (data != null)
+            var Data = db.Tbl_Unit_Master.Where(r => r.UnitName == b.UnitName).FirstOrDefault();
+            if(Data==null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
             }
@@ -282,7 +287,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Terminal" };
             }
-            var data = db.Tbl_TermCommencementDate.FirstOrDefault(r => r.TermID == b.TermID);
+            var data = db.Tbl_TermCommencementDate.Where(r => r.TermID == b.TermID).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -363,6 +368,11 @@ namespace SchoolAPI.BusinessLayer
             if (b.TermID == 0)
             {
                 return new Error() { IsError = true, Message = "Required Terminal" };
+            }
+            var Info = db.Tbl_TermCommencementDate.Where(r => r.TermID == b.TermID).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
             }
             var data = db.Tbl_TermCommencementDate.Where(r => r.TermCommID == b.TermCommID).FirstOrDefault();
             try

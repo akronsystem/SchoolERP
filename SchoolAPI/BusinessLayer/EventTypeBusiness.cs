@@ -47,7 +47,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Event Type" };
             }
-            var Info = db.Tbl_EventType_Master.FirstOrDefault(r => r.EventType == b.EventType);
+            var Info = db.Tbl_EventType_Master.Where(r => r.EventType == b.EventType).FirstOrDefault();
             if (Info != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -185,7 +185,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Event Type" };
             }
-            var Info = db.Tbl_EventMaster.FirstOrDefault(r => r.EventName == b.EventName);
+            var Info = db.Tbl_EventMaster.Where(r => r.EventName == b.EventName).FirstOrDefault();
             if (Info != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };

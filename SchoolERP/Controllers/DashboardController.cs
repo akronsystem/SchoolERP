@@ -66,6 +66,9 @@ namespace SchoolERP.Controllers
         {
             return View();
         }
-   
+        public ActionResult MenuSubMenu()
+        {
+            return View();
+        }
     }
 }

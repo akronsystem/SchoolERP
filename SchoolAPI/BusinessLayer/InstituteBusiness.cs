@@ -315,6 +315,11 @@ namespace SchoolAPI.BusinessLayer
                 {
                     return new Error() { IsError = true, Message = "Institute  Not Found" };
                 }
+                var Info = db.Tbl_Institute_Master.Where(r => r.InstituteName == obj.InstituteName).FirstOrDefault();
+                if(Info==null)
+                {
+                    return new Error() { IsError = true, Message = "Institute Name Already Exists!" };
+                }
                 data.AffilationNo = obj.AffilationNo;
                 data.BoardId = obj.BoardId;
                 data.EstablishedYear = obj.EstablishedYear;

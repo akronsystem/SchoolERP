@@ -48,6 +48,11 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required ShiftName" };
             }
+            var Data = db.Tbl_Shift_Master.Where(r => r.ShiftName == b.ShiftName).FirstOrDefault();
+            if(Data==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             var data = db.Tbl_Shift_Master.Where(r => r.ShiftID == b.ShiftID).FirstOrDefault();
             try
             {
@@ -149,7 +154,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required ShiftName" };
             }
-            var data = db.Tbl_Shift_Details.FirstOrDefault(r => r.ShiftID == b.ShiftID);
+            var data = db.Tbl_Shift_Details.Where(r => r.ShiftID == b.ShiftID).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };

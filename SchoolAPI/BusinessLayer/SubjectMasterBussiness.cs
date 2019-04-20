@@ -48,7 +48,7 @@ namespace SchoolAPI.BusinessLayer
         }
         public object UpdateSubject(SubjectParam ObjParam)
         {
-            var Duplicate = db.Tbl_Subject_Master.SingleOrDefault(r => r.SubjectName == ObjParam.SubjectName && r.SubjectCode == ObjParam.SubjectCode);
+            var Duplicate = db.Tbl_Subject_Master.Where(r => r.SubjectName == ObjParam.SubjectName && r.SubjectCode == ObjParam.SubjectCode).FirstOrDefault();
             if (Duplicate != null)
             {
 

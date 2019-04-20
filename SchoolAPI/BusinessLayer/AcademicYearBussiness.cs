@@ -17,7 +17,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Type" };
             }
-            var data = db.Tbl_AcademicYear_Master.FirstOrDefault(r => r.Type == b.Type);
+            var data = db.Tbl_AcademicYear_Master.FirstOrDefault(r => r.Type == b.Type && r.Status==0);
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -26,6 +26,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 Tbl_AcademicYear_Master obj = new Tbl_AcademicYear_Master();
                 obj.Type = b.Type;
+                obj.AcademicYear = b.AcademicYear;
                 obj.StartDate = Convert.ToDateTime(b.StartDate.ToShortDateString());
                 obj.EndDate =Convert.ToDateTime(b.EndDate.ToShortDateString());
                 obj.Status = 1;
@@ -100,10 +101,16 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required State" };
             }
+            //var Info = db.Tbl_AcademicYear_Master.Where(r => r.StartDate == b.StartDate && r.EndDate == b.EndDate).FirstOrDefault();
+            //if(Info==null)
+            //{
+            //    return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            //}
             var data = db.Tbl_AcademicYear_Master.Where(r => r.AcademicID == b.AcademicID).FirstOrDefault();
             try
             {
                 Tbl_AcademicYear_Master obj = new Tbl_AcademicYear_Master();
+                data.AcademicYear = b.AcademicYear;
                 data.Type = b.Type;
                 data.StartDate = Convert.ToDateTime(b.StartDate.ToShortDateString());
                 data.EndDate = Convert.ToDateTime(b.EndDate.ToShortDateString());

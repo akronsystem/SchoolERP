@@ -17,7 +17,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required CommitteeType" };
             }
-            var data = db.Tbl_CommitteeType_Master.FirstOrDefault(r => r.CommitteeType == b.CommitteeType);
+            var data = db.Tbl_CommitteeType_Master.Where(r => r.CommitteeType == b.CommitteeType).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -148,7 +148,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required CommitteeType" };
             }
-            var data = db.Tbl_CommitteeMaster.FirstOrDefault(r => r.CommitteeTypeID == b.CommitteeTypeID);
+            var data = db.Tbl_CommitteeMaster.Where(r => r.CommitteeTypeID == b.CommitteeTypeID).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };

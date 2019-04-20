@@ -21,8 +21,7 @@ function Service($http) {
     };
 
     this.PostFile = function (url, data) {  
-
-      
+           
 
         //console.log(data)
         //var d = GetModelAsFormData(data)

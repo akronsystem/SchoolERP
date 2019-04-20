@@ -49,6 +49,11 @@ namespace SchoolAPI.BusinessLayer
                 return new Error() { IsError = true, Message = "Required Widget Name" };
             }
             var data = db.Tbl_Widget_Master.Where(r => r.WidgetID == b.WidgetID).FirstOrDefault();
+            var Info = db.Tbl_Widget_Master.Where(r => r.WidgetName == b.WidgetName).FirstOrDefault();
+            if(Info==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             try
             {
                 Tbl_Widget_Master obj = new Tbl_Widget_Master();

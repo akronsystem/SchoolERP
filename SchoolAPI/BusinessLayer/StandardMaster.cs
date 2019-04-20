@@ -77,6 +77,11 @@ namespace SchoolAPI.BusinessLayer
         }
         public object UpdateStandard(StandardParam StdParam)
         {
+            var Data = db.Tbl_StandardMaster.Where(r => r.StandardName == StdParam.StandardName).FirstOrDefault();
+            if(Data==null)
+            {
+                return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+            }
             Tbl_StandardMaster obj = db.Tbl_StandardMaster.SingleOrDefault(r => r.StandardId == StdParam.StandardId);
 
             obj.StandardName = StdParam.StandardName;

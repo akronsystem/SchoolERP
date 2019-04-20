@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "AcademicYear";
-    Layout = "~/Areas/SchoolAdmin/Views/Shared/LayoutPage.cshtml";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/MainMenuLayout.cshtml";
 }
 
 <html>
@@ -51,7 +51,7 @@
                                                     <div class="col-xl-8 col-lg-8">
                                                        
                                                         <div class="input-group date">
-                                                            <input type="text" class="form-control m-input" autocomplete="off"  placeholder="Selectdate" id="m_datepicker_1"  ng-model="StartDate" value="{{StartDate}}" required/>
+                                                            <input type="text" class="form-control m-input" autocomplete="off"  placeholder="Selectdate" id="m_datepicker_1"  ng-model="StartDate" value="{{StartDate}}" />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -74,7 +74,7 @@
                                                             </div>
                                                         </div>*@
                                                         <div class="input-group date">
-                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2"  ng-model="EndDate" value="{{EndDate}}" required/>
+                                                            <input type="text" class="form-control m-input-gr" autocomplete="off" placeholder="Selectdate" id="m_datepicker_2"  ng-model="EndDate" value="{{EndDate}}" />
                                                               <div class="input-group-append">
                                                                 <span class="input-group-text">
                                                                     <i class="la la-calendar-check-o"></i>
@@ -90,7 +90,7 @@
 
                                     <div class="m-portlet__foot">
                                         <div class="row m-0 justify-content-end">
-                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(AcademicID,Type,StartDate,EndDate)">
+                                            <button class="btn btn-primary" ng-show="btnSave" ng-model="Save" ng-click="Add(Type,StartDate,EndDate)">
                                                 <i class="fa fa-save"> </i>   Save
                                             </button>
 
@@ -195,6 +195,7 @@
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/AcademicYear/AcademicYearModule.js")"></script>
     <script src="@Url.Content("~/Scripts/CommonScript/Service.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Areas/Scripts/ProjectScripts/AcademicYear/AcademicYearController.js")" type="text/javascript"></script>
+
     <script src="~/Content/assets/plugins/jquery/dist/jquery.min.js"></script>
     <script src="~/Areas/Scripts/CommonScript/CoomonFunctions.js"></script>
     <script src="~/Areas/Scripts/CommonScript/customize.js"></script>
