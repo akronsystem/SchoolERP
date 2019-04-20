@@ -14,7 +14,10 @@ function LoginController($scope, Service) {
             Service.Post("Login/ValidateUserLogin",data).then(function (rd) {
                
             if (rd.data.IsSucess) {
-                location.href = "SuperAdmin/Master/ViewSchoolMaster";
+                location.href = "Dashboard/Menusubmenu";
+            }
+            else {
+                ShowMessage(0, rd.data.Message);
             }
 
         })

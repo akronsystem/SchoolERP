@@ -32,7 +32,7 @@ namespace SchoolAPI.BusinessLayer
                 {
                     return new Error() { IsError = true, Message = "Required Username" };
                 }
-                var info = db.TblSchools.FirstOrDefault(r => r.SchoolName == school.SchoolName);
+                var info = db.TblSchools.Where(r => r.SchoolName == school.SchoolName).FirstOrDefault();
                 if (info != null)
                 {
                     return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -448,7 +448,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required BoardName" };
             }
-            var data = db.TblBoards.FirstOrDefault(r => r.BoardName == b.BoardName);
+            var data = db.TblBoards.Where(r => r.BoardName == b.BoardName).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
@@ -551,7 +551,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required Language" };
             }
-            var data = db.TblLanguages.FirstOrDefault(r => r.Language == b.Language);
+            var data = db.TblLanguages.Where(r => r.Language == b.Language).FirstOrDefault();
             if (data != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };

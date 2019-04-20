@@ -6,20 +6,17 @@ namespace SchoolAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Tbl_AcademicYear_Master
+    public partial class Tbl_ModuleMaster
     {
         [Key]
-        public long AcademicID { get; set; }
+        public long ModuleId { get; set; }
 
-        [StringLength(20)]
-        public string Type { get; set; }
+        [StringLength(100)]
+        public string ModuleName { get; set; }
 
-        [StringLength(50)]
-        public string AcademicYear { get; set; }
+        public long ParentModuleId { get; set; }
 
-        public DateTime? StartDate { get; set; }
-
-        public DateTime? EndDate { get; set; }
+        public long? ModuleOrder { get; set; }
 
         public long? CreatedBy { get; set; }
 
@@ -29,6 +26,9 @@ namespace SchoolAPI.Models
 
         public DateTime? ModifiedDate { get; set; }
 
-        public int? Status { get; set; }
+        public int Status { get; set; }
+
+        [StringLength(100)]
+        public string ActionName { get; set; }
     }
 }

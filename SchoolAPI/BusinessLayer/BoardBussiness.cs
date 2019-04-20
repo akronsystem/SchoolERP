@@ -48,7 +48,7 @@ namespace SchoolAPI.BusinessLayer
             {
                 return new Error() { IsError = true, Message = "Required BoardName" };
             }
-            var Info = db.Tbl_Board_Master.FirstOrDefault(r => r.BoardName == b.BoardName);
+            var Info = db.Tbl_Board_Master.Where(r => r.BoardName == b.BoardName).FirstOrDefault();
             if (Info != null)
             {
                 return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };

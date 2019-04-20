@@ -94,6 +94,11 @@ namespace SchoolAPI.BusinessLayer
                 }
                 else
                 {
+                    var Data = db.TblTemplatesMasters.Where(r => r.Name == TP.Name).FirstOrDefault();
+                    if(Data==null)
+                    {
+                        return new Error() { IsError = true, Message = "Duplicate Entry Not Allowed" };
+                    }
                     TblTemplatesMaster objTempalte = db.TblTemplatesMasters.Where(r => r.TemplateId == TP.TemplateId).FirstOrDefault();
                     objTempalte.Name = TP.Name.ToUpper();
                     objTempalte.TemplateId = TP.TemplateId;

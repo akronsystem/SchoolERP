@@ -1,6 +1,3 @@
-﻿(
-    function ()
-    {
-        angular.module('ERP',[]);
-    }
-)();
+﻿(function () {
+    angular.module('ERP', []);
+})();
